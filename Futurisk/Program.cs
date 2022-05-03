@@ -16,7 +16,8 @@ namespace Futurisk
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new United());
+            //Application.Run(new United());
+            Application.Run(new Form1());
         }
     }
 }
