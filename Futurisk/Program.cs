@@ -16,8 +16,9 @@ namespace Futurisk
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new United());
-            Application.Run(new Form1());
+            //Application.Run(new OrientalInsurance());
+            //Application.Run(new UnitedInsurance());
+            Application.Run(new Home());
         }
     }
 }
