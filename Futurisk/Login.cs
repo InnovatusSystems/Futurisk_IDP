@@ -110,6 +110,8 @@ namespace Futurisk
             lblErmsg2.Text = "";
             txtPassword.PasswordChar = '.';
             txtPassword.UseSystemPasswordChar = true;
+            txtPassword.Text = "";
+            txtUsername.Text = "";
         }
     }
 }

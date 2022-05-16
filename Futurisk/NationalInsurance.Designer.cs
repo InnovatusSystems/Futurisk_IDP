@@ -30,6 +30,7 @@ namespace Futurisk
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NationalInsurance));
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -49,6 +50,8 @@ namespace Futurisk
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
             this.kryptonPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel2)).BeginInit();
@@ -81,18 +84,18 @@ namespace Futurisk
             this.kryptonButton6.Name = "kryptonButton6";
             this.kryptonButton6.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton6.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton6.Size = new System.Drawing.Size(177, 106);
             this.kryptonButton6.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.kryptonButton6.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
-            this.kryptonButton6.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton6.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton6.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton6.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton6.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton6.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton6.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton6.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton6.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Arial", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton6.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton6.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton6.TabIndex = 2;
             this.kryptonButton6.Values.Text = "Logout";
             // 
@@ -104,20 +107,20 @@ namespace Futurisk
             this.kryptonButton3.Name = "kryptonButton3";
             this.kryptonButton3.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton3.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton3.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton3.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton3.OverrideDefault.Content.ShortText.MultiLineH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonButton3.Size = new System.Drawing.Size(177, 106);
             this.kryptonButton3.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.kryptonButton3.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
-            this.kryptonButton3.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton3.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.kryptonButton3.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton3.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.kryptonButton3.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton3.StateCommon.Content.ShortText.MultiLineH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonButton3.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton3.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton3.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton3.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton3.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Arial", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton3.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton3.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton3.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton3.StateNormal.Content.ShortText.MultiLineH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.kryptonButton3.TabIndex = 1;
             this.kryptonButton3.Values.Text = "View \r\nTemplate";
@@ -130,18 +133,18 @@ namespace Futurisk
             this.kryptonButton2.Name = "kryptonButton2";
             this.kryptonButton2.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton2.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton2.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton2.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton2.Size = new System.Drawing.Size(177, 93);
             this.kryptonButton2.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.kryptonButton2.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
-            this.kryptonButton2.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton2.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton2.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton2.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton2.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
             this.kryptonButton2.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton2.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Arial", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton2.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton2.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton2.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton2.TabIndex = 0;
             this.kryptonButton2.Values.Text = "Home";
             this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
@@ -222,8 +225,8 @@ namespace Futurisk
             this.btnCancel.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnCancel.OverrideDefault.Border.Rounding = 10;
             this.btnCancel.OverrideDefault.Border.Width = 1;
-            this.btnCancel.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnCancel.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnCancel.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnCancel.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnCancel.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Size = new System.Drawing.Size(152, 50);
             this.btnCancel.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
@@ -235,8 +238,8 @@ namespace Futurisk
             this.btnCancel.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnCancel.StateCommon.Border.Rounding = 10;
             this.btnCancel.StateCommon.Border.Width = 1;
-            this.btnCancel.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnCancel.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnCancel.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnCancel.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnCancel.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.StateNormal.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnCancel.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -247,8 +250,8 @@ namespace Futurisk
             this.btnCancel.StateNormal.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnCancel.StateNormal.Border.Rounding = 10;
             this.btnCancel.StateNormal.Border.Width = 1;
-            this.btnCancel.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnCancel.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnCancel.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnCancel.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnCancel.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Values.Text = "Reset";
@@ -281,8 +284,8 @@ namespace Futurisk
             this.btnConvert.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnConvert.StateCommon.Border.Rounding = 10;
             this.btnConvert.StateCommon.Border.Width = 1;
-            this.btnConvert.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnConvert.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnConvert.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnConvert.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnConvert.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConvert.StateNormal.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnConvert.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -324,8 +327,8 @@ namespace Futurisk
             this.btnBrowse.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnBrowse.OverrideDefault.Border.Rounding = 10;
             this.btnBrowse.OverrideDefault.Border.Width = 1;
-            this.btnBrowse.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnBrowse.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnBrowse.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnBrowse.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnBrowse.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.Size = new System.Drawing.Size(152, 50);
             this.btnBrowse.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
@@ -337,8 +340,8 @@ namespace Futurisk
             this.btnBrowse.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.btnBrowse.StateCommon.Border.Rounding = 10;
             this.btnBrowse.StateCommon.Border.Width = 1;
-            this.btnBrowse.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.btnBrowse.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnBrowse.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnBrowse.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
             this.btnBrowse.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowse.StateNormal.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnBrowse.StateNormal.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -368,6 +371,8 @@ namespace Futurisk
             // 
             // kryptonPanel1
             // 
+            this.kryptonPanel1.Controls.Add(this.kryptonLabel1);
+            this.kryptonPanel1.Controls.Add(this.panel1);
             this.kryptonPanel1.Controls.Add(this.label2);
             this.kryptonPanel1.Controls.Add(this.label1);
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -409,7 +414,33 @@ namespace Futurisk
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "pdf";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Pdf Files|*.pdf";
+            // 
+            // kryptonLabel1
+            // 
+            this.kryptonLabel1.Location = new System.Drawing.Point(301, 25);
+            this.kryptonLabel1.Name = "kryptonLabel1";
+            this.kryptonLabel1.Size = new System.Drawing.Size(129, 68);
+            this.kryptonLabel1.StateNormal.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonLabel1.StateNormal.ShortText.Color2 = System.Drawing.Color.OrangeRed;
+            this.kryptonLabel1.StateNormal.ShortText.ColorAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Control;
+            this.kryptonLabel1.StateNormal.ShortText.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Switch50;
+            this.kryptonLabel1.StateNormal.ShortText.Font = new System.Drawing.Font("Verdana", 28.224F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonLabel1.TabIndex = 5;
+            this.kryptonLabel1.Values.Text = "IDP";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(310, 100);
+            this.panel1.TabIndex = 4;
             // 
             // NationalInsurance
             // 
@@ -455,5 +486,7 @@ namespace Futurisk
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

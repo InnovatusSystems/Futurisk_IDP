@@ -27,7 +27,7 @@ namespace Futurisk
         public void bindInsurerdropdown()
         {
             DataRow dr;
-            string com = "select InsurerCode,InsurerName from InsurerMaster";
+            string com = "select InsurerCode,InsurerName from InsurerMaster order by InsurerName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -43,7 +43,7 @@ namespace Futurisk
         public void bindTypedropdown(string InsurerCode)
         {
             DataRow dr;
-            string com = "select ReportCode as ReportCode,ReportName + '_' + ReportType as Type from ReportsLookUp where InsurerCode = '" + InsurerCode + "'";
+            string com = "select ReportCode as ReportCode,ReportName + '_' + ReportType as Type from ReportsLookUp where InsurerCode = '" + InsurerCode + "' order by ReportName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -107,12 +107,16 @@ namespace Futurisk
             if (Type != "0")
             {
                 btnTemp.Enabled = true;
+                btnTemp.ForeColor = System.Drawing.Color.White;
                 btnContinue.Enabled = true;
+                btnContinue.ForeColor = System.Drawing.Color.White;
             }
             else
             {
                 btnTemp.Enabled = false;
+                btnTemp.ForeColor = System.Drawing.Color.Black;
                 btnContinue.Enabled = false;
+                btnContinue.ForeColor = System.Drawing.Color.Black;
             }
         }
 
