@@ -27,7 +27,7 @@ namespace Futurisk
         public void bindInsurerdropdown()
         {
             DataRow dr;
-            string com = "select InsurerCode,InsurerName from InsurerMaster order by InsurerName asc";
+            string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode = 'UIIC' order by InsurerName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);

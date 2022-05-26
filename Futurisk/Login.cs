@@ -56,6 +56,8 @@ namespace Futurisk
                     string result = ds.Tables[0].Rows[0]["result"].ToString();
                     if (result == "Ok")
                     {
+                        LoginInfo.UserID = UserId;
+                        LoginInfo.version = lblversion.Text;
                         Home obj = new Home();
                         obj.Show();
                         this.Hide();
