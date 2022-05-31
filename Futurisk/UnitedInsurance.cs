@@ -180,6 +180,12 @@ namespace Futurisk
                         lblmsg.Refresh();
                         MessageBox.Show("Given file's BDS is already exists in the database.","Warning!");
                         btnCancel.Enabled = true; btnBrowse.Enabled = true;
+                        DDInsurance.SelectionLength = 0;
+                        DDLocation.SelectionLength = 0;
+                        DDsales.SelectionLength = 0;
+                        DDService.SelectionLength = 0;
+                        DDSupport.SelectionLength = 0;
+                        DDMonth.SelectionLength = 0;
                     }
                 }
                 else
@@ -332,6 +338,8 @@ namespace Futurisk
             CB.ValueMember = "No";
             CB.DisplayMember = "Name";
             CB.DataSource = dt;
+            CB.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CB.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             //confirmation.Click += (sender, e) => { prompt.Close(); };
             confirmation1.Click += (sender, e) => { prompt.Close(); };
@@ -383,7 +391,9 @@ namespace Futurisk
         public void BindDDInsurance()
         {
             DataRow dr;
-            string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ',' + Code +' '+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
+            string com = "select Code,Code +' '+ InsurerCode + ',' + UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -537,17 +547,17 @@ namespace Futurisk
 
         private void DDInsurance_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //DataTable table = new DataTable();
-            string name = string.Format("{0}{1}", DDInsurance.Text, e.KeyChar.ToString()); //join previous text and new pressed char
-            DataRow[] rows = AllNames.Select(string.Format("Description LIKE '%{0}%'", name));
-            DataTable filteredTable = AllNames.Clone();
-            foreach (DataRow r in rows)
-                filteredTable.ImportRow(r);
-            DDInsurance.DataSource = null;
-            DDInsurance.DataSource = filteredTable.DefaultView;
-            DDInsurance.DisplayMember = "Description";
-            DDInsurance.Text = name;
-            DDInsurance.DroppedDown = true;
+            ////DataTable table = new DataTable();
+            //string name = string.Format("{0}{1}", DDInsurance.Text, e.KeyChar.ToString()); //join previous text and new pressed char
+            //DataRow[] rows = AllNames.Select(string.Format("Description LIKE '%{0}%'", name));
+            //DataTable filteredTable = AllNames.Clone();
+            //foreach (DataRow r in rows)
+            //    filteredTable.ImportRow(r);
+            //DDInsurance.DataSource = null;
+            //DDInsurance.DataSource = filteredTable.DefaultView;
+            //DDInsurance.DisplayMember = "Description";
+            //DDInsurance.Text = name;
+            //DDInsurance.DroppedDown = true;
         }
 
         private void DDService_SelectedIndexChanged(object sender, EventArgs e)

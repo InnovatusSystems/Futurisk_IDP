@@ -27,7 +27,8 @@ namespace Futurisk
         public void bindInsurerdropdown()
         {
             DataRow dr;
-            string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode = 'UIIC' order by InsurerName asc";
+            //string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode in ('UIIC','NACL') order by InsurerName asc";
+            string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode != 'NIAC' order by InsurerName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -43,7 +44,7 @@ namespace Futurisk
         public void bindTypedropdown(string InsurerCode)
         {
             DataRow dr;
-            string com = "select ReportCode as ReportCode,ReportName + '_' + ReportType as Type from ReportsLookUp where InsurerCode = '" + InsurerCode + "' order by ReportName asc";
+            string com = "select ReportCode as ReportCode,ReportCode + ',' +ReportName + '_' + ReportType as Type from ReportsLookUp where InsurerCode = '" + InsurerCode + "' order by ReportName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -83,7 +84,7 @@ namespace Futurisk
                     UnitedTemplate obj = new UnitedTemplate();
                     obj.Show();
                 }
-                if (Type == "NICP") //National Insurance Co. Ltd.
+                if (Type == "NACP") //National Insurance Co. Ltd.
                 {
                     NationalTemplate obj = new NationalTemplate();
                     obj.Show();
@@ -93,9 +94,14 @@ namespace Futurisk
                     NewIndiaTemplate obj = new NewIndiaTemplate();
                     obj.Show();
                 }
-                if (Type == "OICL") //Oriental Insurance Company Ltd
+                if (Type == "OIC1") //Oriental Insurance Company Ltd
                 {
                     OrientalTemplate obj = new OrientalTemplate();
+                    obj.Show();
+                }
+                if (Type == "OIC2") //Oriental Insurance Company Ltd
+                {
+                    OrientalTemplate2 obj = new OrientalTemplate2();
                     obj.Show();
                 }
             }
@@ -129,7 +135,7 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            if (Type == "NICP") //National Insurance Co. Ltd.
+            if (Type == "NACP") //National Insurance Co. Ltd.
             {
                 NationalInsurance obj = new NationalInsurance();
                 obj.Show();
@@ -141,9 +147,15 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            if (Type == "OICL") //Oriental Insurance Company Ltd
+            if (Type == "OIC1") //Oriental Insurance Company Ltd
             {
                 OrientalInsurance obj = new OrientalInsurance();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "OIC2") //Oriental Insurance Company Ltd
+            {
+                OrientalInsurence2 obj = new OrientalInsurence2();
                 obj.Show();
                 this.Close();
             }

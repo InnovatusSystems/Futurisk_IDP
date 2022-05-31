@@ -43,6 +43,7 @@ namespace Futurisk
             this.btnCancel = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnConvert = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnBrowse = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -50,8 +51,10 @@ namespace Futurisk
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.kryptonPanel4 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -69,8 +72,6 @@ namespace Futurisk
             this.lblSuccMsg = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtfile = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
             this.kryptonPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel4)).BeginInit();
@@ -139,7 +140,8 @@ namespace Futurisk
             // 
             // DDMonth
             // 
-            this.DDMonth.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDMonth.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDMonth.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDMonth.DropDownWidth = 300;
             this.DDMonth.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -158,7 +160,7 @@ namespace Futurisk
             "October",
             "November",
             "December"});
-            this.DDMonth.Location = new System.Drawing.Point(449, 112);
+            this.DDMonth.Location = new System.Drawing.Point(693, 267);
             this.DDMonth.Name = "DDMonth";
             this.DDMonth.Size = new System.Drawing.Size(395, 28);
             this.DDMonth.TabIndex = 57;
@@ -166,12 +168,13 @@ namespace Futurisk
             // 
             // DDSupport
             // 
-            this.DDSupport.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDSupport.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDSupport.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDSupport.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDSupport.DropDownWidth = 350;
             this.DDSupport.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DDSupport.FormattingEnabled = true;
-            this.DDSupport.Location = new System.Drawing.Point(450, 344);
+            this.DDSupport.Location = new System.Drawing.Point(694, 499);
             this.DDSupport.Name = "DDSupport";
             this.DDSupport.Size = new System.Drawing.Size(394, 28);
             this.DDSupport.TabIndex = 49;
@@ -180,12 +183,13 @@ namespace Futurisk
             // 
             // DDLocation
             // 
-            this.DDLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDLocation.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDLocation.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDLocation.DropDownWidth = 350;
             this.DDLocation.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DDLocation.FormattingEnabled = true;
-            this.DDLocation.Location = new System.Drawing.Point(449, 203);
+            this.DDLocation.Location = new System.Drawing.Point(693, 358);
             this.DDLocation.Name = "DDLocation";
             this.DDLocation.Size = new System.Drawing.Size(395, 28);
             this.DDLocation.TabIndex = 47;
@@ -195,12 +199,13 @@ namespace Futurisk
             // 
             // DDInsurance
             // 
-            this.DDInsurance.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDInsurance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDInsurance.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDInsurance.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDInsurance.DropDownWidth = 400;
             this.DDInsurance.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DDInsurance.FormattingEnabled = true;
-            this.DDInsurance.Location = new System.Drawing.Point(449, 157);
+            this.DDInsurance.Location = new System.Drawing.Point(693, 312);
             this.DDInsurance.Name = "DDInsurance";
             this.DDInsurance.Size = new System.Drawing.Size(395, 28);
             this.DDInsurance.TabIndex = 45;
@@ -208,12 +213,13 @@ namespace Futurisk
             // 
             // DDService
             // 
-            this.DDService.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDService.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDService.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDService.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDService.DropDownWidth = 350;
             this.DDService.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DDService.FormattingEnabled = true;
-            this.DDService.Location = new System.Drawing.Point(449, 295);
+            this.DDService.Location = new System.Drawing.Point(693, 450);
             this.DDService.Name = "DDService";
             this.DDService.Size = new System.Drawing.Size(395, 28);
             this.DDService.TabIndex = 43;
@@ -223,12 +229,13 @@ namespace Futurisk
             // 
             // DDsales
             // 
-            this.DDsales.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.DDsales.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DDsales.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.DDsales.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DDsales.DropDownWidth = 350;
             this.DDsales.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DDsales.FormattingEnabled = true;
-            this.DDsales.Location = new System.Drawing.Point(449, 248);
+            this.DDsales.Location = new System.Drawing.Point(693, 403);
             this.DDsales.Name = "DDsales";
             this.DDsales.Size = new System.Drawing.Size(395, 28);
             this.DDsales.TabIndex = 41;
@@ -237,9 +244,10 @@ namespace Futurisk
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(533, 483);
+            this.btnCancel.Location = new System.Drawing.Point(777, 630);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnCancel.OverrideDefault.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -287,9 +295,10 @@ namespace Futurisk
             // 
             // btnConvert
             // 
+            this.btnConvert.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnConvert.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConvert.Enabled = false;
-            this.btnConvert.Location = new System.Drawing.Point(346, 483);
+            this.btnConvert.Location = new System.Drawing.Point(590, 630);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnConvert.OverrideDefault.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -338,9 +347,10 @@ namespace Futurisk
             // 
             // btnBrowse
             // 
+            this.btnBrowse.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBrowse.Enabled = false;
-            this.btnBrowse.Location = new System.Drawing.Point(799, 399);
+            this.btnBrowse.Location = new System.Drawing.Point(1043, 554);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnBrowse.OverrideDefault.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -386,6 +396,33 @@ namespace Futurisk
             this.toolTip1.SetToolTip(this.btnBrowse, "Click here to browse the pdf document");
             this.btnBrowse.Values.Text = "Browse";
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // kryptonButton6
+            // 
+            this.kryptonButton6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.kryptonButton6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton6.Location = new System.Drawing.Point(0, 199);
+            this.kryptonButton6.Name = "kryptonButton6";
+            this.kryptonButton6.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
+            this.kryptonButton6.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
+            this.kryptonButton6.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton6.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton6.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.Size = new System.Drawing.Size(177, 106);
+            this.kryptonButton6.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
+            this.kryptonButton6.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
+            this.kryptonButton6.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton6.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton6.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
+            this.kryptonButton6.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
+            this.kryptonButton6.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton6.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton6.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton6.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.kryptonButton6, "Click here to modify one or multiple data from the existing record.");
+            this.kryptonButton6.Values.Text = "Edit";
+            this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
             // 
             // openFileDialog1
             // 
@@ -462,6 +499,7 @@ namespace Futurisk
             // 
             // kryptonPanel4
             // 
+            this.kryptonPanel4.Controls.Add(this.kryptonButton1);
             this.kryptonPanel4.Controls.Add(this.kryptonButton6);
             this.kryptonPanel4.Controls.Add(this.kryptonButton3);
             this.kryptonPanel4.Controls.Add(this.kryptonButton2);
@@ -476,38 +514,40 @@ namespace Futurisk
             this.kryptonPanel4.StateCommon.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Rounding2;
             this.kryptonPanel4.TabIndex = 36;
             // 
-            // kryptonButton6
+            // kryptonButton1
             // 
-            this.kryptonButton6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.kryptonButton6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonButton6.Location = new System.Drawing.Point(0, 199);
-            this.kryptonButton6.Name = "kryptonButton6";
-            this.kryptonButton6.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonButton6.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.White;
-            this.kryptonButton6.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton6.Size = new System.Drawing.Size(177, 106);
-            this.kryptonButton6.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
-            this.kryptonButton6.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
-            this.kryptonButton6.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonButton6.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
-            this.kryptonButton6.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton6.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
-            this.kryptonButton6.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonButton6.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
-            this.kryptonButton6.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton6.TabIndex = 2;
-            this.kryptonButton6.Values.Text = "Logout";
-            this.kryptonButton6.Click += new System.EventHandler(this.kryptonButton6_Click);
+            this.kryptonButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.kryptonButton1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonButton1.Location = new System.Drawing.Point(0, 305);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.OverrideDefault.Back.Color1 = System.Drawing.Color.Transparent;
+            this.kryptonButton1.OverrideDefault.Back.Color2 = System.Drawing.Color.Transparent;
+            this.kryptonButton1.OverrideDefault.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.OverrideDefault.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.OverrideDefault.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton1.Size = new System.Drawing.Size(177, 106);
+            this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.DarkCyan;
+            this.kryptonButton1.StateCommon.Back.Color2 = System.Drawing.Color.DarkCyan;
+            this.kryptonButton1.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton1.StateNormal.Back.Color1 = System.Drawing.Color.Transparent;
+            this.kryptonButton1.StateNormal.Back.Color2 = System.Drawing.Color.Transparent;
+            this.kryptonButton1.StateNormal.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.StateNormal.Content.ShortText.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.StateNormal.Content.ShortText.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonButton1.TabIndex = 3;
+            this.kryptonButton1.Values.Text = "Logout";
+            this.kryptonButton1.Click += new System.EventHandler(this.kryptonButton1_Click);
             // 
             // kryptonPanel2
             // 
-            this.kryptonPanel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.kryptonPanel2.Controls.Add(this.panel2);
             this.kryptonPanel2.Controls.Add(this.label13);
             this.kryptonPanel2.Controls.Add(this.DDMonth);
+            this.kryptonPanel2.Controls.Add(this.kryptonPanel4);
             this.kryptonPanel2.Controls.Add(this.label15);
+            this.kryptonPanel2.Controls.Add(this.kryptonPanel1);
             this.kryptonPanel2.Controls.Add(this.label12);
             this.kryptonPanel2.Controls.Add(this.label11);
             this.kryptonPanel2.Controls.Add(this.label10);
@@ -531,207 +571,13 @@ namespace Futurisk
             this.kryptonPanel2.Controls.Add(this.label3);
             this.kryptonPanel2.Controls.Add(this.btnBrowse);
             this.kryptonPanel2.Controls.Add(this.txtfile);
-            this.kryptonPanel2.Location = new System.Drawing.Point(243, 156);
+            this.kryptonPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonPanel2.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel2.Name = "kryptonPanel2";
-            this.kryptonPanel2.Size = new System.Drawing.Size(1092, 843);
+            this.kryptonPanel2.Size = new System.Drawing.Size(1389, 1054);
             this.kryptonPanel2.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel2.StateNormal.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.kryptonPanel2.TabIndex = 37;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(281, 110);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(149, 25);
-            this.label13.TabIndex = 58;
-            this.label13.Text = "Report Month";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(426, 111);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(15, 20);
-            this.label15.TabIndex = 56;
-            this.label15.Text = "*";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(427, 300);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(15, 20);
-            this.label12.TabIndex = 54;
-            this.label12.Text = "*";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(427, 250);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(15, 20);
-            this.label11.TabIndex = 53;
-            this.label11.Text = "*";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(427, 203);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(15, 20);
-            this.label10.TabIndex = 52;
-            this.label10.Text = "*";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(427, 158);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(15, 20);
-            this.label9.TabIndex = 51;
-            this.label9.Text = "*";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(206, 347);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(226, 25);
-            this.label8.TabIndex = 50;
-            this.label8.Text = "Support/Technical By";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(271, 205);
-            this.label7.Name = "label7";
-            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label7.Size = new System.Drawing.Size(161, 25);
-            this.label7.TabIndex = 48;
-            this.label7.Text = "Office Location";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(266, 157);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 25);
-            this.label6.TabIndex = 46;
-            this.label6.Text = "Insurer Branch";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(301, 300);
-            this.label5.Name = "label5";
-            this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label5.Size = new System.Drawing.Size(132, 25);
-            this.label5.TabIndex = 44;
-            this.label5.Text = "Serviced By";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(222, 251);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(212, 25);
-            this.label4.TabIndex = 42;
-            this.label4.Text = "Sales Generated By";
-            // 
-            // lblmsg1
-            // 
-            this.lblmsg1.AutoSize = true;
-            this.lblmsg1.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblmsg1.Location = new System.Drawing.Point(247, 634);
-            this.lblmsg1.Name = "lblmsg1";
-            this.lblmsg1.Size = new System.Drawing.Size(0, 25);
-            this.lblmsg1.TabIndex = 40;
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Green;
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.ForeColor = System.Drawing.Color.DarkGreen;
-            this.linkLabel2.LinkColor = System.Drawing.Color.DarkGreen;
-            this.linkLabel2.Location = new System.Drawing.Point(284, 642);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(0, 25);
-            this.linkLabel2.TabIndex = 39;
-            // 
-            // lblmsg
-            // 
-            this.lblmsg.AutoSize = true;
-            this.lblmsg.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblmsg.ForeColor = System.Drawing.Color.Green;
-            this.lblmsg.Location = new System.Drawing.Point(429, 559);
-            this.lblmsg.Name = "lblmsg";
-            this.lblmsg.Size = new System.Drawing.Size(0, 25);
-            this.lblmsg.TabIndex = 38;
-            // 
-            // lblSuccMsg
-            // 
-            this.lblSuccMsg.AutoSize = true;
-            this.lblSuccMsg.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSuccMsg.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lblSuccMsg.Location = new System.Drawing.Point(229, 578);
-            this.lblSuccMsg.MaximumSize = new System.Drawing.Size(648, 100);
-            this.lblSuccMsg.Name = "lblSuccMsg";
-            this.lblSuccMsg.Size = new System.Drawing.Size(0, 25);
-            this.lblSuccMsg.TabIndex = 37;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Verdana", 17.856F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label3.Location = new System.Drawing.Point(63, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(957, 38);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "NACL(National Insurance Co.Ltd.) - Report Id: NACP";
-            // 
-            // txtfile
-            // 
-            this.txtfile.BackColor = System.Drawing.Color.White;
-            this.txtfile.Enabled = false;
-            this.txtfile.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtfile.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.txtfile.Location = new System.Drawing.Point(148, 412);
-            this.txtfile.Name = "txtfile";
-            this.txtfile.Size = new System.Drawing.Size(651, 28);
-            this.txtfile.TabIndex = 32;
-            this.txtfile.Text = "Select pdf document";
             // 
             // panel2
             // 
@@ -752,7 +598,220 @@ namespace Futurisk
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(375, 20);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Smart Reader by Innovatus Systems. SR2";
+            this.label14.Text = "Smart Reader by Innovatus Systems. SR4";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(525, 265);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(149, 25);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "Report Month";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(670, 266);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(15, 20);
+            this.label15.TabIndex = 56;
+            this.label15.Text = "*";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(671, 455);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(15, 20);
+            this.label12.TabIndex = 54;
+            this.label12.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(671, 405);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(15, 20);
+            this.label11.TabIndex = 53;
+            this.label11.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(671, 358);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(15, 20);
+            this.label10.TabIndex = 52;
+            this.label10.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(671, 313);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(15, 20);
+            this.label9.TabIndex = 51;
+            this.label9.Text = "*";
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(450, 502);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(226, 25);
+            this.label8.TabIndex = 50;
+            this.label8.Text = "Support/Technical By";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(515, 360);
+            this.label7.Name = "label7";
+            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label7.Size = new System.Drawing.Size(161, 25);
+            this.label7.TabIndex = 48;
+            this.label7.Text = "Office Location";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(510, 312);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(164, 25);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Insurer Branch";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(545, 455);
+            this.label5.Name = "label5";
+            this.label5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label5.Size = new System.Drawing.Size(132, 25);
+            this.label5.TabIndex = 44;
+            this.label5.Text = "Serviced By";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(466, 406);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(212, 25);
+            this.label4.TabIndex = 42;
+            this.label4.Text = "Sales Generated By";
+            // 
+            // lblmsg1
+            // 
+            this.lblmsg1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblmsg1.AutoSize = true;
+            this.lblmsg1.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblmsg1.Location = new System.Drawing.Point(446, 796);
+            this.lblmsg1.Name = "lblmsg1";
+            this.lblmsg1.Size = new System.Drawing.Size(0, 25);
+            this.lblmsg1.TabIndex = 40;
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Green;
+            this.linkLabel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.linkLabel2.LinkColor = System.Drawing.Color.DarkGreen;
+            this.linkLabel2.Location = new System.Drawing.Point(621, 849);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(0, 25);
+            this.linkLabel2.TabIndex = 39;
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // lblmsg
+            // 
+            this.lblmsg.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblmsg.AutoSize = true;
+            this.lblmsg.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblmsg.ForeColor = System.Drawing.Color.Green;
+            this.lblmsg.Location = new System.Drawing.Point(673, 706);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(0, 25);
+            this.lblmsg.TabIndex = 38;
+            // 
+            // lblSuccMsg
+            // 
+            this.lblSuccMsg.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblSuccMsg.AutoSize = true;
+            this.lblSuccMsg.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuccMsg.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lblSuccMsg.Location = new System.Drawing.Point(418, 726);
+            this.lblSuccMsg.MaximumSize = new System.Drawing.Size(648, 100);
+            this.lblSuccMsg.Name = "lblSuccMsg";
+            this.lblSuccMsg.Size = new System.Drawing.Size(0, 25);
+            this.lblSuccMsg.TabIndex = 37;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Verdana", 17.856F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkCyan;
+            this.label3.Location = new System.Drawing.Point(306, 204);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(957, 38);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "NACL(National Insurance Co.Ltd.) - Report Id: NACP";
+            // 
+            // txtfile
+            // 
+            this.txtfile.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtfile.BackColor = System.Drawing.Color.White;
+            this.txtfile.Enabled = false;
+            this.txtfile.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtfile.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.txtfile.Location = new System.Drawing.Point(392, 567);
+            this.txtfile.Name = "txtfile";
+            this.txtfile.Size = new System.Drawing.Size(651, 28);
+            this.txtfile.TabIndex = 32;
+            this.txtfile.Text = "Select pdf document";
             // 
             // NationalInsurance
             // 
@@ -760,10 +819,7 @@ namespace Futurisk
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1389, 1054);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.kryptonPanel2);
-            this.Controls.Add(this.kryptonPanel4);
-            this.Controls.Add(this.kryptonPanel1);
             this.Name = "NationalInsurance";
             this.Text = "NationalInsurance";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -822,5 +878,6 @@ namespace Futurisk
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }

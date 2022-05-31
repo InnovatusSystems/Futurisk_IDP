@@ -18,108 +18,19 @@ using System.Text.RegularExpressions;
 
 namespace Futurisk
 {
-    public partial class OrientalInsurance : Form
+    public partial class OrientalInsurence2 : Form
     {
         static string Dir, Filepath, RDate, Result;
         static string Filename, Filenamewithext, Filewithext, name, TranID, BatchID, NoRecord;
-
-        private void kryptonButton2_Click(object sender, EventArgs e)
+        private string strconn = ConfigurationManager.ConnectionStrings["IDP"].ToString();
+        public OrientalInsurence2()
         {
-            Home obj = new Home();
-            obj.Show();
-            this.Close();
-        }
-
-        private void kryptonButton6_Click(object sender, EventArgs e)
-        {
-            string promptValue = ShowDialog("Batch");
-            if (promptValue != "")
-            {
-                Fileinfo.Insurer = "OICL,Oriental Insurance Co.Ltd.";
-                Fileinfo.InsurerCode = "OICL";
-                Fileinfo.ReportId = "OIC1";
-                Fileinfo.BatchId = promptValue.Substring(0, promptValue.IndexOf(","));
-                Fileinfo.Filename = promptValue.Substring(promptValue.IndexOf(",") + 1);
-                EditForm obj = new EditForm();
-                obj.Show();
-                obj.WindowState = FormWindowState.Normal;
-            }
-        }
-        public string ShowDialog(string caption)
-        {
-            var promptValue = "";
-            Form prompt = new Form()
-            {
-                Width = 600,
-                Height = 200,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                BackColor = System.Drawing.Color.White,
-                Text = caption,
-                StartPosition = FormStartPosition.CenterScreen,
-                MinimizeBox = false,
-                MaximizeBox = false
-            };
-            Label textLabel = new Label() { Left = 50, Top = 30, Text = "Batch" };
-            ComboBox CB = new ComboBox() { Left = 100, Top = 30, Width = 450 };
-            Label lblErmsg = new Label() { Left = 50, Top = 50, Width = 300 };
-            Button confirmation = new Button() { Text = "Ok", Left = 220, Width = 80, Top = 100, DialogResult = DialogResult.OK, Enabled = false };
-            Button confirmation1 = new Button() { Text = "Cancel", Left = 320, Width = 80, Top = 100, DialogResult = DialogResult.Cancel };
-            textLabel.Font = new Font("Verdana", 11);
-            CB.Font = new Font("Verdana", 9);
-            lblErmsg.Font = new Font("Verdana", 9);
-            lblErmsg.ForeColor = System.Drawing.Color.Red;
-            confirmation.Font = new Font("Verdana", 9);
-            confirmation1.Font = new Font("Verdana", 9);
-            DataRow dr;
-            string com = "select distinct(Inv_No) as No,Inv_No+','+[Filename] as Name from BDSMaster where InsurerCode = 'OICL' and ReportCode = 'OIC1'";
-            SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
-            DataTable dt = new DataTable();
-            adpt.Fill(dt);
-            dr = dt.NewRow();
-            dr.ItemArray = new object[] { 0, "" };
-            dt.Rows.InsertAt(dr, 0);
-
-            CB.ValueMember = "No";
-            CB.DisplayMember = "Name";
-            CB.DataSource = dt;
-            CB.AutoCompleteMode = AutoCompleteMode.Suggest;
-            CB.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            //confirmation.Click += (sender, e) => { prompt.Close(); };
-            confirmation1.Click += (sender, e) => { prompt.Close(); };
-            prompt.Controls.Add(CB);
-            prompt.Controls.Add(confirmation);
-            prompt.Controls.Add(confirmation1);
-            prompt.Controls.Add(textLabel);
-            prompt.AcceptButton = confirmation;
-
-            CB.SelectedIndexChanged += (sender, e) =>
-            {
-                if (CB.SelectedValue.ToString() != "0")
-                {
-                    confirmation.Enabled = true;
-                }
-                else
-                {
-                    confirmation.Enabled = false;
-                }
-            };
-            if (prompt.ShowDialog() == DialogResult.OK && CB.SelectedValue.ToString() != "0")
-            {
-                // promptValue = CB.SelectedValue.ToString();
-                promptValue = CB.Text;
-            }
-            else if (prompt.ShowDialog() == DialogResult.Cancel)
-            {
-                promptValue = "";
-                prompt.Close();
-            }
-            return promptValue;
-        }
-        private void kryptonButton3_Click(object sender, EventArgs e)
-        {
-            OrientalTemplate obj = new OrientalTemplate();
-            obj.Show();
+            InitializeComponent();
+            BindDDInsurance();
+            BindDDSales();
+            BindDDService();
+            BindDDLocation();
+            BindDDSupport();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -183,6 +94,46 @@ namespace Futurisk
                 btnConvert.Enabled = false;
                 btnCancel.Enabled = false;
                 btnBrowse.Enabled = true;
+            }
+        }
+
+        private void kryptonButton2_Click(object sender, EventArgs e)
+        {
+            Home obj = new Home();
+            obj.Show();
+            this.Close();
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            Login obj = new Login();
+            obj.Show();
+            this.Close();
+        }
+
+        private void DDService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DDService.SelectedValue.ToString() != "0")
+            {
+                btnBrowse.Enabled = true;
+            }
+            else
+            {
+                btnBrowse.Enabled = false;
+            }
+        }
+
+        private void DDLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DDLocation.SelectedValue.ToString() == "05")
+            {
+                DDsales.SelectedValue = "S74";
+                DDService.SelectedValue = "R57";
+            }
+            else
+            {
+                DDsales.SelectedValue = "0";
+                DDService.SelectedValue = "0";
             }
         }
 
@@ -387,7 +338,7 @@ namespace Futurisk
                 string date = DateTime.Now.ToString();
                 date = date.Replace("/", "_").Replace(":", "").Replace(" ", "").Replace("AM", "").Replace("PM", "");
 
-                string FileName = "OIC1_" + date + ".xlsx";
+                string FileName = "OIC2_" + date + ".xlsx";
 
                 using (ClosedXML.Excel.XLWorkbook wb = new ClosedXML.Excel.XLWorkbook())
                 {
@@ -404,7 +355,7 @@ namespace Futurisk
                     new SqlParameter { ParameterName = "@Imode", Value = 6 },
                     new SqlParameter { ParameterName = "@BatchID", Value = BatchID },
                     new SqlParameter { ParameterName = "@version", Value = LoginInfo.version },
-                    new SqlParameter { ParameterName = "@ReportId", Value = "OIC1" },
+                    new SqlParameter { ParameterName = "@ReportId", Value = "OIC2" },
                     new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
                     );
 
@@ -423,6 +374,140 @@ namespace Futurisk
                 linkLabel2.Enabled = false;
             }
         }
+
+        private void kryptonButton6_Click(object sender, EventArgs e)
+        {
+            string promptValue = ShowDialog("Batch");
+            if (promptValue != "")
+            {
+                Fileinfo.Insurer = "OICL,Oriental Insurance Co.Ltd.";
+                Fileinfo.InsurerCode = "OICL";
+                Fileinfo.ReportId = "OIC2";
+                Fileinfo.BatchId = promptValue.Substring(0, promptValue.IndexOf(","));
+                Fileinfo.Filename = promptValue.Substring(promptValue.IndexOf(",") + 1);
+                EditForm obj = new EditForm();
+                obj.Show();
+                obj.WindowState = FormWindowState.Normal;
+            }
+        }
+        public string ShowDialog(string caption)
+        {
+            var promptValue = "";
+            Form prompt = new Form()
+            {
+                Width = 600,
+                Height = 200,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                BackColor = System.Drawing.Color.White,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen,
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+            Label textLabel = new Label() { Left = 50, Top = 30, Text = "Batch" };
+            ComboBox CB = new ComboBox() { Left = 100, Top = 30, Width = 450 };
+            Label lblErmsg = new Label() { Left = 50, Top = 50, Width = 300 };
+            Button confirmation = new Button() { Text = "Ok", Left = 220, Width = 80, Top = 100, DialogResult = DialogResult.OK, Enabled = false };
+            Button confirmation1 = new Button() { Text = "Cancel", Left = 320, Width = 80, Top = 100, DialogResult = DialogResult.Cancel };
+            textLabel.Font = new Font("Verdana", 11);
+            CB.Font = new Font("Verdana", 9);
+            lblErmsg.Font = new Font("Verdana", 9);
+            lblErmsg.ForeColor = System.Drawing.Color.Red;
+            confirmation.Font = new Font("Verdana", 9);
+            confirmation1.Font = new Font("Verdana", 9);
+            DataRow dr;
+            string com = "select distinct(Inv_No) as No,Inv_No+','+[Filename] as Name from BDSMaster where InsurerCode = 'OICL' and ReportCode = 'OIC2'";
+            SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            dr = dt.NewRow();
+            dr.ItemArray = new object[] { 0, "" };
+            dt.Rows.InsertAt(dr, 0);
+
+            CB.ValueMember = "No";
+            CB.DisplayMember = "Name";
+            CB.DataSource = dt;
+            CB.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CB.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            //confirmation.Click += (sender, e) => { prompt.Close(); };
+            confirmation1.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(CB);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(confirmation1);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            CB.SelectedIndexChanged += (sender, e) =>
+            {
+                if (CB.SelectedValue.ToString() != "0")
+                {
+                    confirmation.Enabled = true;
+                }
+                else
+                {
+                    confirmation.Enabled = false;
+                }
+            };
+            if (prompt.ShowDialog() == DialogResult.OK && CB.SelectedValue.ToString() != "0")
+            {
+                // promptValue = CB.SelectedValue.ToString();
+                promptValue = CB.Text;
+            }
+            else if (prompt.ShowDialog() == DialogResult.Cancel)
+            {
+                promptValue = "";
+                prompt.Close();
+            }
+            return promptValue;
+        }
+
+        private void kryptonButton3_Click(object sender, EventArgs e)
+        {
+            OrientalTemplate2 obj = new OrientalTemplate2();
+            obj.Show();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Filepath = "";
+            Dir = "";
+            Filename = "";
+            txtfile.Text = "";
+            linkLabel2.Text = "";
+            btnBrowse.Enabled = false;
+            btnCancel.Enabled = false;
+            btnConvert.Enabled = false;
+            linkLabel2.Enabled = false;
+            txtfile.Text = "Select pdf document";
+            txtfile.ForeColor = System.Drawing.Color.Gray;
+            lblmsg1.Text = "";
+            lblSuccMsg.Text = "";
+            DDInsurance.SelectedValue = 0;
+            DDLocation.SelectedValue = 0;
+            DDsales.SelectedValue = 0;
+            DDService.SelectedValue = 0;
+            DDSupport.SelectedValue = 0;
+            DDMonth.SelectedIndex = 0;
+            DDInsurance.Enabled = true;
+            DDLocation.Enabled = true;
+            DDsales.Enabled = true;
+            DDService.Enabled = true;
+            DDSupport.Enabled = true;
+            DDMonth.Enabled = true;
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Fileinfo.Insurer = "OICL,Oriental Insurance Co.Ltd.";
+            Fileinfo.InsurerCode = "OICL";
+            Fileinfo.ReportId = "OIC2";
+            Fileinfo.BatchId = BatchID;
+            EditForm obj = new EditForm();
+            obj.Show();
+            obj.WindowState = FormWindowState.Normal;
+        }
+
         public void BindDDInsurance()
         {
             DataRow dr;
@@ -502,90 +587,6 @@ namespace Futurisk
             DDSupport.DisplayMember = "ShortDescription";
             DDSupport.DataSource = dt;
         }
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Filepath = "";
-            Dir = "";
-            Filename = "";
-            txtfile.Text = "";
-            linkLabel2.Text = "";
-            btnBrowse.Enabled = false;
-            btnCancel.Enabled = false;
-            btnConvert.Enabled = false;
-            linkLabel2.Enabled = false;
-            txtfile.Text = "Select pdf document";
-            txtfile.ForeColor = System.Drawing.Color.Gray;
-            lblmsg1.Text = "";
-            lblSuccMsg.Text = "";
-            DDInsurance.SelectedValue = 0;
-            DDLocation.SelectedValue = 0;
-            DDsales.SelectedValue = 0;
-            DDService.SelectedValue = 0;
-            DDSupport.SelectedValue = 0;
-            DDMonth.SelectedIndex = 0;
-            DDInsurance.Enabled = true;
-            DDLocation.Enabled = true;
-            DDsales.Enabled = true;
-            DDService.Enabled = true;
-            DDSupport.Enabled = true;
-            DDMonth.Enabled = true;
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Fileinfo.Insurer = "OICL,Oriental Insurance Co.Ltd.";
-            Fileinfo.InsurerCode = "OICL";
-            Fileinfo.ReportId = "OIC1";
-            Fileinfo.BatchId = BatchID;
-            EditForm obj = new EditForm();
-            obj.Show();
-            obj.WindowState = FormWindowState.Normal;
-        }
-
-        private void kryptonButton1_Click(object sender, EventArgs e)
-        {
-            Login obj = new Login();
-            obj.Show();
-            this.Close();
-        }
-
-        private void DDService_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DDService.SelectedValue.ToString() != "0")
-            {
-                btnBrowse.Enabled = true;
-            }
-            else
-            {
-                btnBrowse.Enabled = false;
-            }
-        }
-
-        private void DDLocation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DDLocation.SelectedValue.ToString() == "05")
-            {
-                DDsales.SelectedValue = "S74";
-                DDService.SelectedValue = "R57";
-            }
-            else
-            {
-                DDsales.SelectedValue = "0";
-                DDService.SelectedValue = "0";
-            }
-        }
-
-        private string strconn = ConfigurationManager.ConnectionStrings["IDP"].ToString();
-        public OrientalInsurance()
-        {
-            InitializeComponent();
-            BindDDInsurance();
-            BindDDSales();
-            BindDDService();
-            BindDDLocation();
-            BindDDSupport();
-        }
-
         private static IWorkbook OpenWorkBook(string workBookName)
         {
             using (FileStream file = new FileStream(workBookName, FileMode.Open, FileAccess.Read))
@@ -664,8 +665,9 @@ namespace Futurisk
                 }
                 ICell cell5 = row.GetCell(7);
                 ICell cell6 = row.GetCell(8);
-                if ((cell5 != null && cell5.StringCellValue.Contains("Net Payable")) 
-                    || (cell6 != null && cell6.StringCellValue.Contains("Net Payable")))
+                ICell cell7 = row.GetCell(6);
+                if ((cell5 != null && cell5.StringCellValue.Contains("Net Payable"))
+                    || (cell6 != null && cell6.StringCellValue.Contains("Net Payable")) || (cell7 != null && cell7.StringCellValue.Contains("Net Payable")))
                 {
                     termsList4 = rowIndex;
                 }
@@ -688,6 +690,20 @@ namespace Futurisk
                     {
                         sheet.ShiftRows(row.RowNum + 1, sheet.LastRowNum, -1);
                     }
+
+                }
+            }
+            for (int rowIndex = sheet.LastRowNum; rowIndex >= 0; rowIndex--)
+            {
+                IRow row = sheet.GetRow(rowIndex);
+                if (row == null) continue;
+                ICell cell4 = row.GetCell(0);
+                if (cell4 != null && cell4.StringCellValue.Contains("Department Total"))
+                {
+                    if (rowIndex != sheet.LastRowNum)
+                    {
+                        sheet.ShiftRows(row.RowNum + 1, sheet.LastRowNum, -1);
+                    }
                 }
             }
         }
@@ -696,64 +712,216 @@ namespace Futurisk
         //    SQLProcs sql = new SQLProcs();
         //    Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
         //    Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-        //    int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; string Policy_Type = "";
-
+        //    int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; string Policy_Type = ""; int Cvrno;
+        //    int J = 0; int count = 0; var InsuredName = ""; var InstlNo = ""; string PolicyNo = ""; string Previous = ""; int depno; var CvrType = "";
+        //    int[] PEarray = new int[lastrow - 14];
         //    for (int i = 14; i < lastrow; i++)
         //    {
-        //        var InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value.Replace("\n", "").TrimStart();
-        //        Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value.Replace("\n", "").TrimStart();
-        //        string PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
-        //        string BillNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[4, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
-        //        string LicenseNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[7, 6]).Value.Replace(":", "").Replace("\n", "").TrimStart();
-        //        string BRCode = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
-        //        var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
-        //        var CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value.Replace("\n", "").TrimStart();
-        //        string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 1]).Value;
-        //        var Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace(",", "").TrimStart();
-        //        var Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace(",", "").TrimStart();
-        //        var Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-        //        BillNo = BillNo.Substring(0, BillNo.IndexOf('/'));
-        //        var InstlNo = Regex.Replace(InsuredName, @"\D", "");
-        //        InsuredName = Regex.Replace(InsuredName, @"\d", "");
-
-        //        if (Dept != null && Dept != "")
+        //        string PEIndex = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value;
+        //        string PEIndex1 = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 2]).Value;
+        //        if (PEIndex != null && PEIndex != "" && (PEIndex == "ENDMT" || PEIndex == "NEW" || PEIndex == "RENEW"))
         //        {
-        //            bool isNo = !String.IsNullOrEmpty(Dept) && Char.IsDigit(Dept[0]);
-        //            if (isNo == true)
+        //            PEarray[J] = i;
+        //            J++;
+        //        }
+        //        if (PEIndex1 != null && PEIndex1 != "" && (PEIndex1 == "ENDMT" || PEIndex1 == "NEW" || PEIndex1 == "RENEW"))
+        //        {
+        //            PEarray[J] = i;
+        //            J++;
+        //        }
+        //    }
+        //    for (int i = 14; i < lastrow; i++)
+        //    {
+        //        int PEarraypos = Array.IndexOf(PEarray, i);
+        //        if (PEarraypos > -1)
+        //        {
+        //            if (PEarray[PEarraypos + 1] != 0)
         //            {
-        //                Policy_Type = Dept.Replace("-", "").Replace("\n", "").TrimStart();
-        //                Policy_Type = Regex.Replace(Policy_Type, @"\d", "");
+        //                count = PEarray[PEarraypos + 1] - i;
         //            }
-        //            else
+        //            else if (PEarray[PEarraypos] != 0 && PEarray[PEarraypos + 1] == 0)
+        //            {
+        //                count = (lastrow - 1) - i;
+        //            }
+        //            //string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 2]).Value;
+        //            Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value.Replace("\n", "").TrimStart();
+        //            if (Policy_Endorsement != "ENDMT" && Policy_Endorsement != "NEW" && Policy_Endorsement != "RENEW")
         //            {
         //                Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 2]).Value.Replace("\n", "").TrimStart();
         //                PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value.Replace("\n", "").TrimStart();
+        //                Previous = "Yes";
         //            }
-        //        }
-        //        if (CvrType == "TP")
-        //        {
-        //            Terrorism = Premium_Amt; 
-        //            Premium_Amt = "0";
-        //        }
-
-        //        if (Policy_Endorsement == "ENDMT")
-        //        {
-        //            Policy_Endorsement = "Endorsement";
-        //            if(i+1 != lastrow)
+        //            else
         //            {
-        //                PolicyNo = PolicyNo + ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i+1, 4]).Value.Replace("\n", "").TrimStart();
+        //                PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
         //            }
-        //        }
-        //        else
-        //        {
-        //            Policy_Endorsement = "Policy";
-        //        }
-        //        if (Policy_Type == "Motor TP" || Policy_Type == "Motor")
-        //        {
-        //            InsuredType = "Retail";
-        //        }
-        //        if (Policy_Endorsement != "") 
-        //        {
+        //            var Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            var Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            var Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+        //            string BillNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[4, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
+        //            string LicenseNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[7, 6]).Value.Replace(":", "").Replace("\n", "").TrimStart();
+        //            string BRCode = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
+        //            string END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").TrimStart();
+                   
+        //           // bool result = Regex.IsMatch(Premium_Amt, @"^[a-zA-Z]+$");
+        //            //if (result == true)
+        //            //{
+        //            //    Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //    if (Premium_Amt == "")
+        //            //    {
+        //            //        Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //        if (Premium_Amt == "")
+        //            //        {
+        //            //            Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //            Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //            Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+        //            //            if (END_Date == "" || END_Date.Contains("."))
+        //            //            {
+        //            //                END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value.Replace("\n", "").TrimStart();
+        //            //            }
+        //            //        }
+        //            //        else
+        //            //        {
+        //            //            Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //            Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+        //            //            if (END_Date == "" || END_Date.Contains("."))
+        //            //            {
+        //            //                END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value.Replace("\n", "").TrimStart();
+        //            //            }
+        //            //        }
+        //            //    }
+        //            //    else
+        //            //    {
+        //            //        Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+        //            //        Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+        //            //        //CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").TrimStart();
+        //            //        if (END_Date == "" || END_Date.Contains("."))
+        //            //        {
+        //            //            END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value.Replace("\n", "").TrimStart();
+        //            //        }
+        //            //    }
+        //            //}
+
+        //            BillNo = BillNo.Substring(0, BillNo.IndexOf('/'));
+        //            if (Policy_Endorsement == "ENDMT")
+        //            {
+        //                Policy_Endorsement = "Endorsement";
+        //                if (i + 1 != lastrow)
+        //                {
+        //                    if (Previous == "Yes")
+        //                    {
+        //                        PolicyNo = PolicyNo + ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + 1, 3]).Value.Replace("\n", "").TrimStart();
+        //                    }
+        //                    else
+        //                    {
+        //                        PolicyNo = PolicyNo + ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + 1, 4]).Value.Replace("\n", "").TrimStart();
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Policy_Endorsement = "Policy";
+        //            }
+        //            //if (result == false)
+        //            //{
+        //                for (int K = 0; K < count; K++)
+        //                {
+        //                    var IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 5]).Value;
+        //                    if (IName == null || IName == "")
+        //                    {
+        //                        if (Previous == "Yes")
+        //                        {
+        //                            string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+        //                            IName = IN.Replace("\n", "").TrimStart();
+        //                        }
+        //                        else
+        //                        {
+        //                            string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+        //                            bool isNo = IN.Any(char.IsDigit);
+        //                            if (isNo == false)
+        //                            {
+        //                                IName = IN.Replace("\n", "").TrimStart();
+        //                            }
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        IName = IName.Replace("\n", "").TrimStart();
+        //                    }
+        //                    InsuredName = InsuredName + IName;
+        //                    if (Previous == "Yes")
+        //                    {
+        //                        Cvrno = 6;
+        //                        depno = 1;
+        //                    }
+        //                    else
+        //                    {
+        //                        Cvrno = 7;
+        //                        depno = 2;
+        //                    }
+        //                    CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, Cvrno]).Value.Replace("\n", "").TrimStart();
+        //                    if (CvrType == "")
+        //                    {
+        //                        var CType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, Cvrno-1]).Value.Replace("\n", "").TrimStart();
+        //                        if(CType == "OD" || CType == "TP")
+        //                        {
+        //                            CvrType = CType;
+        //                        }
+        //                    }
+        //                    string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, depno]).Value;
+        //                    if (Dept != null && Dept != "")
+        //                    {
+        //                        Policy_Type = Policy_Type + Dept;
+        //                    }
+        //                }
+        //                InstlNo = Regex.Replace(InsuredName, @"\D", "");
+        //                InsuredName = Regex.Replace(InsuredName, @"\d", "");
+        //            //}
+        //            //else
+        //            //{
+        //            //    for (int K = 0; K < count; K++)
+        //            //    {
+        //            //        var IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 6]).Value;
+        //            //        if (IName == null || IName == "")
+        //            //        {
+        //            //            string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+        //            //            bool isNo = IN.Any(char.IsDigit);
+        //            //            if (isNo == false)
+        //            //            {
+        //            //                IName = IN.Replace("\n", "").TrimStart();
+        //            //            }
+        //            //            if (IN == "")
+        //            //            {
+        //            //                string IN1 = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 3]).Value;
+        //            //                IName = IN1.Replace("\n", "").TrimStart();
+        //            //                if (IN1 == "")
+        //            //                {
+        //            //                    IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 2]).Value.Replace("\n", "").TrimStart();
+        //            //                }
+        //            //            }
+        //            //        }
+        //            //        else
+        //            //        {
+        //            //            IName = IName.Replace("\n", "").TrimStart();
+        //            //        }
+        //            //        InsuredName = InsuredName + IName;
+        //            //        if (Previous == "Yes")
+        //            //        {
+        //            //            depno = 1;
+        //            //        }
+        //            //        else
+        //            //        {
+        //            //            depno = 2;
+        //            //        }
+        //            //        string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, depno]).Value.Trim();
+        //            //        if (Dept != null && Dept != "")
+        //            //        {
+        //            //            Policy_Type = Policy_Type + Dept;
+        //            //        }
+        //            //    }
+        //            //    InstlNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
+        //            //}
+
         //            if (Premium_Amt == "" || Premium_Amt == " ")
         //            {
         //                Premium_Amt = 0;
@@ -766,6 +934,10 @@ namespace Futurisk
         //            {
         //                Terrorism = "0";
         //            }
+        //            if (Revenue_Pcnt == "" || Revenue_Pcnt == " ")
+        //            {
+        //                Revenue_Pcnt = "0";
+        //            }
 
         //            sql.ExecuteSQLNonQuery("SP_Oriental_Transactions",
         //                        new SqlParameter { ParameterName = "@Imode", Value = 1 },
@@ -774,8 +946,6 @@ namespace Futurisk
         //                        new SqlParameter { ParameterName = "@ClientName", Value = InsuredName },
         //                        new SqlParameter { ParameterName = "@Itype", Value = InsuredType },
         //                        new SqlParameter { ParameterName = "@Policy_No", Value = PolicyNo },
-        //                        //new SqlParameter { ParameterName = "@Endo_Effective_Date", Value = Endo_Effective_Date },
-        //                        //new SqlParameter { ParameterName = "@Effective_Date", Value = Effective_Date },
         //                        new SqlParameter { ParameterName = "@END_Date", Value = END_Date },
         //                        new SqlParameter { ParameterName = "@Policy_Type", Value = Policy_Type },
         //                        new SqlParameter { ParameterName = "@Premium_Amt", Value = Premium_Amt },
@@ -794,10 +964,13 @@ namespace Futurisk
         //                        new SqlParameter { ParameterName = "@Support", Value = Support },
         //                        new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
         //                        new SqlParameter { ParameterName = "@RFormat", Value = "F1" },
-        //                        new SqlParameter { ParameterName = "@InvNo", Value = "OIC1" },
+        //                        new SqlParameter { ParameterName = "@InvNo", Value = "OIC2" },
         //                        new SqlParameter { ParameterName = "@DocName", Value = "Oriental Insurance Co.Ltd." }
         //                        );
+        //            InsuredName = "";
+        //            Policy_Type = "";
         //        }
+
         //    }
 
 
@@ -821,6 +994,8 @@ namespace Futurisk
         //    dsR = sql.SQLExecuteDataset("SP_Oriental_Transactions",
         //         new SqlParameter { ParameterName = "@Imode", Value = 5 },
         //         new SqlParameter { ParameterName = "@BatchID", Value = BatchID },
+        //         new SqlParameter { ParameterName = "@Filename", Value = Fileinfo.Filename },
+        //         new SqlParameter { ParameterName = "@version", Value = LoginInfo.version },
         //         new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
         //         );
         //    if (dsR != null && dsR.Tables.Count > 0 && dsR.Tables[0].Rows.Count > 0)
@@ -832,13 +1007,15 @@ namespace Futurisk
         //        NoRecord = "";
         //    }
         //}
+
         public static void InsertTransaction(Microsoft.Office.Interop.Excel.Workbook WB, string TranID, string RDate, string Insurance, string Salesby, string Serviceby, string location, string Support, string Rmonth)
         {
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; string Policy_Type = "";
-            int J = 0; int count = 0; var InsuredName = ""; var InstlNo = ""; string PolicyNo =""; string Previous = ""; int depno;
+            int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; string Policy_Type = ""; int Cvrno; var TPrevenue = "";
+            int J = 0; int count = 0; var InsuredName = ""; var InstlNo = ""; string PolicyNo = ""; string Previous = ""; int depno; var CvrType = "";var ODRevenue = "";
+            var Premium_Amt = ""; var Revenue_Amt = ""; var Revenue_Pcnt = "";
             int[] PEarray = new int[lastrow - 14];
             for (int i = 14; i < lastrow; i++)
             {
@@ -849,7 +1026,7 @@ namespace Futurisk
                     PEarray[J] = i;
                     J++;
                 }
-                if(PEIndex1 != null && PEIndex1 != "" && (PEIndex1 == "ENDMT" || PEIndex1 == "NEW" || PEIndex1 == "RENEW"))
+                if (PEIndex1 != null && PEIndex1 != "" && (PEIndex1 == "ENDMT" || PEIndex1 == "NEW" || PEIndex1 == "RENEW"))
                 {
                     PEarray[J] = i;
                     J++;
@@ -864,7 +1041,7 @@ namespace Futurisk
                     {
                         count = PEarray[PEarraypos + 1] - i;
                     }
-                    else if(PEarray[PEarraypos] != 0 && PEarray[PEarraypos + 1] == 0)
+                    else if (PEarray[PEarraypos] != 0 && PEarray[PEarraypos + 1] == 0)
                     {
                         count = (lastrow - 1) - i;
                     }
@@ -879,53 +1056,15 @@ namespace Futurisk
                     else
                     {
                         PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
+                        Previous = "No";
                     }
-                    var Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                    var Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                    var Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                    //var Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                    //var Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                    //var Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
                     string BillNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[4, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
                     string LicenseNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[7, 6]).Value.Replace(":", "").Replace("\n", "").TrimStart();
                     string BRCode = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 2]).Value.Replace(":", "").Replace("\n", "").TrimStart();
-                    string END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").TrimStart();
-                    var CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value.Replace("\n", "").TrimStart();
-                    bool result = Regex.IsMatch(Premium_Amt, @"^[a-zA-Z]+$");
-                    if(result == true)
-                    {
-                        Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                        if (Premium_Amt == "")
-                        {
-                            Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                            if (Premium_Amt == "")
-                            {
-                                Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                                Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-                                if (END_Date == "" || END_Date.Contains("."))
-                                {
-                                    END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value.Replace("\n", "").TrimStart();
-                                }
-                            }
-                            else
-                            {
-                                Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-                                if (END_Date == "" || END_Date.Contains("."))
-                                {
-                                    END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value.Replace("\n", "").TrimStart();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Revenue_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                            Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-                            CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").TrimStart();
-                            if (END_Date == "" || END_Date.Contains("."))
-                            {
-                                END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value.Replace("\n", "").TrimStart();
-                            }
-                        }
-                    }
+                    string END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
 
                     BillNo = BillNo.Substring(0, BillNo.IndexOf('/'));
                     if (Policy_Endorsement == "ENDMT")
@@ -947,13 +1086,188 @@ namespace Futurisk
                     {
                         Policy_Endorsement = "Policy";
                     }
+                    for (int K = 0; K < count; K++)
+                    {
+                        var IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 5]).Value;
+                        if (IName == null || IName == "")
+                        {
+                            if (Previous == "Yes")
+                            {
+                                string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+                                if(IN == "")
+                                {
+                                    IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 3]).Value;
+                                    if (IN == "")
+                                    {
+                                        IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 2]).Value;
+                                    }
+                                }
+                                IName = IN.Replace("\n", "").TrimStart();
+                            }
+                            else
+                            {
+                                string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+                                bool isNo = IN.Any(char.IsDigit);
+                                if (isNo == false)
+                                {
+                                    IName = IN.Replace("\n", "").TrimStart();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (Previous == "Yes")
+                            {
+                                string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
+                                if (IN == "")
+                                {
+                                    IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 3]).Value;
+                                    if (IN == "")
+                                    {
+                                        IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 2]).Value;
+                                    }
+                                }
+                                IName = IN.Replace("\n", "").TrimStart();
+                            }
+                            else
+                            {
+                                IName = IName.Replace("\n", "").TrimStart();
+                            }
+                        }
+                        InsuredName = InsuredName + IName;
+                        if (Previous == "Yes")
+                        {
+                            depno = 1;
+                        }
+                        else
+                        {
+                            depno = 2;
+                        }
+                        string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, depno]).Value;
+                        if (Dept != null && Dept != "")
+                        {
+                            Policy_Type = Policy_Type + Dept.Replace("\n", "").TrimStart();
+                        }
+                    }
+                    InstlNo = Regex.Replace(InsuredName, @"\D", "");
+                    InsuredName = Regex.Replace(InsuredName, @"\d", "");
+                    for (int K = 0; K < count; K++)
+                    {
+                        if (Previous == "Yes")
+                        {
+                            Cvrno = 6;
+                        }
+                        else
+                        {
+                            Cvrno = 7;
+                        }
+                        CvrType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, Cvrno]).Value.Replace("\n", "").TrimStart();
+                        if (CvrType == "")
+                        {
+                            var CType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, Cvrno - 1]).Value.Replace("\n", "").TrimStart();
+                            if (CType == "OD" || CType == "TP")
+                            {
+                                CvrType = CType;
+                            }
+                        }
+                        if(CvrType == "OD")
+                        {
+                            if (Previous == "Yes")
+                            {
+                                Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                if(Premium_Amt == "")
+                                {
+                                    Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 1]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                    ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    if (Premium_Amt == "")
+                                    {
+                                        Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 2]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                        ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        if (Premium_Amt == "")
+                                        {
+                                            Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 3]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                            ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            if (Premium_Amt == "")
+                                            {
+                                                Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 5]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                                ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                if (Premium_Amt == "")
+                                                {
+                                                    Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 6]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                                    ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                            }
+                        }
+                        if (CvrType == "TP")
+                        {
+                            if (Previous == "Yes")
+                            {
+                                Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                if (Terrorism == "")
+                                {
+                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7+1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9+1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    if (Terrorism == "")
+                                    {
+                                        Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        if (Terrorism == "")
+                                        {
+                                            Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            if (Terrorism == "")
+                                            {
+                                                Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                if (Terrorism == "")
+                                                {
+                                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    if (Terrorism == "")
+                                                    {
+                                                        Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                        TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+
+                            }
+                        }
+                    }
+
                     if (Premium_Amt == "" || Premium_Amt == " ")
                     {
-                        Premium_Amt = 0;
+                        Premium_Amt = "0";
                     }
                     if (Revenue_Amt == "" || Revenue_Amt == " ")
                     {
-                        Revenue_Amt = 0;
+                        Revenue_Amt = "0";
                     }
                     if (Terrorism == "" || Terrorism == " ")
                     {
@@ -963,94 +1277,8 @@ namespace Futurisk
                     {
                         Revenue_Pcnt = "0";
                     }
-                    if (result == false)
-                    {
-                        for (int K = 0; K < count; K++)
-                        {
-                            var IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 5]).Value;
-                            if (IName == null || IName == "")
-                            {
-                                if (Previous == "Yes")
-                                {
-                                    string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
-                                    IName = IN.Replace("\n", "").TrimStart();
-                                }
-                                else
-                                {
-                                    string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
-                                    bool isNo = IN.Any(char.IsDigit);
-                                    if (isNo == false)
-                                    {
-                                        IName = IN.Replace("\n", "").TrimStart();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                IName = IName.Replace("\n", "").TrimStart();
-                            }
-                            InsuredName = InsuredName + IName;
-                            if (Previous == "Yes")
-                            {
-                                depno = 1;
-                            }
-                            else
-                            {
-                                depno = 2;
-                            }
-                            string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, depno]).Value;
-                            if (Dept != null && Dept != "")
-                            {
-                                Policy_Type = Policy_Type + Dept;
-                            }
-                        }
-                        InstlNo = Regex.Replace(InsuredName, @"\D", "");
-                        InsuredName = Regex.Replace(InsuredName, @"\d", "");
-                    }
-                    else
-                    {
-                        for (int K = 0; K < count; K++)
-                        {
-                            var IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 6]).Value;
-                            if (IName == null || IName == "")
-                            {
-                                string IN = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 4]).Value;
-                                bool isNo = IN.Any(char.IsDigit);
-                                if (isNo == false)
-                                {
-                                    IName = IN.Replace("\n", "").TrimStart();
-                                }
-                                if (IN == "")
-                                {
-                                    string IN1 = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 3]).Value;
-                                    IName = IN1.Replace("\n", "").TrimStart();
-                                    if (IN1 == "")
-                                    {
-                                        IName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 2]).Value.Replace("\n", "").TrimStart();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                IName = IName.Replace("\n", "").TrimStart();
-                            }
-                            InsuredName = InsuredName + IName;
-                            if (Previous == "Yes")
-                            {
-                                depno = 1;
-                            }
-                            else
-                            {
-                                depno = 2;
-                            }
-                            string Dept = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, depno]).Value.Trim();
-                            if (Dept != null && Dept != "")
-                            {
-                                Policy_Type = Policy_Type + Dept;
-                            }
-                        }
-                        InstlNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i , 5]).Value;
-                    }
+                    Revenue_Amt = Convert.ToString(Convert.ToDecimal(ODRevenue) + Convert.ToDecimal(TPrevenue));
+
                     sql.ExecuteSQLNonQuery("SP_Oriental_Transactions",
                                 new SqlParameter { ParameterName = "@Imode", Value = 1 },
                                 new SqlParameter { ParameterName = "@RDate", Value = RDate },
@@ -1076,14 +1304,14 @@ namespace Futurisk
                                 new SqlParameter { ParameterName = "@Support", Value = Support },
                                 new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
                                 new SqlParameter { ParameterName = "@RFormat", Value = "F1" },
-                                new SqlParameter { ParameterName = "@InvNo", Value = "OIC1" },
-                                new SqlParameter { ParameterName = "@ReportId", Value = "OIC1" },
+                                new SqlParameter { ParameterName = "@InvNo", Value = "OIC2" },
+                                new SqlParameter { ParameterName = "@ReportId", Value = "OIC2" },
                                 new SqlParameter { ParameterName = "@DocName", Value = "Oriental Insurance Co.Ltd." }
                                 );
                     InsuredName = "";
                     Policy_Type = "";
-                }                
-                            
+                }
+
             }
 
 
@@ -1109,7 +1337,7 @@ namespace Futurisk
                  new SqlParameter { ParameterName = "@BatchID", Value = BatchID },
                  new SqlParameter { ParameterName = "@Filename", Value = Fileinfo.Filename },
                  new SqlParameter { ParameterName = "@version", Value = LoginInfo.version },
-                 new SqlParameter { ParameterName = "@ReportId", Value = "OIC1" },
+                 new SqlParameter { ParameterName = "@ReportId", Value = "OIC2" },
                  new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
                  );
             if (dsR != null && dsR.Tables.Count > 0 && dsR.Tables[0].Rows.Count > 0)

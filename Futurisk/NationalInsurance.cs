@@ -19,7 +19,7 @@ namespace Futurisk
 {
     public partial class NationalInsurance : Form
     {
-        static string Dir, Filepath, RDate;
+        static string Dir, Filepath, RDate, Result;
         static string Filename, Filenamewithext, Filewithext, name, TranID, BatchID, NoRecord;
 
         private void DDService_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +69,14 @@ namespace Futurisk
                     DDService.Enabled = false;
                     DDSupport.Enabled = false;
                     DDMonth.Enabled = false;
+
+                    DDInsurance.SelectionLength = 0;
+                    DDLocation.SelectionLength = 0;
+                    DDsales.SelectionLength = 0;
+                    DDService.SelectionLength = 0;
+                    DDSupport.SelectionLength = 0;
+                    DDMonth.SelectionLength = 0;
+
                     //Aspose.Pdf.License license = new Aspose.Pdf.License();
                     //license.SetLicense(ConfigurationManager.AppSettings["aposePDFLicense"]);
                     Aspose.Pdf.Document pdfDocument = new Aspose.Pdf.Document(Filepath);
@@ -78,79 +86,126 @@ namespace Futurisk
                     // Minimize number of Worksheets
                     options.MinimizeTheNumberOfWorksheets = true;
 
-                    Filenamewithext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss") + ".xlsx";
-                    name = Dir + "\\" + Filenamewithext;
-                    pdfDocument.Save(name, options);
-
-                    IWorkbook workbook = OpenWorkBook(name);
-
-                    ISheet sheet1 = workbook.GetSheet("Sheet1");
-
-                    DeleteRows(sheet1);
-
-                    SaveWorkBook(workbook, name);
-
-                    string filewithourext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss");
-                    filewithourext = Dir + "\\" + filewithourext;
-
                     SQLProcs sql = new SQLProcs();
-                    DataSet ds = new DataSet();
-                    ds = sql.SQLExecuteDataset("SP_National_Transactions",
-                                 new SqlParameter { ParameterName = "@Imode", Value = 2 }
-                        );
-                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    DataSet ds1 = new DataSet();
+                    ds1 = sql.SQLExecuteDataset("SP_Insert_Transactions",
+                                  new SqlParameter { ParameterName = "@Imode", Value = 7 },
+                                  new SqlParameter { ParameterName = "@Filename", Value = Fileinfo.Filename }
+                         );
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
                     {
-                        TranID = ds.Tables[0].Rows[0]["TranID"].ToString();
+                        Result = ds1.Tables[0].Rows[0]["Result"].ToString();
                     }
                     else
                     {
-                        TranID = "0";
+                        Result = "Not Exists";
                     }
-                    //RDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
-
-                    string Insurance = DDInsurance.Text.ToString();
-                    string Salesby = DDsales.Text.ToString();
-                    string Serviceby = DDService.Text.ToString();
-                    string location = DDLocation.Text.ToString();
-                    string Support = DDSupport.Text.ToString();
-                    string Rmonth = DDMonth.Text.ToString();
-
-                    RDate = DateTime.Now.AddDays(0).ToString("dd-MM-yyyy");
-                    Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
-                    Microsoft.Office.Interop.Excel.Workbook WB = oExcel.Workbooks.Open(name);
-
-                    Microsoft.Office.Interop.Excel.Worksheet sheet = WB.ActiveSheet;
-                    InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-
-                    DateTime b = DateTime.Now;
-                    TimeSpan diff = b - a;
-                    var Sec = String.Format("{0}", diff.Seconds);
-                    lblmsg.Text = "";
-                    lblSuccMsg.Text = "Smart Read completed in " + Sec + " Seconds, Batch ID: " + BatchID + "\n" +
-                                      "                     Number of records: " + NoRecord;
-                    //linkLabel2.Text = "Click here to export the extracted data.";
-                    oExcel.Workbooks.Close();
-                    var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
-                                    MessageBoxButtons.YesNo);
-                    if (confirmExportResult == DialogResult.Yes)
+                    if (Result == "Not Exists")
                     {
-                        ExcelExport();
+
+                        Filenamewithext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss") + ".xlsx";
+                        name = Dir + "\\" + Filenamewithext;
+                        pdfDocument.Save(name, options);
+
+                        IWorkbook workbook = OpenWorkBook(name);
+
+                        ISheet sheet1 = workbook.GetSheet("Sheet1");
+
+                        DeleteRows(sheet1);
+
+                        SaveWorkBook(workbook, name);
+
+                        string filewithourext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss");
+                        filewithourext = Dir + "\\" + filewithourext;
+
+                        //SQLProcs sql = new SQLProcs();
+                        DataSet ds = new DataSet();
+                        ds = sql.SQLExecuteDataset("SP_National_Transactions",
+                                     new SqlParameter { ParameterName = "@Imode", Value = 2 }
+                            );
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            TranID = ds.Tables[0].Rows[0]["TranID"].ToString();
+                        }
+                        else
+                        {
+                            TranID = "0";
+                        }
+                        //RDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+
+                        string Insurance = DDInsurance.Text.ToString();
+                        string Salesby = DDsales.Text.ToString();
+                        string Serviceby = DDService.Text.ToString();
+                        string location = DDLocation.Text.ToString();
+                        string Support = DDSupport.Text.ToString();
+                        string Rmonth = DDMonth.Text.ToString();
+
+                        RDate = DateTime.Now.AddDays(0).ToString("dd-MM-yyyy");
+                        Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
+                        Microsoft.Office.Interop.Excel.Workbook WB = oExcel.Workbooks.Open(name);
+
+                        Microsoft.Office.Interop.Excel.Worksheet sheet = WB.ActiveSheet;
+                        InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
+
+                        DateTime b = DateTime.Now;
+                        TimeSpan diff = b - a;
+                        var Sec = String.Format("{0}", diff.Seconds);
+                        lblmsg.Text = "";
+                        lblSuccMsg.Text = "Smart Read completed in " + Sec + " Seconds, Batch ID: " + BatchID + "\n" +
+                                          "                     Number of records: " + NoRecord;
+                        linkLabel2.Enabled = true;
+                        linkLabel2.Text = "Click here to edit data.";
+                        //linkLabel2.Text = "Click here to export the extracted data.";
+                        oExcel.Workbooks.Close();
+
+                        DDInsurance.SelectionLength = 0;
+                        DDLocation.SelectionLength = 0;
+                        DDsales.SelectionLength = 0;
+                        DDService.SelectionLength = 0;
+                        DDSupport.SelectionLength = 0;
+                        DDMonth.SelectionLength = 0;
+
+                        var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
+                                        MessageBoxButtons.YesNo);
+                        if (confirmExportResult == DialogResult.Yes)
+                        {
+                            ExcelExport();
+                        }
+                        else
+                        {
+                            lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
+                            lblmsg1.Text = "You can check the data through another Menu Option.";
+                        }
+
+                        DDInsurance.SelectionLength = 0;
+                        DDLocation.SelectionLength = 0;
+                        DDsales.SelectionLength = 0;
+                        DDService.SelectionLength = 0;
+                        DDSupport.SelectionLength = 0;
+                        DDMonth.SelectionLength = 0;
+                        //txtfile.Text = "Select pdf file";
+                        //btnBrowse.Enabled = true;
+                        btnCancel.Enabled = true;
+                        //linkLabel2.Enabled = true;
+                        //DDInsurance.SelectedValue = 0;
+                        //DDLocation.SelectedValue = 0;
+                        //DDsales.SelectedValue = 0;
+                        //DDService.SelectedValue = 0;
+                        //DDSupport.SelectedValue = 0;
                     }
                     else
                     {
-                        lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
-                        lblmsg1.Text = "You can check the data through another Menu Option.";
+                        lblmsg.Text = "";
+                        lblmsg.Refresh();
+                        MessageBox.Show("Given file's BDS is already exists in the database.", "Warning!");
+                        btnCancel.Enabled = true; btnBrowse.Enabled = true;
+                        DDInsurance.SelectionLength = 0;
+                        DDLocation.SelectionLength = 0;
+                        DDsales.SelectionLength = 0;
+                        DDService.SelectionLength = 0;
+                        DDSupport.SelectionLength = 0;
+                        DDMonth.SelectionLength = 0;
                     }
-
-                    //txtfile.Text = "Select pdf file";
-                    //btnBrowse.Enabled = true;
-                    btnCancel.Enabled = true;
-                    //linkLabel2.Enabled = true;
-                    //DDInsurance.SelectedValue = 0;
-                    //DDLocation.SelectedValue = 0;
-                    //DDsales.SelectedValue = 0;
-                    //DDService.SelectedValue = 0;
-                    //DDSupport.SelectedValue = 0;
                 }
             }
             catch (Exception ex)
@@ -171,6 +226,12 @@ namespace Futurisk
                 DDService.Enabled = true;
                 DDSupport.Enabled = true;
                 DDMonth.Enabled = true;
+                DDInsurance.SelectionLength = 0;
+                DDLocation.SelectionLength = 0;
+                DDsales.SelectionLength = 0;
+                DDService.SelectionLength = 0;
+                DDSupport.SelectionLength = 0;
+                DDMonth.SelectionLength = 0;
             }
         }
 
@@ -183,11 +244,90 @@ namespace Futurisk
 
         private void kryptonButton6_Click(object sender, EventArgs e)
         {
-            Login obj = new Login();
-            obj.Show();
-            this.Close();
+            string promptValue = ShowDialog("Batch");
+            if (promptValue != "")
+            {
+                Fileinfo.Insurer = "NACL,National Insurance Co.Ltd.";
+                Fileinfo.InsurerCode = "NACL";
+                Fileinfo.ReportId = "NACP";               
+                Fileinfo.BatchId = promptValue.Substring(0, promptValue.IndexOf(","));
+                Fileinfo.Filename = promptValue.Substring(promptValue.IndexOf(",") + 1);
+                EditForm obj = new EditForm();
+                obj.Show();
+                obj.WindowState = FormWindowState.Normal;
+            }
         }
+        public string ShowDialog(string caption)
+        {
+            var promptValue = "";
+            Form prompt = new Form()
+            {
+                Width = 600,
+                Height = 200,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                BackColor = System.Drawing.Color.White,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen,
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+            Label textLabel = new Label() { Left = 50, Top = 30, Text = "Batch" };
+            ComboBox CB = new ComboBox() { Left = 100, Top = 30, Width = 450 };
+            Label lblErmsg = new Label() { Left = 50, Top = 50, Width = 300 };
+            Button confirmation = new Button() { Text = "Ok", Left = 220, Width = 80, Top = 100, DialogResult = DialogResult.OK, Enabled = false };
+            Button confirmation1 = new Button() { Text = "Cancel", Left = 320, Width = 80, Top = 100, DialogResult = DialogResult.Cancel };
+            textLabel.Font = new Font("Verdana", 11);
+            CB.Font = new Font("Verdana", 9);
+            lblErmsg.Font = new Font("Verdana", 9);
+            lblErmsg.ForeColor = System.Drawing.Color.Red;
+            confirmation.Font = new Font("Verdana", 9);
+            confirmation1.Font = new Font("Verdana", 9);
+            DataRow dr;
+            string com = "select distinct(Inv_No) as No,Inv_No+','+[Filename] as Name from BDSMaster where InsurerCode = 'NACL' and ReportCode = 'NACP'";
+            SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
+            DataTable dt = new DataTable();
+            adpt.Fill(dt);
+            dr = dt.NewRow();
+            dr.ItemArray = new object[] { 0, "" };
+            dt.Rows.InsertAt(dr, 0);
 
+            CB.ValueMember = "No";
+            CB.DisplayMember = "Name";
+            CB.DataSource = dt;
+            CB.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CB.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            //confirmation.Click += (sender, e) => { prompt.Close(); };
+            confirmation1.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(CB);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(confirmation1);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            CB.SelectedIndexChanged += (sender, e) =>
+            {
+                if (CB.SelectedValue.ToString() != "0")
+                {
+                    confirmation.Enabled = true;
+                }
+                else
+                {
+                    confirmation.Enabled = false;
+                }
+            };
+            if (prompt.ShowDialog() == DialogResult.OK && CB.SelectedValue.ToString() != "0")
+            {
+                // promptValue = CB.SelectedValue.ToString();
+                promptValue = CB.Text;
+            }
+            else if (prompt.ShowDialog() == DialogResult.Cancel)
+            {
+                promptValue = "";
+                prompt.Close();
+            }
+            return promptValue;
+        }
         private void kryptonButton3_Click(object sender, EventArgs e)
         {
             NationalTemplate obj = new NationalTemplate();
@@ -247,6 +387,8 @@ namespace Futurisk
 
                     txtfile.Text = Filewithext;
                     txtfile.ForeColor = System.Drawing.Color.Black;
+                    Fileinfo.Filename = Filewithext;
+                    Fileinfo.TName = "NationalTransaction";
 
                     btnBrowse.Enabled = false;
                 }
@@ -298,7 +440,11 @@ namespace Futurisk
         public void BindDDInsurance()
         {
             DataRow dr;
-            string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'NA' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'NA' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ',' + Code +' '+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
+            string com = "select Code,Code +' '+ InsurerCode + ',' + UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'NA' and Code != '' order by Description asc";
+
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -310,6 +456,25 @@ namespace Futurisk
             DDInsurance.DisplayMember = "Description";
             DDInsurance.DataSource = dt;
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Fileinfo.Insurer = "NACL,National Insurance Co.Ltd.";
+            Fileinfo.InsurerCode = "NACL";
+            Fileinfo.ReportId = "NACP";
+            Fileinfo.BatchId = BatchID;
+            EditForm obj = new EditForm();
+            obj.Show();
+            obj.WindowState = FormWindowState.Normal;
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
+        {
+            Login obj = new Login();
+            obj.Show();
+            this.Close();
+        }
+
         public void BindDDSales()
         {
             DataRow dr;
@@ -438,6 +603,14 @@ namespace Futurisk
                     wb.Style.Font.Bold = true;
                     string path = pathDownload + "\\" + FileName;
                     wb.SaveAs(path);
+
+                    sql.SQLExecuteDataset("SP_National_Transactions",
+                    new SqlParameter { ParameterName = "@Imode", Value = 6 },
+                    new SqlParameter { ParameterName = "@BatchID", Value = BatchID },
+                    new SqlParameter { ParameterName = "@version", Value = LoginInfo.version },
+                    new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
+                    );
+
                     lblmsg1.ForeColor = System.Drawing.Color.Green;
                     lblmsg1.Text = "              Data downloaded successfully.\n     (File Name:" + FileName + ")";
                 }
@@ -670,6 +843,7 @@ namespace Futurisk
             dsR = sql.SQLExecuteDataset("SP_National_Transactions",
                  new SqlParameter { ParameterName = "@Imode", Value = 5 },
                  new SqlParameter { ParameterName = "@BatchID", Value = BatchID },
+                 new SqlParameter { ParameterName = "@version", Value = LoginInfo.version },
                  new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
                  );
             if (dsR != null && dsR.Tables.Count > 0 && dsR.Tables[0].Rows.Count > 0)

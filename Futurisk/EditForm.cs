@@ -36,7 +36,9 @@ namespace Futurisk
         public void BindDDInsurance()
         {
             DataRow dr;
-            string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where InsurerCode = '"+Fileinfo.InsurerCode +"' and Code != '' order by Description asc";
+            //string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where InsurerCode = '"+Fileinfo.InsurerCode +"' and Code != '' order by Description asc";
+            string com = "select Code,Code +' '+ InsurerCode + ',' + UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where InsurerCode = '" + Fileinfo.InsurerCode + "' and Code != '' order by Description asc";
+
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
