@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GodigitInsurence1.cs" />
     <Compile Include="SQLProcs.cs" />
     <Compile Include="UnitedPDF1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

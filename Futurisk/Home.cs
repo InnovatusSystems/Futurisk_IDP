@@ -159,6 +159,12 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
+            if (Type == "GGIC") //Oriental Insurance Company Ltd
+            {
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

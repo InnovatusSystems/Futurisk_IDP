@@ -220,7 +220,7 @@ namespace Futurisk
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(523, 220);
+            this.label1.Location = new System.Drawing.Point(507, 222);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 20);
             this.label1.TabIndex = 53;
@@ -233,7 +233,7 @@ namespace Futurisk
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(535, 171);
+            this.label9.Location = new System.Drawing.Point(519, 173);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(15, 20);
             this.label9.TabIndex = 52;
@@ -351,11 +351,11 @@ namespace Futurisk
             this.DBType.BackColor = System.Drawing.Color.White;
             this.DBType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DBType.DropDownWidth = 330;
-            this.DBType.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DBType.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DBType.FormattingEnabled = true;
-            this.DBType.Location = new System.Drawing.Point(555, 220);
+            this.DBType.Location = new System.Drawing.Point(539, 222);
             this.DBType.Name = "DBType";
-            this.DBType.Size = new System.Drawing.Size(462, 31);
+            this.DBType.Size = new System.Drawing.Size(518, 28);
             this.DBType.TabIndex = 38;
             this.toolTip1.SetToolTip(this.DBType, "Select the document type");
             this.DBType.SelectedIndexChanged += new System.EventHandler(this.DBType_SelectedIndexChanged);
@@ -365,7 +365,7 @@ namespace Futurisk
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(335, 221);
+            this.label5.Location = new System.Drawing.Point(319, 223);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(175, 25);
             this.label5.TabIndex = 37;
@@ -377,11 +377,11 @@ namespace Futurisk
             this.DBInsurer.BackColor = System.Drawing.Color.White;
             this.DBInsurer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DBInsurer.DropDownWidth = 300;
-            this.DBInsurer.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DBInsurer.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DBInsurer.FormattingEnabled = true;
-            this.DBInsurer.Location = new System.Drawing.Point(555, 173);
+            this.DBInsurer.Location = new System.Drawing.Point(539, 175);
             this.DBInsurer.Name = "DBInsurer";
-            this.DBInsurer.Size = new System.Drawing.Size(462, 31);
+            this.DBInsurer.Size = new System.Drawing.Size(518, 28);
             this.DBInsurer.TabIndex = 36;
             this.toolTip1.SetToolTip(this.DBInsurer, "Select the Insurance Company");
             this.DBInsurer.SelectedIndexChanged += new System.EventHandler(this.DBInsurer_SelectedIndexChanged);
@@ -391,7 +391,7 @@ namespace Futurisk
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12.096F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(291, 171);
+            this.label4.Location = new System.Drawing.Point(275, 173);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(222, 25);
             this.label4.TabIndex = 32;
