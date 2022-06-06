@@ -211,6 +211,7 @@ namespace Futurisk
             catch (Exception ex)
             {
                 lblmsg.Text = "";
+                InsertException(ex.Message);
                 lblmsg1.Text = "Smart Read data extraction failed.";
                 lblmsg1.ForeColor = System.Drawing.Color.Red;
                 btnCancel.Enabled = true;
@@ -234,7 +235,17 @@ namespace Futurisk
                 DDMonth.SelectionLength = 0;
             }
         }
-
+        public void InsertException(string exception)
+        {
+            SQLProcs sql = new SQLProcs();
+            sql.ExecuteSQLNonQuery("SP_Login",
+                     new SqlParameter { ParameterName = "@Imode", Value = 10 },
+                     new SqlParameter { ParameterName = "@Exception", Value = exception },
+                     new SqlParameter { ParameterName = "@InsurerCode", Value = Fileinfo.InsurerCode },
+                     new SqlParameter { ParameterName = "@ReportCode", Value = Fileinfo.ReportId },
+                     new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
+                     );
+        }
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             Home obj = new Home();

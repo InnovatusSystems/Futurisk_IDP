@@ -141,7 +141,7 @@ namespace Futurisk
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1641, 1054);
+            this.panel1.Size = new System.Drawing.Size(1699, 1054);
             this.panel1.TabIndex = 0;
             // 
             // RBType2
@@ -247,7 +247,7 @@ namespace Futurisk
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 1007);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1641, 47);
+            this.panel3.Size = new System.Drawing.Size(1699, 47);
             this.panel3.TabIndex = 73;
             // 
             // label22
@@ -256,7 +256,7 @@ namespace Futurisk
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Verdana", 9.792F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label22.Location = new System.Drawing.Point(619, 14);
+            this.label22.Location = new System.Drawing.Point(648, 14);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(375, 20);
             this.label22.TabIndex = 0;
@@ -724,7 +724,7 @@ namespace Futurisk
             this.lblReportid.AutoSize = true;
             this.lblReportid.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblReportid.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblReportid.Location = new System.Drawing.Point(916, 239);
+            this.lblReportid.Location = new System.Drawing.Point(935, 239);
             this.lblReportid.Name = "lblReportid";
             this.lblReportid.Size = new System.Drawing.Size(52, 25);
             this.lblReportid.TabIndex = 9;
@@ -735,7 +735,7 @@ namespace Futurisk
             this.lblInsurer.AutoSize = true;
             this.lblInsurer.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInsurer.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblInsurer.Location = new System.Drawing.Point(1014, 206);
+            this.lblInsurer.Location = new System.Drawing.Point(1033, 206);
             this.lblInsurer.Name = "lblInsurer";
             this.lblInsurer.Size = new System.Drawing.Size(52, 25);
             this.lblInsurer.TabIndex = 8;
@@ -745,7 +745,7 @@ namespace Futurisk
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(798, 239);
+            this.label6.Location = new System.Drawing.Point(817, 239);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(118, 25);
             this.label6.TabIndex = 6;
@@ -755,7 +755,7 @@ namespace Futurisk
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(797, 206);
+            this.label5.Location = new System.Drawing.Point(816, 206);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(222, 25);
             this.label5.TabIndex = 4;
@@ -766,7 +766,7 @@ namespace Futurisk
             this.lblFilename.AutoSize = true;
             this.lblFilename.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFilename.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblFilename.Location = new System.Drawing.Point(923, 176);
+            this.lblFilename.Location = new System.Drawing.Point(942, 176);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(52, 25);
             this.lblFilename.TabIndex = 3;
@@ -781,7 +781,7 @@ namespace Futurisk
             this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
             this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(1641, 100);
+            this.kryptonPanel1.Size = new System.Drawing.Size(1699, 100);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.DarkCyan;
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.AliceBlue;
             this.kryptonPanel1.StateCommon.ColorAlign = ComponentFactory.Krypton.Toolkit.PaletteRectangleAlign.Form;
@@ -843,7 +843,7 @@ namespace Futurisk
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(797, 176);
+            this.label1.Location = new System.Drawing.Point(816, 176);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 25);
             this.label1.TabIndex = 0;
@@ -855,7 +855,7 @@ namespace Futurisk
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1641, 1054);
+            this.ClientSize = new System.Drawing.Size(1699, 1054);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

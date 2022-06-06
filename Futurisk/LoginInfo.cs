@@ -19,5 +19,6 @@ namespace Futurisk
         public static string ReportId;
         public static string BatchId;
         public static string TName;
+        public static string Type;
     }
 }

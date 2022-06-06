@@ -39,8 +39,19 @@
     <Reference Include="NPOI">
       <HintPath>..\Futurisk\bin\Debug\NPOI.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base">
+      <HintPath>..\Futurisk\bin\Debug\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing">
+      <HintPath>..\Futurisk\bin\Debug\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base">
+      <HintPath>..\Futurisk\bin\Debug\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,7 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GodigitInsurence1.cs" />
+    <Compile Include="ICICITransaction1.cs" />
     <Compile Include="SQLProcs.cs" />
+    <Compile Include="StarHealthInsurence1.cs" />
+    <Compile Include="TATAInsurence.cs" />
     <Compile Include="UnitedPDF1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

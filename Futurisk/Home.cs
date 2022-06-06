@@ -71,7 +71,7 @@ namespace Futurisk
             string Type = DBType.SelectedValue.ToString();
             if (Insurer == "0" && Type == "0")
             {
-                MessageBox.Show("Please select Insurer and Type");
+                MessageBox.Show("Please select Insurer and Document Type");
             }
             else if (Type == "0")
             {
@@ -104,6 +104,26 @@ namespace Futurisk
                     OrientalTemplate2 obj = new OrientalTemplate2();
                     obj.Show();
                 }
+                if (Type == "GGI1") //Godigit General Insurance Co. Ltd
+                {
+                    Godigitsample1 obj = new Godigitsample1();
+                    obj.Show();
+                }
+                if (Type == "TAI1") //TATA AIG General Insurance Co. Ltd.
+                {
+                    TATASample1 obj = new TATASample1();
+                    obj.Show();
+                }
+                if (Type == "ILG1") //ICICI Lombard General Insurance Co. Ltd.
+                {
+                    ICICIsample1 obj = new ICICIsample1();
+                    obj.Show();
+                }
+                if (Type == "STA1") //Star Health & Allied Insurance Co. Ltd.
+                {
+                    StarHealthSample1 obj = new StarHealthSample1();
+                    obj.Show();
+                }
             }
         }
 
@@ -112,6 +132,27 @@ namespace Futurisk
             string Type = DBType.SelectedValue.ToString();
             if (Type != "0")
             {
+                //if (Type == "STA1")
+                //{
+                //    lbltype.Visible = true;
+                //    RBType1.Visible = true;
+                //    RBType2.Visible = true;
+                //}
+                //else if (Type == "ILG1")
+                //{
+                //    lblType2.Visible = true;
+                //    RBType3.Visible = true;
+                //    RBType4.Visible = true;
+                //}
+                //else
+                //{
+                //    lbltype.Visible = false;
+                //    RBType1.Visible = false;
+                //    RBType2.Visible = false;
+                //    lblType2.Visible = false;
+                //    RBType3.Visible = false;
+                //    RBType4.Visible = false;
+                //}
                 btnTemp.Enabled = true;
                 btnTemp.ForeColor = System.Drawing.Color.White;
                 btnContinue.Enabled = true;
@@ -119,6 +160,12 @@ namespace Futurisk
             }
             else
             {
+                lbltype.Visible = false;
+                RBType1.Visible = false;
+                RBType2.Visible = false;
+                lblType2.Visible = false;
+                RBType3.Visible = false;
+                RBType4.Visible = false;
                 btnTemp.Enabled = false;
                 btnTemp.ForeColor = System.Drawing.Color.Black;
                 btnContinue.Enabled = false;
@@ -159,12 +206,90 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            if (Type == "GGIC") //Oriental Insurance Company Ltd
+            if (Type == "GGI1") //Godigit General Insurance Co. Ltd
             {
+                Fileinfo.InsurerCode = "GGIC";
+                Fileinfo.ReportId = Type;
                 GodigitInsurence obj = new GodigitInsurence();
                 obj.Show();
                 this.Close();
             }
+            if (Type == "TAI1") //TATA AIG General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "TAIG";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "ILG1") //ICICI Lombard General Insurance Co. Ltd.
+            {
+                //if (RBType3.Checked != true && RBType4.Checked != true)
+                //{
+                //    MessageBox.Show("Please select Type");
+                //}
+                //else
+                //{
+                //    var RBType = "";
+                //    if (RBType3.Checked == true)
+                //    {
+                //        RBType = "General";
+                //    }
+                //    else if (RBType4.Checked == true)
+                //    {
+                //        RBType = "Terrorism";
+                //    }
+                //    Fileinfo.Type = RBType;
+                //    Fileinfo.InsurerCode = "ILGI";
+                //    Fileinfo.ReportId = Type;
+                //    GodigitInsurence obj = new GodigitInsurence();
+                //    obj.Show();
+                //    this.Close();
+                //}
+                Fileinfo.InsurerCode = "ILGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "STA1") //Star Health & Allied Insurance Co. Ltd.
+            {
+                //if (RBType1.Checked != true && RBType2.Checked != true)
+                //{
+                //    MessageBox.Show("Please select Type");
+                //}
+                //else
+                //{
+                //    var RBType = "";
+                //    if (RBType1.Checked == true)
+                //    {
+                //        RBType = "Retail";
+                //    }
+                //    else if (RBType2.Checked == true)
+                //    {
+                //        RBType = "Corporate";
+                //    }
+                //    Fileinfo.Type = RBType;
+                //    Fileinfo.InsurerCode = "STAR";
+                //    Fileinfo.ReportId = Type;
+                //    GodigitInsurence obj = new GodigitInsurence();
+                //    obj.Show();
+                //    this.Close();
+                //}
+                Fileinfo.InsurerCode = "STAR";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            //if (Type == "NACX") //National Insurance Co. Ltd.
+            //{
+            //    Fileinfo.InsurerCode = "NACL";
+            //    Fileinfo.ReportId = Type;
+            //    GodigitInsurence obj = new GodigitInsurence();
+            //    obj.Show();
+            //    this.Close();
+            //}
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

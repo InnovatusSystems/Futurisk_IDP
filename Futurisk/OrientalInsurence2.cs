@@ -96,7 +96,17 @@ namespace Futurisk
                 btnBrowse.Enabled = true;
             }
         }
-
+        public void InsertException(string exception)
+        {
+            SQLProcs sql = new SQLProcs();
+            sql.ExecuteSQLNonQuery("SP_Login",
+                     new SqlParameter { ParameterName = "@Imode", Value = 10 },
+                     new SqlParameter { ParameterName = "@Exception", Value = exception },
+                     new SqlParameter { ParameterName = "@InsurerCode", Value = Fileinfo.InsurerCode },
+                     new SqlParameter { ParameterName = "@ReportCode", Value = Fileinfo.ReportId },
+                     new SqlParameter { ParameterName = "@UserId", Value = LoginInfo.UserID }
+                     );
+        }
         private void kryptonButton2_Click(object sender, EventArgs e)
         {
             Home obj = new Home();
@@ -301,6 +311,7 @@ namespace Futurisk
             catch (Exception ex)
             {
                 lblmsg.Text = "";
+                InsertException(ex.Message);
                 lblmsg1.Text = "              Smart Read data extraction failed.";
                 lblmsg1.ForeColor = System.Drawing.Color.Red;
                 btnCancel.Enabled = true;
@@ -368,6 +379,7 @@ namespace Futurisk
             {
                 //return ex.Message;
                 lblSuccMsg.Text = "";
+                InsertException(ex.Message);
                 lblmsg1.Text = "Data export failed.";
                 lblmsg1.ForeColor = System.Drawing.Color.Red;
                 linkLabel2.Text = "";
@@ -1165,6 +1177,7 @@ namespace Futurisk
                         if (CvrType == "")
                         {
                             var CType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, Cvrno - 1]).Value.Replace("\n", "").TrimStart();
+                            CType = Regex.Replace(CType, @"\d", "");
                             if (CType == "OD" || CType == "TP")
                             {
                                 CvrType = CType;
@@ -1177,7 +1190,7 @@ namespace Futurisk
                                 Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                 Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
                                 ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                                if(Premium_Amt == "")
+                                if (Premium_Amt == "")
                                 {
                                     Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                     Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 1]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
@@ -1213,6 +1226,42 @@ namespace Futurisk
                                 Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                 Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
                                 ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                if (Premium_Amt == "")
+                                {
+                                    Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 1]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                    ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    if (Premium_Amt == "")
+                                    {
+                                        Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 2]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                        ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        if (Premium_Amt == "")
+                                        {
+                                            Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 3]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                            ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            if (Premium_Amt == "")
+                                            {
+                                                Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 4]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                                ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                if (Premium_Amt == "")
+                                                {
+                                                    Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 5]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                                    ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    if (Premium_Amt == "")
+                                                    {
+                                                        Premium_Amt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                        Revenue_Pcnt = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 6]).Value.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+                                                        ODRevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         if (CvrType == "TP")
@@ -1223,8 +1272,8 @@ namespace Futurisk
                                 TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                 if (Terrorism == "")
                                 {
-                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7+1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9+1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 9 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                     if (Terrorism == "")
                                     {
                                         Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 7 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
@@ -1256,7 +1305,36 @@ namespace Futurisk
                             {
                                 Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
                                 TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
-
+                                if (Terrorism == "")
+                                {
+                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 1]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                    if (Terrorism == "")
+                                    {
+                                        Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 2]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                        if (Terrorism == "")
+                                        {
+                                            Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 3]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                            if (Terrorism == "")
+                                            {
+                                                Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 4]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                if (Terrorism == "")
+                                                {
+                                                    Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 5]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    if (Terrorism == "")
+                                                    {
+                                                        Terrorism = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 8 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                        TPrevenue = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i + K, 10 + 6]).Value.Replace("\n", "").Replace(",", "").Replace(" ", "").TrimStart();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -1303,7 +1381,7 @@ namespace Futurisk
                                 new SqlParameter { ParameterName = "@location", Value = location },
                                 new SqlParameter { ParameterName = "@Support", Value = Support },
                                 new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
-                                new SqlParameter { ParameterName = "@RFormat", Value = "F1" },
+                                new SqlParameter { ParameterName = "@RFormat", Value = "F2" },
                                 new SqlParameter { ParameterName = "@InvNo", Value = "OIC2" },
                                 new SqlParameter { ParameterName = "@ReportId", Value = "OIC2" },
                                 new SqlParameter { ParameterName = "@DocName", Value = "Oriental Insurance Co.Ltd." }

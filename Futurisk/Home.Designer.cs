@@ -36,6 +36,12 @@ namespace Futurisk
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.kryptonPanel2 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
+            this.RBType4 = new System.Windows.Forms.RadioButton();
+            this.RBType3 = new System.Windows.Forms.RadioButton();
+            this.lblType2 = new System.Windows.Forms.Label();
+            this.RBType2 = new System.Windows.Forms.RadioButton();
+            this.RBType1 = new System.Windows.Forms.RadioButton();
+            this.lbltype = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -117,6 +123,12 @@ namespace Futurisk
             // 
             // kryptonPanel2
             // 
+            this.kryptonPanel2.Controls.Add(this.RBType4);
+            this.kryptonPanel2.Controls.Add(this.RBType3);
+            this.kryptonPanel2.Controls.Add(this.lblType2);
+            this.kryptonPanel2.Controls.Add(this.RBType2);
+            this.kryptonPanel2.Controls.Add(this.RBType1);
+            this.kryptonPanel2.Controls.Add(this.lbltype);
             this.kryptonPanel2.Controls.Add(this.label11);
             this.kryptonPanel2.Controls.Add(this.label10);
             this.kryptonPanel2.Controls.Add(this.label8);
@@ -138,6 +150,82 @@ namespace Futurisk
             this.kryptonPanel2.StateNormal.Color1 = System.Drawing.Color.White;
             this.kryptonPanel2.StateNormal.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             this.kryptonPanel2.TabIndex = 44;
+            // 
+            // RBType4
+            // 
+            this.RBType4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RBType4.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBType4.Location = new System.Drawing.Point(704, 285);
+            this.RBType4.Name = "RBType4";
+            this.RBType4.Size = new System.Drawing.Size(133, 29);
+            this.RBType4.TabIndex = 84;
+            this.RBType4.TabStop = true;
+            this.RBType4.Text = "Terrorism";
+            this.RBType4.UseVisualStyleBackColor = true;
+            this.RBType4.Visible = false;
+            // 
+            // RBType3
+            // 
+            this.RBType3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RBType3.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBType3.Location = new System.Drawing.Point(576, 285);
+            this.RBType3.Name = "RBType3";
+            this.RBType3.Size = new System.Drawing.Size(121, 29);
+            this.RBType3.TabIndex = 83;
+            this.RBType3.TabStop = true;
+            this.RBType3.Text = "General";
+            this.RBType3.UseVisualStyleBackColor = true;
+            this.RBType3.Visible = false;
+            // 
+            // lblType2
+            // 
+            this.lblType2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblType2.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType2.ForeColor = System.Drawing.Color.Black;
+            this.lblType2.Location = new System.Drawing.Point(505, 286);
+            this.lblType2.Name = "lblType2";
+            this.lblType2.Size = new System.Drawing.Size(67, 25);
+            this.lblType2.TabIndex = 82;
+            this.lblType2.Text = "Type:";
+            this.lblType2.Visible = false;
+            // 
+            // RBType2
+            // 
+            this.RBType2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RBType2.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBType2.Location = new System.Drawing.Point(678, 284);
+            this.RBType2.Name = "RBType2";
+            this.RBType2.Size = new System.Drawing.Size(133, 29);
+            this.RBType2.TabIndex = 81;
+            this.RBType2.TabStop = true;
+            this.RBType2.Text = "Corporate";
+            this.RBType2.UseVisualStyleBackColor = true;
+            this.RBType2.Visible = false;
+            // 
+            // RBType1
+            // 
+            this.RBType1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RBType1.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RBType1.Location = new System.Drawing.Point(582, 284);
+            this.RBType1.Name = "RBType1";
+            this.RBType1.Size = new System.Drawing.Size(91, 29);
+            this.RBType1.TabIndex = 80;
+            this.RBType1.TabStop = true;
+            this.RBType1.Text = "Retail";
+            this.RBType1.UseVisualStyleBackColor = true;
+            this.RBType1.Visible = false;
+            // 
+            // lbltype
+            // 
+            this.lbltype.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbltype.Font = new System.Drawing.Font("Verdana", 10.944F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltype.ForeColor = System.Drawing.Color.Black;
+            this.lbltype.Location = new System.Drawing.Point(511, 285);
+            this.lbltype.Name = "lbltype";
+            this.lbltype.Size = new System.Drawing.Size(67, 25);
+            this.lbltype.TabIndex = 79;
+            this.lbltype.Text = "Type:";
+            this.lbltype.Visible = false;
             // 
             // label11
             // 
@@ -244,7 +332,7 @@ namespace Futurisk
             this.btnContinue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnContinue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnContinue.Enabled = false;
-            this.btnContinue.Location = new System.Drawing.Point(657, 316);
+            this.btnContinue.Location = new System.Drawing.Point(666, 342);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnContinue.OverrideDefault.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -298,7 +386,7 @@ namespace Futurisk
             this.btnTemp.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnTemp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTemp.Enabled = false;
-            this.btnTemp.Location = new System.Drawing.Point(459, 316);
+            this.btnTemp.Location = new System.Drawing.Point(468, 342);
             this.btnTemp.Name = "btnTemp";
             this.btnTemp.OverrideDefault.Back.Color1 = System.Drawing.Color.DarkCyan;
             this.btnTemp.OverrideDefault.Back.ColorStyle = ComponentFactory.Krypton.Toolkit.PaletteColorStyle.Linear40;
@@ -467,5 +555,11 @@ namespace Futurisk
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.RadioButton RBType2;
+        private System.Windows.Forms.RadioButton RBType1;
+        private System.Windows.Forms.Label lbltype;
+        private System.Windows.Forms.RadioButton RBType4;
+        private System.Windows.Forms.RadioButton RBType3;
+        private System.Windows.Forms.Label lblType2;
     }
 }
