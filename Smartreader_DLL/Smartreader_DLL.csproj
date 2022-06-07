@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="GodigitInsurence1.cs" />
     <Compile Include="ICICITransaction1.cs" />
+    <Compile Include="NationalInsurence.cs" />
     <Compile Include="SQLProcs.cs" />
     <Compile Include="StarHealthInsurence1.cs" />
     <Compile Include="TATAInsurence.cs" />

@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using Syncfusion.XlsIO;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Futurisk
 {
@@ -168,7 +169,7 @@ namespace Futurisk
                             else if (Fileinfo.ReportId == "NACX")
                             {
                                 InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                                //ICICITransaction1.InsertTransaction(WB, LoginInfo.UserID, strconn);
+                                //NationalInsurence.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
                             }
                             else if (Fileinfo.ReportId == "STA1")
                             {
@@ -262,7 +263,7 @@ namespace Futurisk
                 lblmsg.Text = "";
                 lblmsg.Refresh();
                 InsertException(ex.Message);
-                lblmsg1.Text = "Smart Read data extraction failed.";
+                lblmsg1.Text = "          Smart Read data extraction failed.";
                 lblmsg1.ForeColor = System.Drawing.Color.Red;
                 btnCancel.Enabled = true;
                 DDMonth.SelectedIndex = 0;
@@ -1867,29 +1868,141 @@ namespace Futurisk
         //    return dtcopy;
         //}
 
+        //public static void InsertTransaction(Microsoft.Office.Interop.Excel.Workbook WB, string TranID, string RDate, string Insurance, string Salesby, string Serviceby, string location, string Support, string Rmonth)
+        //{
+        //    //National insurance
+        //    SQLProcs sql = new SQLProcs();
+        //    Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
+        //    Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+        //    int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = "";var Policy_Type = "";
+        //    for (int i = 4; i < lastrow; i++)
+        //    {
+        //        string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value;
+        //        if (InsuredName != null && InsuredName != "" && InsuredName != " ")
+        //        {
+        //            InsuredName = InsuredName.Replace("\n", "").TrimStart();
+        //            string PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
+        //            //var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value;
+        //            //var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
+        //            var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
+        //            //Endo_Effective_Date = Endo_Effective_Date.ToString("dd/MM/yyyy");
+        //            //Effective_Date = Effective_Date.ToString("dd/MM/yyyy");
+        //            END_Date = END_Date.ToString("dd/MM/yyyy");
+        //            //Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
+        //            var Presult = PolicyNo.Substring(PolicyNo.LastIndexOf('/') + 1);
+        //            if (Presult.Contains("0"))
+        //            {
+        //                Policy_Endorsement = "Policy";
+        //            }
+        //            else
+        //            {
+        //                Policy_Endorsement = "Endorsement";
+        //            }
+        //            var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value);
+        //            var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value);
+        //            var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Text);
+        //            Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
+        //            //var Total_Premium = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value);
+        //            Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
+        //            var ODOtherPremium = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value).Replace("\n", "").Replace(",", "").TrimStart();
+        //            var OD_OtherCommission = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace("\n", "").Replace(",", "").TrimStart();
+
+        //            var Ptype = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 1]).Value;
+        //            if (Ptype != "" && Ptype != null)
+        //            {
+        //                Policy_Type = Ptype.Replace("\n", "").Replace(",", "").TrimStart();
+        //            }
+
+        //            if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
+        //            {
+        //                InsuredType = "Corporate";
+        //            }
+        //            else
+        //            {
+        //                InsuredType = "Retail";
+        //            }
+        //            if (Premium_Amt == "" || Premium_Amt == " " || Terrorism == null)
+        //            {
+        //                Premium_Amt = 0;
+        //            }
+        //            if (Revenue_Amt == "" || Revenue_Amt == " " || Terrorism == null)
+        //            {
+        //                Revenue_Amt = 0;
+        //            }
+        //            if (Revenue_Pcnt == "" || Revenue_Pcnt == " " || Revenue_Pcnt == null)
+        //            {
+        //                Revenue_Pcnt = "0";
+        //            }
+        //            if (Terrorism == "" || Terrorism == " " || Terrorism == null)
+        //            {
+        //                Terrorism = "0";
+        //            }
+        //            if (ODOtherPremium == "" || ODOtherPremium == " " || ODOtherPremium == null)
+        //            {
+        //                ODOtherPremium = "0";
+        //            }
+        //            if (OD_OtherCommission == "" || OD_OtherCommission == " " || OD_OtherCommission == null)
+        //            {
+        //                OD_OtherCommission = "0";
+        //            }
+        //            sql.ExecuteSQLNonQuery("SP_NationalExcel_Transactions",
+        //                       new SqlParameter { ParameterName = "@Imode", Value = 1 },
+        //                       new SqlParameter { ParameterName = "@RDate", Value = RDate },
+        //                       new SqlParameter { ParameterName = "@Rmonth", Value = Rmonth },
+        //                       new SqlParameter { ParameterName = "@ClientName", Value = InsuredName },
+        //                       new SqlParameter { ParameterName = "@Itype", Value = InsuredType },
+        //                       new SqlParameter { ParameterName = "@Policy_No", Value = PolicyNo },
+        //                       new SqlParameter { ParameterName = "@Revenue_Pcnt", Value = Revenue_Pcnt },
+        //                       //new SqlParameter { ParameterName = "@Endo_Effective_Date", Value = Endo_Effective_Date },
+        //                       //new SqlParameter { ParameterName = "@Effective_Date", Value = Effective_Date },
+        //                       new SqlParameter { ParameterName = "@END_Date", Value = END_Date },
+        //                       new SqlParameter { ParameterName = "@Policy_Type", Value = Policy_Type },
+        //                       new SqlParameter { ParameterName = "@Premium_Amt", Value = Premium_Amt },
+        //                       new SqlParameter { ParameterName = "@TranID", Value = TranID },
+        //                       new SqlParameter { ParameterName = "@Revenue_Amt", Value = Revenue_Amt },
+        //                        new SqlParameter { ParameterName = "@ODOtherPremium", Value = ODOtherPremium },
+        //                        new SqlParameter { ParameterName = "@OD_OtherCommission", Value = OD_OtherCommission },
+        //                       new SqlParameter { ParameterName = "@Terrorism", Value = Terrorism },
+        //                      // new SqlParameter { ParameterName = "@Total_Premium", Value = Total_Premium },
+        //                       new SqlParameter { ParameterName = "@Insurance", Value = Insurance },
+        //                       new SqlParameter { ParameterName = "@Salesby", Value = Salesby },
+        //                       new SqlParameter { ParameterName = "@Serviceby", Value = Serviceby },
+        //                       new SqlParameter { ParameterName = "@location", Value = location },
+        //                       new SqlParameter { ParameterName = "@Support", Value = Support },
+        //                       new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
+        //                       new SqlParameter { ParameterName = "@RFormat", Value = "F1" },
+        //                       new SqlParameter { ParameterName = "@InvNo", Value = "NACX" },
+        //                       new SqlParameter { ParameterName = "@ReportId", Value = "NACX" },
+        //                       new SqlParameter { ParameterName = "@DocName", Value = "National Insurance Co. Ltd." }
+        //                       );
+        //        }
+        //    }
+        //}
+
         public static void InsertTransaction(Microsoft.Office.Interop.Excel.Workbook WB, string TranID, string RDate, string Insurance, string Salesby, string Serviceby, string location, string Support, string Rmonth)
         {
-
+            //Bajaj insurance
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = "";var Policy_Type = "";
+            int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = "";
             for (int i = 4; i < lastrow; i++)
             {
-                string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value;
+                string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 26]).Value;
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
                 {
                     InsuredName = InsuredName.Replace("\n", "").TrimStart();
-                    string PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
-                    //var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value;
-                    //var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
-                    var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
+                    string PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 2]).Value.Replace("\n", "").TrimStart();
+                    var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value;
+                    var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 35]).Value;
+                    //var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value;
                     //Endo_Effective_Date = Endo_Effective_Date.ToString("dd/MM/yyyy");
                     //Effective_Date = Effective_Date.ToString("dd/MM/yyyy");
-                    END_Date = END_Date.ToString("dd/MM/yyyy");
+                    //END_Date = END_Date.ToString("dd/MM/yyyy");
                     //Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
                     var Presult = PolicyNo.Substring(PolicyNo.LastIndexOf('/') + 1);
-                    if (Presult.Contains("0"))
+                    var resultString = Regex.Match(Presult, @"\d+").Value;
+                    if (Convert.ToDouble(resultString) > 0)
                     {
                         Policy_Endorsement = "Policy";
                     }
@@ -1897,21 +2010,15 @@ namespace Futurisk
                     {
                         Policy_Endorsement = "Endorsement";
                     }
-                    var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value);
-                    var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value);
-                    var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Text);
+                    var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value);
+                    var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value);
+                    var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Text);
                     Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-                    //var Total_Premium = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value);
-                    Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
-                    var ODOtherPremium = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value).Replace("\n", "").Replace(",", "").TrimStart();
-                    var OD_OtherCommission = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace("\n", "").Replace(",", "").TrimStart();
+                    var TP1 = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value);
+                    var TP = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
 
-                    var Ptype = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 1]).Value;
-                    if (Ptype != "" && Ptype != null)
-                    {
-                        Policy_Type = Ptype.Replace("\n", "").Replace(",", "").TrimStart();
-                    }
-
+                    Policy_Type = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 19]).Value;
+                    
                     if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
                     {
                         InsuredType = "Corporate";
@@ -1920,11 +2027,11 @@ namespace Futurisk
                     {
                         InsuredType = "Retail";
                     }
-                    if (Premium_Amt == "" || Premium_Amt == " " || Terrorism == null)
+                    if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
                     {
                         Premium_Amt = 0;
                     }
-                    if (Revenue_Amt == "" || Revenue_Amt == " " || Terrorism == null)
+                    if (Revenue_Amt == "" || Revenue_Amt == " " || Revenue_Amt == null)
                     {
                         Revenue_Amt = 0;
                     }
@@ -1932,19 +2039,27 @@ namespace Futurisk
                     {
                         Revenue_Pcnt = "0";
                     }
+                    if (TP1 == "" || TP1 == " " || TP1 == null)
+                    {
+                        TP1 = "0";
+                    }
+                    if (TP == "" || TP == " " || TP == null)
+                    {
+                        TP = "0";
+                    }
+                    if(TP == "0" && TP1 != "0")
+                    {
+                        Terrorism = TP1;
+                    }
+                    else if(TP != "0" && TP1 == "0")
+                    {
+                        Terrorism = TP;
+                    }
                     if (Terrorism == "" || Terrorism == " " || Terrorism == null)
                     {
                         Terrorism = "0";
                     }
-                    if (ODOtherPremium == "" || ODOtherPremium == " " || ODOtherPremium == null)
-                    {
-                        ODOtherPremium = "0";
-                    }
-                    if (OD_OtherCommission == "" || OD_OtherCommission == " " || OD_OtherCommission == null)
-                    {
-                        OD_OtherCommission = "0";
-                    }
-                    sql.ExecuteSQLNonQuery("SP_NationalExcel_Transactions",
+                    sql.ExecuteSQLNonQuery("SP_BajajTransactions",
                                new SqlParameter { ParameterName = "@Imode", Value = 1 },
                                new SqlParameter { ParameterName = "@RDate", Value = RDate },
                                new SqlParameter { ParameterName = "@Rmonth", Value = Rmonth },
@@ -1952,17 +2067,14 @@ namespace Futurisk
                                new SqlParameter { ParameterName = "@Itype", Value = InsuredType },
                                new SqlParameter { ParameterName = "@Policy_No", Value = PolicyNo },
                                new SqlParameter { ParameterName = "@Revenue_Pcnt", Value = Revenue_Pcnt },
-                               //new SqlParameter { ParameterName = "@Endo_Effective_Date", Value = Endo_Effective_Date },
-                               //new SqlParameter { ParameterName = "@Effective_Date", Value = Effective_Date },
-                               new SqlParameter { ParameterName = "@END_Date", Value = END_Date },
+                               new SqlParameter { ParameterName = "@Endo_Effective_Date", Value = Endo_Effective_Date },
+                               new SqlParameter { ParameterName = "@Effective_Date", Value = Effective_Date },
+                               //new SqlParameter { ParameterName = "@END_Date", Value = END_Date },
                                new SqlParameter { ParameterName = "@Policy_Type", Value = Policy_Type },
                                new SqlParameter { ParameterName = "@Premium_Amt", Value = Premium_Amt },
                                new SqlParameter { ParameterName = "@TranID", Value = TranID },
                                new SqlParameter { ParameterName = "@Revenue_Amt", Value = Revenue_Amt },
-                                new SqlParameter { ParameterName = "@ODOtherPremium", Value = ODOtherPremium },
-                                new SqlParameter { ParameterName = "@OD_OtherCommission", Value = OD_OtherCommission },
                                new SqlParameter { ParameterName = "@Terrorism", Value = Terrorism },
-                              // new SqlParameter { ParameterName = "@Total_Premium", Value = Total_Premium },
                                new SqlParameter { ParameterName = "@Insurance", Value = Insurance },
                                new SqlParameter { ParameterName = "@Salesby", Value = Salesby },
                                new SqlParameter { ParameterName = "@Serviceby", Value = Serviceby },
@@ -1970,9 +2082,9 @@ namespace Futurisk
                                new SqlParameter { ParameterName = "@Support", Value = Support },
                                new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
                                new SqlParameter { ParameterName = "@RFormat", Value = "F1" },
-                               new SqlParameter { ParameterName = "@InvNo", Value = "NACX" },
-                               new SqlParameter { ParameterName = "@ReportId", Value = "NACX" },
-                               new SqlParameter { ParameterName = "@DocName", Value = "National Insurance Co. Ltd." }
+                               new SqlParameter { ParameterName = "@InvNo", Value = "BAGX" },
+                               new SqlParameter { ParameterName = "@ReportId", Value = "BAGX" },
+                               new SqlParameter { ParameterName = "@DocName", Value = "Bajaj Allianz General Insurance Co. Ltd." }
                                );
                 }
             }
