@@ -290,6 +290,14 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
+            if (Type == "BAGX") //National Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "BAGX";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

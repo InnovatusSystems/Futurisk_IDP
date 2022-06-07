@@ -83,6 +83,10 @@ namespace Futurisk
                     {
                         ProcName = "SP_NationalExcel_Transactions";
                     }
+                    else if (Fileinfo.InsurerCode == "BAGX")
+                    {
+                        ProcName = "SP_BajajTransactions";
+                    }
                     SQLProcs sql = new SQLProcs();
                     DataSet ds1 = new DataSet();
                     ds1 = sql.SQLExecuteDataset(ProcName,
@@ -167,6 +171,11 @@ namespace Futurisk
                                 ICICITransaction1.InsertTransaction(WB, LoginInfo.UserID, strconn);
                             }
                             else if (Fileinfo.ReportId == "NACX")
+                            {
+                                //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
+                                //NationalInsurence.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            }
+                            else if (Fileinfo.ReportId == "BAGX")
                             {
                                 InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
                                 //NationalInsurence.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
@@ -451,6 +460,10 @@ namespace Futurisk
                 {
                     Fileinfo.Insurer = "NACL,National Insurance Co. Ltd.";
                 }
+                else if (Fileinfo.InsurerCode == "BAGI")
+                {
+                    Fileinfo.Insurer = "BAGI,Bajaj Allianz General Insurance Co. Ltd.";
+                }
 
                 Fileinfo.BatchId = promptValue.Substring(0, promptValue.IndexOf(","));
                 Fileinfo.Filename = promptValue.Substring(promptValue.IndexOf(",") + 1);
@@ -482,6 +495,11 @@ namespace Futurisk
             {
                 Fileinfo.Insurer = "NACL,National Insurance Co. Ltd.";
             }
+            else if (Fileinfo.InsurerCode == "BAGI")
+            {
+                Fileinfo.Insurer = "BAGI,Bajaj Allianz General Insurance Co. Ltd.";
+            }
+
             Fileinfo.BatchId = BatchID;
             EditForm obj = new EditForm();
             obj.Show();
@@ -745,6 +763,10 @@ namespace Futurisk
             {
                 lblHeader.Text = "NACL (National Insurance Co. Ltd.) - Report Id: NACX";
             }
+            else if (Fileinfo.ReportId == "BAGX")
+            {
+                lblHeader.Text = "BAGI (Bajaj Allianz General Insurance Co.Ltd.) - Report Id: BAGX";
+            }
             else if (Fileinfo.ReportId == "STA1")
             {
                 lblHeader.Text = "STAR(Star Health and Allied Insurance Co.Ltd.) - Report Id: STA1";
@@ -798,6 +820,10 @@ namespace Futurisk
             else if (Fileinfo.InsurerCode == "NACL")
             {
                 groupby = "NA";
+            }
+            else if (Fileinfo.InsurerCode == "BAGI")
+            {
+                groupby = "BA";
             }
             //string com = "select Code,InsurerCode + ','+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
             //string com = "select Code,InsurerCode + ',' + Code +' '+ UPPER(LEFT(Description, 1)) + LOWER(RIGHT(Description, LEN(Description) - 1)) as Description from tblBRInsurancelkup where GroupBy = 'UN' and Code != '' order by Description asc";
@@ -973,6 +999,10 @@ namespace Futurisk
                             else if (Fileinfo.InsurerCode == "NACL")
                             {
                                 Fileinfo.TName = "NationalExcelTransaction";
+                            }
+                            else if (Fileinfo.InsurerCode == "BAGI")
+                            {
+                                Fileinfo.TName = "BAJAJTransaction";
                             }
 
                             btnBrowse.Enabled = false;
@@ -1986,7 +2016,7 @@ namespace Futurisk
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
             int lastrow = lastCell.Row; var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = "";
-            for (int i = 4; i < lastrow; i++)
+            for (int i = 3; i < lastrow; i++)
             {
                 string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 26]).Value;
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
