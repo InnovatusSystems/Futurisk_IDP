@@ -60,13 +60,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AckoInsurance.cs" />
+    <Compile Include="AdityaInsurance.cs" />
+    <Compile Include="BajajInsurance.cs" />
+    <Compile Include="CareHealthInsurance.cs" />
+    <Compile Include="CholaInsurance.cs" />
+    <Compile Include="EdelweissInsurance.cs" />
+    <Compile Include="FutureGNlIndiaInsurance.cs" />
     <Compile Include="GodigitInsurence1.cs" />
+    <Compile Include="HDFCInsurance.cs" />
     <Compile Include="ICICITransaction1.cs" />
+    <Compile Include="IffcoTransactions.cs" />
+    <Compile Include="KotakTransaction.cs" />
+    <Compile Include="LibertyInsurance.cs" />
     <Compile Include="NationalInsurence.cs" />
+    <Compile Include="NewIndiaInsurance.cs" />
+    <Compile Include="NivaInsurance.cs" />
+    <Compile Include="RahejaTransactions.cs" />
+    <Compile Include="RelianceInsurance.cs" />
+    <Compile Include="RoyalInsurance.cs" />
+    <Compile Include="SBIInsurance.cs" />
     <Compile Include="SQLProcs.cs" />
     <Compile Include="StarHealthInsurence1.cs" />
     <Compile Include="TATAInsurence.cs" />
-    <Compile Include="UnitedPDF1.cs" />
+    <Compile Include="UnitedInsurence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

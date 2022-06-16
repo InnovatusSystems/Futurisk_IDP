@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>21</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -148,11 +148,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AckoInsurence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AckoInsurence.Designer.cs">
+      <DependentUpon>AckoInsurence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdityaTemplate1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdityaTemplate1.Designer.cs">
+      <DependentUpon>AdityaTemplate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BajajSample1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BajajSample1.Designer.cs">
+      <DependentUpon>BajajSample1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CareHealthSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CareHealthSample.Designer.cs">
+      <DependentUpon>CareHealthSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CholaSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CholaSample.Designer.cs">
+      <DependentUpon>CholaSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EdelweissSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EdelweissSample.Designer.cs">
+      <DependentUpon>EdelweissSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editlogform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editlogform.Designer.cs">
+      <DependentUpon>Editlogform.cs</DependentUpon>
     </Compile>
     <Compile Include="GodigitInsurence.cs">
       <SubType>Form</SubType>
@@ -166,6 +208,12 @@
     <Compile Include="Godigitsample1.Designer.cs">
       <DependentUpon>Godigitsample1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HDFCSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HDFCSample.Designer.cs">
+      <DependentUpon>HDFCSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +226,18 @@
     <Compile Include="ICICIsample1.Designer.cs">
       <DependentUpon>ICICIsample1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IFFCOSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IFFCOSample.Designer.cs">
+      <DependentUpon>IFFCOSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LibertySample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LibertySample.Designer.cs">
+      <DependentUpon>LibertySample.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +245,12 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="NationalExcelSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NationalExcelSample.Designer.cs">
+      <DependentUpon>NationalExcelSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="NationalInsurance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +299,30 @@
     <Compile Include="OrientalTemplate2.Designer.cs">
       <DependentUpon>OrientalTemplate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="RahejaQBESample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RahejaQBESample.Designer.cs">
+      <DependentUpon>RahejaQBESample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelianceSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelianceSample.Designer.cs">
+      <DependentUpon>RelianceSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoyalExcelSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoyalExcelSample.Designer.cs">
+      <DependentUpon>RoyalExcelSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SBISample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SBISample.Designer.cs">
+      <DependentUpon>SBISample.cs</DependentUpon>
+    </Compile>
     <Compile Include="StarHealthSample1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,8 +362,29 @@
     <Compile Include="UnitedTemplate.Designer.cs">
       <DependentUpon>UnitedTemplate.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AckoInsurence.resx">
+      <DependentUpon>AckoInsurence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdityaTemplate1.resx">
+      <DependentUpon>AdityaTemplate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BajajSample1.resx">
+      <DependentUpon>BajajSample1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CareHealthSample.resx">
+      <DependentUpon>CareHealthSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CholaSample.resx">
+      <DependentUpon>CholaSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EdelweissSample.resx">
+      <DependentUpon>EdelweissSample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editlogform.resx">
+      <DependentUpon>Editlogform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GodigitInsurence.resx">
       <DependentUpon>GodigitInsurence.cs</DependentUpon>
@@ -281,14 +392,26 @@
     <EmbeddedResource Include="Godigitsample1.resx">
       <DependentUpon>Godigitsample1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HDFCSample.resx">
+      <DependentUpon>HDFCSample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ICICIsample1.resx">
       <DependentUpon>ICICIsample1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IFFCOSample.resx">
+      <DependentUpon>IFFCOSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LibertySample.resx">
+      <DependentUpon>LibertySample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NationalExcelSample.resx">
+      <DependentUpon>NationalExcelSample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NationalInsurance.resx">
       <DependentUpon>NationalInsurance.cs</DependentUpon>
@@ -313,6 +436,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrientalTemplate2.resx">
       <DependentUpon>OrientalTemplate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RahejaQBESample.resx">
+      <DependentUpon>RahejaQBESample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelianceSample.resx">
+      <DependentUpon>RelianceSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoyalExcelSample.resx">
+      <DependentUpon>RoyalExcelSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SBISample.resx">
+      <DependentUpon>SBISample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StarHealthSample1.resx">
       <DependentUpon>StarHealthSample1.cs</DependentUpon>

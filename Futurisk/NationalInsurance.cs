@@ -151,10 +151,10 @@ namespace Futurisk
                         TimeSpan diff = b - a;
                         var Sec = String.Format("{0}", diff.Seconds);
                         lblmsg.Text = "";
-                        lblSuccMsg.Text = "Smart Read completed in " + Sec + " Seconds, Batch ID: " + BatchID + "\n" +
-                                          "                     Number of records: " + NoRecord;
+                        lblSuccMsg.Text = "                  SmartRead Done in " + Sec + " Seconds.\n" +
+                                             "               Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
                         linkLabel2.Enabled = true;
-                        linkLabel2.Text = "Click here to edit data.";
+                        linkLabel2.Text = "Click here to Edit the records if needed.";
                         //linkLabel2.Text = "Click here to export the extracted data.";
                         oExcel.Workbooks.Close();
 
@@ -212,7 +212,9 @@ namespace Futurisk
             {
                 lblmsg.Text = "";
                 InsertException(ex.Message);
-                lblmsg1.Text = "Smart Read data extraction failed.";
+                lblmsg1.Text = "                        SmartRead data extraction failed." +
+                               "\n Possible reasons:Wrong document,Column mismatch or empty rows" +
+                               "\n                             Please check the source file.";
                 lblmsg1.ForeColor = System.Drawing.Color.Red;
                 btnCancel.Enabled = true;
                 DDInsurance.SelectedValue = 0;
@@ -442,11 +444,21 @@ namespace Futurisk
         public NationalInsurance()
         {
             InitializeComponent();
+            lblUser.Text = LoginInfo.UserID;
             BindDDInsurance();
             BindDDSales();
             BindDDService();
             BindDDLocation();
             BindDDSupport();
+            TimeUpdater();
+        }
+        async void TimeUpdater()
+        {
+            while (true)
+            {
+                lblTimer.Text = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+                await Task.Delay(1000);
+            }
         }
         public void BindDDInsurance()
         {
@@ -623,7 +635,7 @@ namespace Futurisk
                     );
 
                     lblmsg1.ForeColor = System.Drawing.Color.Green;
-                    lblmsg1.Text = "              Data downloaded successfully.\n     (File Name:" + FileName + ")";
+                    lblmsg1.Text = "SmartRead data downloaded as XLSX file for your verification.\n     (File Name:" + FileName + ")";
                 }
             }
             catch (Exception ex)

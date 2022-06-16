@@ -19,10 +19,12 @@ namespace Futurisk
         public EditForm()
         {
             InitializeComponent();
+            lblUser.Text = LoginInfo.UserID;
             lblFilename.Text = Fileinfo.Filename;
             lblInsurer.Text = Fileinfo.Insurer;
             lblReportid.Text = Fileinfo.ReportId;
             lblBatchno.Text = Fileinfo.BatchId;
+            TimeUpdater();
             BindDDInsurance();
             BindDDSales();
             BindDDService();
@@ -31,7 +33,7 @@ namespace Futurisk
             BindDDPolicyType();
             gridload();
             BindFromRSN();
-            BindToRSN();
+           // BindToRSN();
         }
         public void BindDDInsurance()
         {
@@ -193,7 +195,7 @@ namespace Futurisk
         public void BindToRSN()
         {
             DataRow dr;
-            string com = "SELECT RSN as Num,[RSN] FROM [BDSMaster] where Inv_NO = '" + Fileinfo.BatchId + "' order by RSN asc";
+            string com = "SELECT RSN as Num,[RSN] FROM [BDSMaster] where Inv_NO = '" + Fileinfo.BatchId + "' and RSN >= "+ DDFrom.SelectedValue + " order by RSN asc";
             //string com = "SELECT RSN as Num,[RSN] FROM [BDSMaster] where Inv_NO = 'UIIP1' order by RSN asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
@@ -205,6 +207,41 @@ namespace Futurisk
             DDTo.ValueMember = "Num";
             DDTo.DisplayMember = "RSN";
             DDTo.DataSource = dt;
+        }
+        public void gridReload()
+        {
+            SQLProcs sql = new SQLProcs();
+            DataSet ds = new DataSet();
+            ds = sql.SQLExecuteDataset("SP_Login",
+                         new SqlParameter { ParameterName = "@Imode", Value = 11 },
+                         new SqlParameter { ParameterName = "@BatchID", Value = Fileinfo.BatchId },
+                         new SqlParameter { ParameterName = "@RSNFrom", Value = DDFrom.SelectedValue.ToString() },
+                         new SqlParameter { ParameterName = "@RSNTo", Value = DDTo.SelectedValue.ToString() }
+                );
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                //dataGridView1.EmptyDataText = "No Records Found";
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("Message", typeof(string));
+                dataTable.Rows.Add("No records found");
+
+                dataGridView1.DataSource = new BindingSource { DataSource = dataTable };
+                dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            else
+            {
+
+                var bindingSource = new System.Windows.Forms.BindingSource();
+                bindingSource.DataSource = ds.Tables[0];
+
+                dataGridView1.DataSource = bindingSource;
+                //dataGridView1.DefaultCellStyle.Font = new Font("Bookman Old Style", 8);
+                //dataGridView1.Columns[0].Visible = false;
+                //dataGridView1.Columns[1].Visible = false;
+                dataGridView1.Columns[0].DefaultCellStyle.ForeColor = Color.Blue;
+                dataGridView1.Columns[0].Width = 50;
+                dataGridView1.Columns[1].Width = 80;
+            }
         }
 
         private void DDTo_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,6 +264,14 @@ namespace Futurisk
             {
                 btnupdate.Enabled = false;
             }
+            if (DDFrom.SelectedIndex.ToString() != "-1" && DDFrom.SelectedIndex.ToString() != "0" && DDTo.SelectedIndex.ToString() != "-1" && DDTo.SelectedIndex.ToString() != "0" && DDFrom.SelectedValue.ToString() != DDTo.SelectedValue.ToString())
+            {
+                gridReload();
+            }
+            else
+            {
+                gridload();
+            }
         }
 
         private void DDFrom_SelectedIndexChanged(object sender, EventArgs e)
@@ -234,16 +279,18 @@ namespace Futurisk
             if (DDFrom.SelectedIndex.ToString() != "-1" && DDFrom.SelectedIndex.ToString() != "0")
             {
                 DDTo.Enabled = true;
-                if (DDTo.SelectedIndex.ToString() != "-1" && DDTo.SelectedIndex.ToString() != "0")
-                {
-                    var RSNFrom = DDFrom.SelectedValue.ToString();
-                    var RSNTo = DDTo.SelectedValue.ToString();
-                    if (Convert.ToInt32(RSNFrom) > Convert.ToInt32(RSNTo))
-                    {
-                        MessageBox.Show("FromRSN should be less than ToRSN");
-                        DDFrom.SelectedIndex = 0;
-                    }
-                }
+                //if (DDTo.SelectedIndex.ToString() != "-1" && DDTo.SelectedIndex.ToString() != "0")
+                //{
+                //    var RSNFrom = DDFrom.SelectedValue.ToString();
+                //    var RSNTo = DDTo.SelectedValue.ToString();
+                //    if (Convert.ToInt32(RSNFrom) > Convert.ToInt32(RSNTo))
+                //    {
+                //        MessageBox.Show("FromRSN should be less than ToRSN");
+                //        DDFrom.SelectedIndex = 0;
+                //    }
+                //}
+                BindToRSN();
+                DDTo.SelectedValue = DDFrom.SelectedValue.ToString();
             }
             else
             {
@@ -274,6 +321,7 @@ namespace Futurisk
             RBClient2.Checked = false;
             RBType1.Checked = false;
             RBType2.Checked = false;
+            gridload();
         }
 
         private void btnupdate_Click(object sender, EventArgs e)
@@ -297,7 +345,7 @@ namespace Futurisk
             }
             if (DDInsurance.Text.ToString() == "" && DDsales.Text.ToString() == "" && DDService.Text.ToString() == "" && DDLocation.Text.ToString() == "" &&
                 DDSupport.Text.ToString() == "" && DDPolicyType.Text.ToString() == "" && Type == "" && Client == "") {
-                MessageBox.Show("Must be select any one of the data from the dropdown for the update.");
+                MessageBox.Show("No data selected.");
             }
             else {
                 SQLProcs sql = new SQLProcs();
@@ -332,7 +380,7 @@ namespace Futurisk
                 //DDSupport.SelectedIndex = 0;
                 //RBType1.Checked = false;
                 //RBType2.Checked = false;
-                gridload();
+                gridReload();
             }
         }
 
@@ -372,7 +420,7 @@ namespace Futurisk
                     string path = pathDownload + "\\" + FileName;
                     wb.SaveAs(path);
 
-                    MessageBox.Show("Data downloaded successfully.\n(File Name:" + FileName + ")");
+                    MessageBox.Show("SmartRead data downloaded as XLSX file for your verification.\n     (File Name:" + FileName + ")");
                     //result = "OK";
                     //lblSuccMsg.Text = "";
                     //lblmsg1.ForeColor = System.Drawing.Color.Green;
@@ -383,6 +431,20 @@ namespace Futurisk
             catch (Exception ex)
             {
                 MessageBox.Show("Data export failed.");
+            }
+        }
+
+        private void kryptonButton2_Click(object sender, EventArgs e)
+        {
+            Editlogform obj = new Editlogform();
+            obj.Show();
+        }
+        async void TimeUpdater()
+        {
+            while (true)
+            {
+                lblTimer.Text = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt");
+                await Task.Delay(1000);
             }
         }
     }

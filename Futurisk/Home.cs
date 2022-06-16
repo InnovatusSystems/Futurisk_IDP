@@ -22,13 +22,14 @@ namespace Futurisk
 
         private void Home_Load(object sender, EventArgs e)
         {
+            lblUser.Text = LoginInfo.UserID;
             bindInsurerdropdown();
         }
         public void bindInsurerdropdown()
         {
             DataRow dr;
             //string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode in ('UIIC','NACL') order by InsurerName asc";
-            string com = "select InsurerCode,InsurerName from InsurerMaster where InsurerCode != 'NIAC' order by InsurerName asc";
+            string com = "select InsurerCode,InsurerCode + ',' + InsurerName as InsurerName from InsurerMaster order by InsurerName asc";
             SqlDataAdapter adpt = new SqlDataAdapter(com, strconn);
             DataTable dt = new DataTable();
             adpt.Fill(dt);
@@ -122,6 +123,71 @@ namespace Futurisk
                 if (Type == "STA1") //Star Health & Allied Insurance Co. Ltd.
                 {
                     StarHealthSample1 obj = new StarHealthSample1();
+                    obj.Show();
+                }
+                if (Type == "NACX") //National Insurance Co. Ltd.
+                {
+                    NationalExcelSample obj = new NationalExcelSample();
+                    obj.Show();
+                }
+                if (Type == "BAGX") //Bajajational Insurance Co. Ltd.
+                {
+                    BajajSample1 obj = new BajajSample1();
+                    obj.Show();
+                }
+                if (Type == "CHIX") //Care Health Insurance Co. Ltd.
+                {
+                    CareHealthSample obj = new CareHealthSample();
+                    obj.Show();
+                }
+                if (Type == "CMGX") //Chola MS General Insurance Co. Ltd.
+                {
+                    CholaSample obj = new CholaSample();
+                    obj.Show();
+                }
+                if (Type == "ABHX") //Aditya Birla Health Insurance Co. Ltd.
+                {
+                    AdityaTemplate1 obj = new AdityaTemplate1();
+                    obj.Show();
+                }
+                if (Type == "EGIX") //Edelweiss General Insurance Co. Ltd.
+                {
+                    EdelweissSample obj = new EdelweissSample();
+                    obj.Show();
+                }
+                if (Type == "HEGX") //HDFC Ergo General Insurance Co. Ltd.
+                {
+                    HDFCSample obj = new HDFCSample();
+                    obj.Show();
+                }
+                if (Type == "ITGX") //Iffco Tokio General Insurance Co.Ltd.
+                {
+                    IFFCOSample obj = new IFFCOSample();
+                    obj.Show();
+                }
+                if (Type == "LVGX") //Liberty Videocon General Insurance Co. Ltd.
+                {
+                    LibertySample obj = new LibertySample();
+                    obj.Show();
+                }
+                if (Type == "RQGX") //Raheja QBE General Insurance Co. Ltd.
+                {
+                    RahejaQBESample obj = new RahejaQBESample();
+                    obj.Show();
+                }
+                if (Type == "RGIX") //Reliance General Insurance Co. Ltd.
+                {
+                    RelianceSample obj = new RelianceSample();
+                    obj.Show();
+                }
+                if (Type == "RSGX") //Royal Sundaram General Insurance Co Ltd.
+                {
+                    RoyalExcelSample obj = new RoyalExcelSample();
+                    obj.Show();
+                }
+                if (Type == "SBIX") //SBI General Insurance Co. Ltd.
+                {
+                    SBISample obj = new SBISample();
                     obj.Show();
                 }
             }
@@ -224,28 +290,6 @@ namespace Futurisk
             }
             if (Type == "ILG1") //ICICI Lombard General Insurance Co. Ltd.
             {
-                //if (RBType3.Checked != true && RBType4.Checked != true)
-                //{
-                //    MessageBox.Show("Please select Type");
-                //}
-                //else
-                //{
-                //    var RBType = "";
-                //    if (RBType3.Checked == true)
-                //    {
-                //        RBType = "General";
-                //    }
-                //    else if (RBType4.Checked == true)
-                //    {
-                //        RBType = "Terrorism";
-                //    }
-                //    Fileinfo.Type = RBType;
-                //    Fileinfo.InsurerCode = "ILGI";
-                //    Fileinfo.ReportId = Type;
-                //    GodigitInsurence obj = new GodigitInsurence();
-                //    obj.Show();
-                //    this.Close();
-                //}
                 Fileinfo.InsurerCode = "ILGI";
                 Fileinfo.ReportId = Type;
                 GodigitInsurence obj = new GodigitInsurence();
@@ -254,28 +298,6 @@ namespace Futurisk
             }
             if (Type == "STA1") //Star Health & Allied Insurance Co. Ltd.
             {
-                //if (RBType1.Checked != true && RBType2.Checked != true)
-                //{
-                //    MessageBox.Show("Please select Type");
-                //}
-                //else
-                //{
-                //    var RBType = "";
-                //    if (RBType1.Checked == true)
-                //    {
-                //        RBType = "Retail";
-                //    }
-                //    else if (RBType2.Checked == true)
-                //    {
-                //        RBType = "Corporate";
-                //    }
-                //    Fileinfo.Type = RBType;
-                //    Fileinfo.InsurerCode = "STAR";
-                //    Fileinfo.ReportId = Type;
-                //    GodigitInsurence obj = new GodigitInsurence();
-                //    obj.Show();
-                //    this.Close();
-                //}
                 Fileinfo.InsurerCode = "STAR";
                 Fileinfo.ReportId = Type;
                 GodigitInsurence obj = new GodigitInsurence();
@@ -292,9 +314,161 @@ namespace Futurisk
             }
             if (Type == "BAGX") //National Insurance Co. Ltd.
             {
-                Fileinfo.InsurerCode = "BAGX";
+                Fileinfo.InsurerCode = "BAGI";
                 Fileinfo.ReportId = Type;
                 GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "CHIX") //Care Health Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "CHIC";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "CMGX") //Chola MS General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "CMGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "ABHX") //Aditya Birla Health Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "ABHI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "EGIX") //Edelweiss General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "EGIC";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "HEGX") //HDFC Ergo General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "HEGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "ITGX") //Iffco Tokio General Insurance Co.Ltd.
+            {
+                Fileinfo.InsurerCode = "ITGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "LVGX") //Liberty Videocon General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "LVGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "RQGX") //Raheja QBE General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "RQGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "RGIX") //Reliance General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "RGIC";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "SBIX") //SBI General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "SBII";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "RSGX") //Royal Sundaram General Insurance Co Ltd.
+            {
+                Fileinfo.InsurerCode = "RSGI";
+                Fileinfo.ReportId = Type;
+                GodigitInsurence obj = new GodigitInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "UIIX") // United India Insurance Co Ltd (Excel).
+            {
+                Fileinfo.InsurerCode = "UIIC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "FGIX") //Future General India Insurance Co. Ltd..
+            {
+                Fileinfo.InsurerCode = "FGII";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "KMGX") //Kotak Mahindra General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "KMGI";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "ACKX") //Acko General Insurance  Co.Ltd.
+            {
+                Fileinfo.InsurerCode = "ACKO";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NBHX") //Acko General Insurance  Co.Ltd.
+            {
+                Fileinfo.InsurerCode = "NBHI";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
                 obj.Show();
                 this.Close();
             }
