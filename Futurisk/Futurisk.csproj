@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -154,6 +154,12 @@
     <Compile Include="AckoInsurence.Designer.cs">
       <DependentUpon>AckoInsurence.cs</DependentUpon>
     </Compile>
+    <Compile Include="AckoSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AckoSample.Designer.cs">
+      <DependentUpon>AckoSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdityaTemplate1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,12 @@
     <Compile Include="Editlogform.Designer.cs">
       <DependentUpon>Editlogform.cs</DependentUpon>
     </Compile>
+    <Compile Include="FutureGeneralSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FutureGeneralSample.Designer.cs">
+      <DependentUpon>FutureGeneralSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="GodigitInsurence.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +243,12 @@
     </Compile>
     <Compile Include="IFFCOSample.Designer.cs">
       <DependentUpon>IFFCOSample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kotaksample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kotaksample.Designer.cs">
+      <DependentUpon>Kotaksample.cs</DependentUpon>
     </Compile>
     <Compile Include="LibertySample.cs">
       <SubType>Form</SubType>
@@ -274,6 +292,12 @@
     </Compile>
     <Compile Include="NewIndiaTemplate.Designer.cs">
       <DependentUpon>NewIndiaTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NivaSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NivaSample.Designer.cs">
+      <DependentUpon>NivaSample.cs</DependentUpon>
     </Compile>
     <Compile Include="OrientalInsurance.cs">
       <SubType>Form</SubType>
@@ -341,6 +365,12 @@
     <Compile Include="test.Designer.cs">
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnitedExcelSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitedExcelSample.Designer.cs">
+      <DependentUpon>UnitedExcelSample.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnitedInsurance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +395,9 @@
     <EmbeddedResource Include="AckoInsurence.resx">
       <DependentUpon>AckoInsurence.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AckoSample.resx">
+      <DependentUpon>AckoSample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdityaTemplate1.resx">
       <DependentUpon>AdityaTemplate1.cs</DependentUpon>
     </EmbeddedResource>
@@ -386,6 +419,9 @@
     <EmbeddedResource Include="Editlogform.resx">
       <DependentUpon>Editlogform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FutureGeneralSample.resx">
+      <DependentUpon>FutureGeneralSample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GodigitInsurence.resx">
       <DependentUpon>GodigitInsurence.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IFFCOSample.resx">
       <DependentUpon>IFFCOSample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kotaksample.resx">
+      <DependentUpon>Kotaksample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibertySample.resx">
       <DependentUpon>LibertySample.cs</DependentUpon>
@@ -424,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewIndiaTemplate.resx">
       <DependentUpon>NewIndiaTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NivaSample.resx">
+      <DependentUpon>NivaSample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrientalInsurance.resx">
       <DependentUpon>OrientalInsurance.cs</DependentUpon>
@@ -457,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="test.resx">
       <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitedExcelSample.resx">
+      <DependentUpon>UnitedExcelSample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnitedInsurance.resx">
       <DependentUpon>UnitedInsurance.cs</DependentUpon>

@@ -54,11 +54,19 @@ namespace Smartreader_DLL
                         PolicyNo = PolicyNo + "/0";
                         Policy_Endorsement = "Policy";
                     }
+                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
+                    {
+                        InsuredType = "Corporate";
+                    }
+                    else
+                    {
+                        InsuredType = "Retail";
+                    }
                     var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value.Replace("\n", "").TrimStart();
                     if (Client_N_E == "New Business")
                     {
                         Client_N_E = "New Client";
-                        if (Policy_Endorsement != "Endorsement")
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
                         {
                             New_Renewal = "New Policy";
                         }
@@ -66,7 +74,7 @@ namespace Smartreader_DLL
                     else
                     {
                         Client_N_E = "Existing Client";
-                        if (Policy_Endorsement == "Endorsement")
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
                         {
                             New_Renewal = "Renewal Policy";
                         }
@@ -99,17 +107,9 @@ namespace Smartreader_DLL
                     var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value);
                     var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Text);
                     Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-
+                    var offlocation = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value);
                     Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value);
 
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
-                    {
-                        InsuredType = "Corporate";
-                    }
-                    else
-                    {
-                        InsuredType = "Retail";
-                    }
                     if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
                     {
                         Premium_Amt = 0;
@@ -147,7 +147,7 @@ namespace Smartreader_DLL
                                new SqlParameter { ParameterName = "@Insurance", Value = Insurance },
                                new SqlParameter { ParameterName = "@Salesby", Value = Salesby },
                                new SqlParameter { ParameterName = "@Serviceby", Value = Serviceby },
-                               new SqlParameter { ParameterName = "@location", Value = location },
+                               new SqlParameter { ParameterName = "@location", Value = offlocation },
                                new SqlParameter { ParameterName = "@Support", Value = Support },
                                new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
                                new SqlParameter { ParameterName = "@RFormat", Value = "F1" },

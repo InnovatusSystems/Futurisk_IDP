@@ -190,6 +190,31 @@ namespace Futurisk
                     SBISample obj = new SBISample();
                     obj.Show();
                 }
+                if (Type == "FGIX") //Future General India Insurance Co. Ltd..
+                {                  
+                    FutureGeneralSample obj = new FutureGeneralSample();
+                    obj.Show();
+                }
+                if (Type == "KMGX") //Kotak Mahindra General Insurance Co. Ltd.
+                {
+                    Kotaksample obj = new Kotaksample();
+                    obj.Show();
+                }
+                if (Type == "ACKX") //Acko General Insurance  Co.Ltd.
+                {
+                    AckoSample obj = new AckoSample();
+                    obj.Show();
+                }
+                if (Type == "NBHX") //Niva Bupa Health Insurance Co. Ltd. 
+                {
+                    NivaSample obj = new NivaSample();
+                    obj.Show();
+                }
+                if (Type == "UIIX") // United India Insurance Co Ltd (Excel).
+                {
+                    UnitedExcelSample obj = new UnitedExcelSample();
+                    obj.Show();
+                }
             }
         }
 
@@ -416,30 +441,30 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
-            {
-                Fileinfo.InsurerCode = "NIAC";
-                Fileinfo.ReportId = Type;
-                AckoInsurence obj = new AckoInsurence();
-                obj.Show();
-                this.Close();
-            }
-            if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
-            {
-                Fileinfo.InsurerCode = "NIAC";
-                Fileinfo.ReportId = Type;
-                AckoInsurence obj = new AckoInsurence();
-                obj.Show();
-                this.Close();
-            }
-            if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
-            {
-                Fileinfo.InsurerCode = "NIAC";
-                Fileinfo.ReportId = Type;
-                AckoInsurence obj = new AckoInsurence();
-                obj.Show();
-                this.Close();
-            }
+            //if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
+            //{
+            //    Fileinfo.InsurerCode = "NIAC";
+            //    Fileinfo.ReportId = Type;
+            //    AckoInsurence obj = new AckoInsurence();
+            //    obj.Show();
+            //    this.Close();
+            //}
+            //if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
+            //{
+            //    Fileinfo.InsurerCode = "NIAC";
+            //    Fileinfo.ReportId = Type;
+            //    AckoInsurence obj = new AckoInsurence();
+            //    obj.Show();
+            //    this.Close();
+            //}
+            //if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
+            //{
+            //    Fileinfo.InsurerCode = "NIAC";
+            //    Fileinfo.ReportId = Type;
+            //    AckoInsurence obj = new AckoInsurence();
+            //    obj.Show();
+            //    this.Close();
+            //}
             if (Type == "FGIX") //Future General India Insurance Co. Ltd..
             {
                 Fileinfo.InsurerCode = "FGII";
@@ -464,7 +489,7 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            if (Type == "NBHX") //Acko General Insurance  Co.Ltd.
+            if (Type == "NBHX") //Niva Bupa Health Insurance Co. Ltd. 
             {
                 Fileinfo.InsurerCode = "NBHI";
                 Fileinfo.ReportId = Type;

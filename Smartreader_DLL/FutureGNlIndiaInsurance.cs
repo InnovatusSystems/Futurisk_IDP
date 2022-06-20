@@ -57,7 +57,7 @@ namespace Smartreader_DLL
                     if (Client_N_E == "New Business Issue")
                     {
                         Client_N_E = "New Client";
-                        if (Policy_Endorsement != "Endorsement")
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
                         {
                             New_Renewal = "New Policy";
                         }
@@ -65,7 +65,7 @@ namespace Smartreader_DLL
                     else
                     {
                         Client_N_E = "Existing Client";
-                        if (Policy_Endorsement != "Endorsement")
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
                         {
                             New_Renewal = "Renewal Policy";
                         }

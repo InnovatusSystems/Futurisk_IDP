@@ -1120,7 +1120,7 @@
   <data name="btnshowpassword.StateCommon.Back.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJcAAABZCAYAAAAzfba9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAT
-        NwAAEzcBK0sa/wAACENJREFUeF7tnelv1EgQxdl7/3cg/CUJJOES4gYJEUhCuO9TAiJuvnDHmzdro1lv
+        NgAAEzYB+Qz4GwAACENJREFUeF7tnelv1EgQxdl7/3cg/CUJJOES4gYJEUhCuO9TAiJuvnDHmzdro1lv
         Zdzd9aq6PeOf9AQfJt1t+9murj68qxoYMGIw14AZg7kGzBjMNWDGYK4BMwZz7cCPHz+qr1+//vx3XN++
         ffupra2t+i8G2sysuWCKT58+VY8fP66WlpaqXbt303ThwoXq+fPno/JnmZkx1/v376szZ86IZvDSxsbG
         6Mk3K0ytuXARL126JF7kUnTlypWpNttUmevNmzfiReyD5ufnq3fv3tVHMh303lx43UkXq89CDPj58+f6
@@ -1311,4 +1311,10 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>46</value>
+  </metadata>
 </root>

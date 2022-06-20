@@ -317,8 +317,8 @@ namespace Futurisk
                         }
                         else
                         {
-                            lblSuccMsg.Text = "          SmartRead Done in " + Sec + " Seconds.\n" +
-                                             "       Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
+                            lblSuccMsg.Text = "                SmartRead Done in " + Sec + " Seconds.\n" +
+                                             "           Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
 
                             var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
                                             MessageBoxButtons.YesNo);
@@ -496,7 +496,8 @@ namespace Futurisk
                     );
 
                     lblmsg1.ForeColor = System.Drawing.Color.Green;
-                    lblmsg1.Text = "SmartRead data downloaded as XLSX file for your verification.\n     (File Name:" + FileName + ")";
+                    lblmsg1.Text = "SmartRead data downloaded as XLSX file for your verification." +
+                                    "\n            (File Name:" + FileName + ")";
 
                 }
             }
@@ -704,7 +705,6 @@ namespace Futurisk
                 Fileinfo.Type = "General";
                 label15.Visible = true;
                 label9.Visible = true;
-                label10.Visible = true;
                 label11.Visible = true;
                 label12.Visible = true;
                 DDInsurance.Enabled = true;
@@ -728,7 +728,6 @@ namespace Futurisk
                 Fileinfo.Type = "Terrorism";
                 label15.Visible = false;
                 label9.Visible = false;
-                label10.Visible = false;
                 label11.Visible = false;
                 label12.Visible = false;
                 DDInsurance.Enabled = false;
@@ -897,7 +896,6 @@ namespace Futurisk
                 {
                     label15.Visible = true;
                     label9.Visible = true;
-                    label10.Visible = true;
                     label11.Visible = true;
                     label12.Visible = true;
                 }
@@ -1305,7 +1303,7 @@ namespace Futurisk
             }
             else
             {
-                if (DDInsurance.SelectedValue.ToString() != "0" && DDLocation.SelectedValue.ToString() != "0" && DDsales.SelectedValue.ToString() != "0" && DDService.SelectedValue.ToString() != "0" && (DDMonth.SelectedIndex != -1 && DDMonth.SelectedIndex != 0))
+                if (DDInsurance.SelectedValue.ToString() != "0" && DDsales.SelectedValue.ToString() != "0" && DDService.SelectedValue.ToString() != "0" && (DDMonth.SelectedIndex != -1 && DDMonth.SelectedIndex != 0))
                 {
                     if (Fileinfo.InsurerCode == "STAR" && RBType1.Checked != true && RBType2.Checked != true)
                     {
@@ -1416,10 +1414,6 @@ namespace Futurisk
                     if (DDInsurance.SelectedValue.ToString() == "0")
                     {
                         MessageBox.Show("Please select Insurance");
-                    }
-                    else if (DDLocation.SelectedValue.ToString() == "0")
-                    {
-                        MessageBox.Show("Please select Office Location");
                     }
                     else if (DDsales.SelectedValue.ToString() == "0")
                     {

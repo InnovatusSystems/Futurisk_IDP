@@ -32,10 +32,7 @@ namespace Smartreader_DLL
                 {
                     PolicyNo = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value.Replace("\n", "").TrimStart();
                 }
-                if (location1 == null || location1 == "")
-                {
                     location1 = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value.Replace("\n", "").TrimStart();
-                }
 
                 var bustype = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value;
 
@@ -49,7 +46,7 @@ namespace Smartreader_DLL
                 //END_Date = END_Date.ToString("dd/MM/yyyy");
                 var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value);
                 var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value);
-                var Revenue_Pct = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value);
+                var Revenue_Pct = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Text);
                 Revenue_Pct = Revenue_Pct.Replace("%", "").TrimStart();
                 var TP_Amt = "";// Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 32]).Value);
                                 //Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 42]).Value);

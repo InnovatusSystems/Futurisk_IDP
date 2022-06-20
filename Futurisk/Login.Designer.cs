@@ -117,7 +117,7 @@ namespace Futurisk
             this.lblversion.Name = "lblversion";
             this.lblversion.Size = new System.Drawing.Size(39, 12);
             this.lblversion.TabIndex = 38;
-            this.lblversion.Text = "UV1.4";
+            this.lblversion.Text = "UV1.5";
             // 
             // kryptonPanel1
             // 

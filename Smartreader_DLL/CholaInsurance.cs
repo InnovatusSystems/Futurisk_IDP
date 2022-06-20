@@ -95,6 +95,8 @@ namespace Smartreader_DLL
                     var Reward_Amt2 = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 25]).Value);
                     var Reward_Amt3 = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 27]).Value);
 
+                    var offlocation = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 48]).Value);
+
                     if (Reward_Pcnt1 == "" || Reward_Pcnt1 == " " || Reward_Pcnt1 == null)
                     {
                         Reward_Pcnt1 = 0;
@@ -125,14 +127,14 @@ namespace Smartreader_DLL
 
                     Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value);
 
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
-                    {
-                        InsuredType = "Corporate";
-                    }
-                    else
-                    {
-                        InsuredType = "Retail";
-                    }
+                    //if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
+                    //{
+                    //    InsuredType = "Corporate";
+                    //}
+                    //else
+                    //{
+                    //    InsuredType = "Retail";
+                    //}
                     if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
                     {
                         Premium_Amt = 0;
@@ -175,7 +177,7 @@ namespace Smartreader_DLL
                                new SqlParameter { ParameterName = "@Insurance", Value = Insurance },
                                new SqlParameter { ParameterName = "@Salesby", Value = Salesby },
                                new SqlParameter { ParameterName = "@Serviceby", Value = Serviceby },
-                               new SqlParameter { ParameterName = "@location", Value = location },
+                               new SqlParameter { ParameterName = "@location", Value = offlocation },
                                new SqlParameter { ParameterName = "@Support", Value = Support },
                                new SqlParameter { ParameterName = "@Policy_Endorsement", Value = Policy_Endorsement },
                                new SqlParameter { ParameterName = "@RFormat", Value = "F1" },

@@ -345,8 +345,8 @@ namespace Futurisk
                         Microsoft.Office.Interop.Excel.Worksheet sheet = WB.ActiveSheet;
                         if (Fileinfo.ReportId == "UIIX")
                         {
-                            InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                            //UnitedInsurence.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
+                           UnitedInsurence.InsertExcelTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
 
                         }
                         else if (Fileinfo.ReportId == "NIX1")
@@ -367,22 +367,22 @@ namespace Futurisk
                         else if (Fileinfo.ReportId == "FGIX")
                         {
                             //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                            //FutureGNlIndiaInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            FutureGNlIndiaInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
                         }
                         else if (Fileinfo.ReportId == "KMGX")
                         {
                             //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                            //KotakTransaction.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            KotakTransaction.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
                         }
                         else if (Fileinfo.ReportId == "ACKX")
                         {
                             //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                            //AckoInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            AckoInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
                         }
                         else if (Fileinfo.ReportId == "NBHX")
                         {
-                            InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                            //AckoInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
+                            //InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
+                            NivaInsurance.InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth, strconn);
                         }
                         oExcel.Workbooks.Close();
                         GetBachid_NoRecord(ProcName, TranID);
@@ -406,8 +406,8 @@ namespace Futurisk
                         //}
                         //else
                         //{
-                        lblSuccMsg.Text = "          SmartRead Done in " + Sec + " Seconds.\n" +
-                                             "       Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
+                        lblSuccMsg.Text = "                     SmartRead Done in " + Sec + " Seconds.\n" +
+                                             "            Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
 
                         var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
                                         MessageBoxButtons.YesNo);
@@ -533,6 +533,37 @@ namespace Futurisk
             DDMonth.Select();
             TimeUpdater();
         }
+
+        private void kryptonButton3_Click(object sender, EventArgs e)
+        {
+
+            if (Fileinfo.ReportId == "FGIX") //Future General India Insurance Co. Ltd..
+            {
+                FutureGeneralSample obj = new FutureGeneralSample();
+                obj.Show();
+            }
+            if (Fileinfo.ReportId == "KMGX") //Kotak Mahindra General Insurance Co. Ltd.
+            {
+                Kotaksample obj = new Kotaksample();
+                obj.Show();
+            }
+            if (Fileinfo.ReportId == "ACKX") //Acko General Insurance  Co.Ltd.
+            {
+                AckoSample obj = new AckoSample();
+                obj.Show();
+            }
+            if (Fileinfo.ReportId == "NBHX") //Niva Bupa Health Insurance Co. Ltd. 
+            {
+                NivaSample obj = new NivaSample();
+                obj.Show();
+            }
+            if (Fileinfo.ReportId == "UIIX") // United India Insurance Co Ltd (Excel).
+            {
+                UnitedExcelSample obj = new UnitedExcelSample();
+                obj.Show();
+            }
+        }
+
         async void TimeUpdater()
         {
             while (true)
@@ -779,7 +810,8 @@ namespace Futurisk
                     );
 
                     lblmsg1.ForeColor = System.Drawing.Color.Green;
-                    lblmsg1.Text = "SmartRead data downloaded as XLSX file for your verification.\n     (File Name:" + FileName + ")";
+                    lblmsg1.Text = "SmartRead data downloaded as XLSX file for your verification." +
+                                   "\n            (File Name:" + FileName + ")";
 
                 }
             }
