@@ -10,15 +10,14 @@ using System.Text.RegularExpressions;
 
 namespace Smartreader_DLL
 {
-    public class NewIndiaInsurance
+    public class NewIndiaexcelInsurance
     {
         public static void InsertTransaction1(Microsoft.Office.Interop.Excel.Workbook WB, string TranID, string RDate, string Insurance, string Salesby, string Serviceby, string location, string Support, string Rmonth, string strconn)
         {
-            //New India Assurance Company Limited.Excel
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; 
+            int lastrow = lastCell.Row;
             for (int i = 8; i <= lastrow; i++)
             {
                 var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = ""; var New_Renewal = ""; var Revenue_Amt = "";
@@ -26,7 +25,7 @@ namespace Smartreader_DLL
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
                 {
                     InsuredName = InsuredName.Replace("\n", "").TrimStart();
-                    //InsuredType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value;
+                    InsuredType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value;
                     string PolicyNo = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value).Replace("\n", "").TrimStart();
                     //var Endorsementno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value);
 
@@ -50,12 +49,22 @@ namespace Smartreader_DLL
                     //}
                     var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     //Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 23]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
-                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value).Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "").TrimStart();
+                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Text);
                     Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-
-                    //Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value);
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD"))
+                    PolicyNo = Regex.Replace(PolicyNo, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+                    string endno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value).Replace("\n", "").TrimStart();
+                    if (endno != null && endno != "" && endno != " " && endno != ":")
+                    {
+                        Policy_Endorsement = "Endorsement";
+                    }
+                    else
+                    {
+                        Policy_Endorsement = "Policy";
+                    }
+                    Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value);
+                    //if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD"))
+                    if (InsuredType == "Organizational")
                     {
                         InsuredType = "Corporate";
                     }
@@ -80,7 +89,7 @@ namespace Smartreader_DLL
                     {
                         Terrorism = "0";
                     }
-                    sql.ExecuteSQLNonQuery(strconn, "SP_NewIndiaExcelTransaction",
+                    sql.ExecuteSQLNonQuery(strconn,"SP_NewIndiaExcelTransaction",
                                new SqlParameter { ParameterName = "@Imode", Value = 1 },
                                new SqlParameter { ParameterName = "@RDate", Value = RDate },
                                new SqlParameter { ParameterName = "@Rmonth", Value = Rmonth },
@@ -116,7 +125,7 @@ namespace Smartreader_DLL
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; 
+            int lastrow = lastCell.Row;
             for (int i = 17; i <= lastrow; i++)
             {
                 var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = ""; var New_Renewal = ""; var Revenue_Amt = "";
@@ -148,13 +157,32 @@ namespace Smartreader_DLL
                     //}
                     var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 23]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     //Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 23]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
-                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 24]).Value).Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "").TrimStart();
+                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 24]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 21]).Text);
                     Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-
-                    //Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value);
-
-
+                    if (PolicyNo != null && PolicyNo != "" && PolicyNo != " ")
+                    {
+                        PolicyNo = Regex.Replace(PolicyNo, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+                    }
+                    Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value);
+                    if (InsuredType == "Organizational")
+                    {
+                        InsuredType = "Corporate";
+                    }
+                    else
+                    {
+                        InsuredType = "Retail";
+                    }
+                    string endno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value).Replace("\n", "").TrimStart();
+                    if (endno != null && endno != "" && endno != " " && endno != ":")
+                    {
+                        Policy_Endorsement = "Endorsement";
+                        PolicyNo = PolicyNo + " " + Regex.Replace(endno, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+                    }
+                    else
+                    {
+                        Policy_Endorsement = "Policy";
+                    }
                     if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
                     {
                         Premium_Amt = 0;
@@ -207,11 +235,11 @@ namespace Smartreader_DLL
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; 
+            int lastrow = lastCell.Row; string Policy_Type = ""; var PType = "";
+
             for (int i = 11; i <= lastrow; i++)
             {
-                var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = ""; var PolicyNo = "";
-                var Revenue_Pcnt = ""; var Revenue_Amt = "";
+                var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Revenue_Pcnt = ""; var Revenue_Amt = ""; var PolicyNo = "";
                 string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value;
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
                 {
@@ -220,10 +248,27 @@ namespace Smartreader_DLL
                     var PNo = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 2]).Value);
                     if (PNo != null && PNo != "" && PNo != " ")
                     {
-                        PolicyNo = PNo.Replace("\n", "").TrimStart();
+                        PType = PNo.Replace("\n", "").TrimStart();
+                        PType = Regex.Replace(PType, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
                     }
-                    //var Endorsementno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 15]).Value);
-
+                    var endno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value);
+                    if (endno != null && endno != "" && endno != " " && endno != ":")
+                    {
+                        Policy_Endorsement = "Endorsement";
+                        PolicyNo = PType + " " + Regex.Replace(endno, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+                    }
+                    else
+                    {
+                        Policy_Endorsement = "Policy";
+                    }
+                    if (InsuredType == "Organizational")
+                    {
+                        InsuredType = "Corporate";
+                    }
+                    else
+                    {
+                        InsuredType = "Retail";
+                    }
                     var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value;
                     var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value;
                     var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value;
@@ -244,12 +289,15 @@ namespace Smartreader_DLL
                     }
                     var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     //Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 23]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
-                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "").TrimStart();
+                    Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     //var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 21]).Text);
                     //Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
 
-                    //Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value);
-
+                    string dept = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 1]).Value);
+                    if (dept != null && dept != "" && dept != " ")
+                    {
+                        Policy_Type = Regex.Match(dept, @"\d+").Value; 
+                    }
 
                     if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
                     {

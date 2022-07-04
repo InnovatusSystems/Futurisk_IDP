@@ -71,9 +71,10 @@ namespace Smartreader_DLL
                     Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value);
                     if (Revenue_Amt != null)
                     {
-                        Revenue_Amt = Revenue_Amt.Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "").TrimStart();
+                        Revenue_Amt = Revenue_Amt.Replace(",", "").Replace("(", "").Replace(")", "").Replace("_", "").TrimStart();
                     }
-                    var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Text);
+                    var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
+                    //var RevPcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
                     if (Revenue_Pcnt != null)
                     {
                         Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
@@ -105,7 +106,7 @@ namespace Smartreader_DLL
                     {
                         Terrorism = "0";
                     }
-                    sql.ExecuteSQLNonQuery(strconn,"SP_NivaExcelTransaction",
+                        sql.ExecuteSQLNonQuery(strconn,"SP_NivaExcelTransaction",
                                new SqlParameter { ParameterName = "@Imode", Value = 1 },
                                new SqlParameter { ParameterName = "@RDate", Value = RDate },
                                new SqlParameter { ParameterName = "@Rmonth", Value = Rmonth },

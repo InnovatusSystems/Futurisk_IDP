@@ -54,7 +54,8 @@ namespace Smartreader_DLL
                         PolicyNo = PolicyNo + "/0";
                         Policy_Endorsement = "Policy";
                     }
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
+                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("LLP")
+                          || InsuredName.ToUpper().Contains("SOLUTIONS") || InsuredName.ToUpper().Contains(".COM"))
                     {
                         InsuredType = "Corporate";
                     }

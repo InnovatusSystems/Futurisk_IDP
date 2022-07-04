@@ -51,6 +51,7 @@ namespace Smartreader_DLL
                 }
                 cmd.CommandText = spName;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
                 if (con.State.Equals(ConnectionState.Open))
                 {
                     con.Close();
@@ -92,6 +93,7 @@ namespace Smartreader_DLL
                     cmd.Parameters.Add(param);
                 }
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
                 cmd.CommandText = query;
                 return cmd.ExecuteNonQuery();
             }
@@ -121,6 +123,7 @@ namespace Smartreader_DLL
                 }
                 cmd.CommandText = spName;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);
                 return ds;

@@ -46,31 +46,50 @@ namespace Smartreader_DLL
                     //{
                     //    END_Date = END_Date.ToString("dd/MM/yyyy");
                     //}
-                    var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
-                    if (Client_N_E == "FRESH")
-                    {
-                        Client_N_E = "New Client";
-                        New_Renewal = "New Policy";
-                    }
-                    else
-                    {
-                        Client_N_E = "Existing Client";
-                        New_Renewal = "Renewal Policy";
-                    }
+                   
                     var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     //Terrorism = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 23]).Value).Replace(",", "").Replace("(", "").Replace(")", "").TrimStart();
                     Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value).Replace(",", "").Replace("(", "").Replace(")", "").Replace("-", "").TrimStart();
                     var Revenue_Pcnt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Text);
                     Revenue_Pcnt = Revenue_Pcnt.Replace("\n", "").Replace("%", "").Replace(",", "").TrimStart();
-
+                    var Endno = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value);
                     Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value);
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD"))
+                    if(Endno != null && Endno != "" && Endno != " ")
+                    {
+                        Policy_Endorsement = "Endorsement";
+                        PolicyNo = PolicyNo + " " + Endno;
+                    }
+                    else
+                    {
+                        Policy_Endorsement = "Policy";
+                    }
+
+                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToLower().Contains("technology") || InsuredName.ToLower().Contains("global")
+                        || InsuredName.ToLower().Contains("pvt") || InsuredName.ToLower().Contains("private") || InsuredName.ToUpper().Contains("INDIA")
+                        || InsuredName.ToLower().Contains("software") || InsuredName.ToLower().Contains("processing"))
                     {
                         InsuredType = "Corporate";
                     }
                     else
                     {
                         InsuredType = "Retail";
+                    }
+                    var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 4]).Value.Replace("\n", "").TrimStart();
+                    if (Client_N_E == "FRESH")
+                    {
+                        Client_N_E = "New Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "New Policy";
+                        }
+                    }
+                    else
+                    {
+                        Client_N_E = "Existing Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "Renewal Policy";
+                        }
                     }
 
                     if (Premium_Amt == "" || Premium_Amt == " " || Premium_Amt == null)
@@ -99,6 +118,8 @@ namespace Smartreader_DLL
                                //new SqlParameter { ParameterName = "@Endo_Effective_Date", Value = Endo_Effective_Date },
                                new SqlParameter { ParameterName = "@Effective_Date", Value = Effective_Date },
                                //new SqlParameter { ParameterName = "@END_Date", Value = END_Date },
+                               new SqlParameter { ParameterName = "@Client_N_E", Value = Client_N_E },
+                               new SqlParameter { ParameterName = "@New_Renewal", Value = New_Renewal },
                                new SqlParameter { ParameterName = "@Revenue_Pct", Value = Revenue_Pcnt },
                                new SqlParameter { ParameterName = "@Policy_Type", Value = Policy_Type },
                                new SqlParameter { ParameterName = "@Premium_Amt", Value = Premium_Amt },

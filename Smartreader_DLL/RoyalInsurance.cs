@@ -26,30 +26,37 @@ namespace Smartreader_DLL
                 string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value;
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
                 {
-                    InsuredName = InsuredName.Replace("\n", "").TrimStart();
+                    InsuredName = InsuredName.Replace("\n", "").Replace(".", "").Replace(",", "").TrimStart();
                     InsuredType = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 19]).Value.Replace("\n", "").TrimStart();
                     string PolicyNo = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 7]).Value).Replace("\n", "").Replace("'", "").TrimStart();
                     var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 8]).Value.Replace("\n", "").TrimStart();
                     var Endono = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value).Replace("\n", "").TrimStart();
+                    Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 18]).Value);
                     //PolicyNo = PolicyNo + "/" + Endono;
                     if (Convert.ToDecimal(Endono) > 0)
                     {
                         PolicyNo = PolicyNo + "/" + Endono;
-                        Policy_Endorsement = "Policy";
+                        Policy_Endorsement = "Endorsement";
                     }
                     else
                     {
-                        Policy_Endorsement = "Endorsement";
+                        Policy_Endorsement = "Policy";
                     }
                     if (Client_N_E == "Renewal")
                     {
                         Client_N_E = "Existing Client";
-                        New_Renewal = "Renewal Policy";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "Renewal Policy";
+                        }
                     }
                     else
                     {
                         Client_N_E = "New Client";
-                        New_Renewal = "New Policy";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "New Policy";
+                        }
                     }
                     var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value;
                     var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 17]).Value;
@@ -63,13 +70,12 @@ namespace Smartreader_DLL
                     {
                         Effective_Date = Effective_Date.ToString("dd/MM/yyyy");
                     }
-                    Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 18]).Value);
-                    var Ridercode = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 22]).Value);
+                    string Ridercode = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 22]).Value);
                     if (Ridercode == null || Ridercode == "" || Ridercode == " " || Ridercode.Contains("ADD-ON"))
                     {
                         Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 26]).Value);
                     }
-                    else if (Ridercode.Contains("TP-COMP"))
+                    else if (Ridercode.ToUpper().Contains("TP-COMP") || Ridercode.ToUpper().Contains("TP-ONLY"))
                     {
                         //if (Policy_Type.ToUpper().Contains("VPD") || Policy_Type.ToUpper().Contains("VPB"))
                         //{

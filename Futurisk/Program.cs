@@ -18,7 +18,7 @@ namespace Futurisk
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Home());
             //Application.Run(new GodigitInsurence());
-            //Application.Run(new NationalInsurance());
+            //Application.Run(new NewIndiaInsurance());
             Application.Run(new Login());
         }
     }

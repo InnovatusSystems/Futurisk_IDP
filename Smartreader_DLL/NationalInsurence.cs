@@ -35,8 +35,8 @@ namespace Smartreader_DLL
                     //Effective_Date = Effective_Date.ToString("dd/MM/yyyy");
                     END_Date = END_Date.ToString("dd/MM/yyyy");
                     //Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
-                    var Presult = PolicyNo.Substring(PolicyNo.LastIndexOf('/') + 1);
-                    if (Presult.Contains("0"))
+                   // var Presult = PolicyNo.Substring(PolicyNo.LastIndexOf('/') + 1);
+                    if (PolicyNo.Length < 20)
                     {
                         Policy_Endorsement = "Policy";
                     }

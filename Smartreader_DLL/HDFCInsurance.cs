@@ -28,16 +28,7 @@ namespace Smartreader_DLL
                     string PolicyNo = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value).Replace("\n", "").Replace("'", "").TrimStart();
                     var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 5]).Value.Replace("\n", "").TrimStart();
                     Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 6]).Value.Replace("\n", "").TrimStart();
-                    if (Client_N_E == "Renewal")
-                    {
-                        Client_N_E = "Existing Client";
-                        New_Renewal = "Renewal Policy";
-                    }
-                    else
-                    {
-                        Client_N_E = "New Client";
-                        New_Renewal = "New Policy";
-                    }
+                   
                     var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value;
                     var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value;
                     var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value;
@@ -70,7 +61,8 @@ namespace Smartreader_DLL
                     {
                         offlocation = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 21]).Value);
                     }
-                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("INTERNATIONAL"))
+                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("INTERNATIONAL")
+                        || InsuredName.ToUpper().Contains("INDIA") || InsuredName.ToUpper().Contains("LLP"))
                     {
                         InsuredType = "Corporate";
                     }
@@ -78,7 +70,22 @@ namespace Smartreader_DLL
                     {
                         InsuredType = "Retail";
                     }
-
+                    if (Client_N_E == "Renewal")
+                    {
+                        Client_N_E = "Existing Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "Renewal Policy";
+                        }
+                    }
+                    else
+                    {
+                        Client_N_E = "New Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "New Policy";
+                        }
+                    }
                     if (PA == "" || PA == " " || PA == null)
                     {
                         PA = "0";

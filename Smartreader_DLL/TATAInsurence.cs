@@ -33,9 +33,13 @@ namespace Smartreader_DLL
                     //Effective_Date = Effective_Date.ToString("dd/MM/yyyy");
                     //END_Date = END_Date.ToString("dd/MM/yyyy");
                     Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 11]).Value.Replace("\n", "").TrimStart();
-                    if (Policy_Endorsement == "New")
+                    if (Policy_Endorsement == "New" || Policy_Endorsement == "Renewal")
                     {
                         Policy_Endorsement = "Policy";
+                    }
+                    else
+                    {
+                        Policy_Endorsement = "Endorsement";
                     }
                     var Premium_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value);
                     var Revenue_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 18]).Value);
@@ -44,7 +48,7 @@ namespace Smartreader_DLL
 
                     var Policy_Type = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 9]).Value.Replace("\n", "").Replace(",", "").TrimStart();
 
-                    if (InsuredName.Contains("LIMITED") || InsuredName.Contains("LTD") || InsuredName.Contains(".COM"))
+                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains(".COM"))
                     {
                         InsuredType = "Corporate";
                     }

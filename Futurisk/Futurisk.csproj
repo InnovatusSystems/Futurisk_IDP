@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>E:\Githubprojects03032020\Futurisk\Futurisk\Futurisk\publish\</PublishUrl>
+    <PublishUrl>E:\Githubprojects03032020\Futurisk\Futurisk\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>23</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -114,6 +114,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
+    <Reference Include="SautinSoft.PdfFocus, Version=8.4.5.25, Culture=neutral, PublicKeyToken=0b79b934109b3e9e, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.pdffocus.8.4.5.25\lib\net472\SautinSoft.PdfFocus.dll</HintPath>
+    </Reference>
     <Reference Include="Smartreader_DLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Smartreader_DLL.dll</HintPath>
@@ -202,6 +205,12 @@
     <Compile Include="Editlogform.Designer.cs">
       <DependentUpon>Editlogform.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportCreditsample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportCreditsample.Designer.cs">
+      <DependentUpon>ExportCreditsample.cs</DependentUpon>
+    </Compile>
     <Compile Include="FutureGeneralSample.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +272,24 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="Magma Reward Sample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Magma Reward Sample.Designer.cs">
+      <DependentUpon>Magma Reward Sample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Magma Sample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Magma Sample.Designer.cs">
+      <DependentUpon>Magma Sample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manipal Sample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manipal Sample.Designer.cs">
+      <DependentUpon>Manipal Sample.cs</DependentUpon>
+    </Compile>
     <Compile Include="NationalExcelSample.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,11 +308,47 @@
     <Compile Include="NationalTemplate.Designer.cs">
       <DependentUpon>NationalTemplate.cs</DependentUpon>
     </Compile>
+    <Compile Include="New India Sample1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New India Sample1.Designer.cs">
+      <DependentUpon>New India Sample1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="New India Sample2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New India Sample2.Designer.cs">
+      <DependentUpon>New India Sample2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="New India Sample3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New India Sample3.Designer.cs">
+      <DependentUpon>New India Sample3.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewIndiaInsurance.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewIndiaInsurance.Designer.cs">
       <DependentUpon>NewIndiaInsurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewIndiaPDFInsurance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewIndiaPDFInsurance.Designer.cs">
+      <DependentUpon>NewIndiaPDFInsurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewIndiaPDFSample2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewIndiaPDFSample2.Designer.cs">
+      <DependentUpon>NewIndiaPDFSample2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewIndiaPDFSample3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewIndiaPDFSample3.Designer.cs">
+      <DependentUpon>NewIndiaPDFSample3.cs</DependentUpon>
     </Compile>
     <Compile Include="NewIndiaTemplate.cs">
       <SubType>Form</SubType>
@@ -346,6 +409,12 @@
     </Compile>
     <Compile Include="SBISample.Designer.cs">
       <DependentUpon>SBISample.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShriramSample.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShriramSample.Designer.cs">
+      <DependentUpon>ShriramSample.cs</DependentUpon>
     </Compile>
     <Compile Include="StarHealthSample1.cs">
       <SubType>Form</SubType>
@@ -419,6 +488,9 @@
     <EmbeddedResource Include="Editlogform.resx">
       <DependentUpon>Editlogform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExportCreditsample.resx">
+      <DependentUpon>ExportCreditsample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FutureGeneralSample.resx">
       <DependentUpon>FutureGeneralSample.cs</DependentUpon>
     </EmbeddedResource>
@@ -449,6 +521,15 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Magma Reward Sample.resx">
+      <DependentUpon>Magma Reward Sample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Magma Sample.resx">
+      <DependentUpon>Magma Sample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Manipal Sample.resx">
+      <DependentUpon>Manipal Sample.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NationalExcelSample.resx">
       <DependentUpon>NationalExcelSample.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,8 +539,26 @@
     <EmbeddedResource Include="NationalTemplate.resx">
       <DependentUpon>NationalTemplate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="New India Sample1.resx">
+      <DependentUpon>New India Sample1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="New India Sample2.resx">
+      <DependentUpon>New India Sample2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="New India Sample3.resx">
+      <DependentUpon>New India Sample3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewIndiaInsurance.resx">
       <DependentUpon>NewIndiaInsurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewIndiaPDFInsurance.resx">
+      <DependentUpon>NewIndiaPDFInsurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewIndiaPDFSample2.resx">
+      <DependentUpon>NewIndiaPDFSample2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewIndiaPDFSample3.resx">
+      <DependentUpon>NewIndiaPDFSample3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewIndiaTemplate.resx">
       <DependentUpon>NewIndiaTemplate.cs</DependentUpon>
@@ -490,6 +589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SBISample.resx">
       <DependentUpon>SBISample.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShriramSample.resx">
+      <DependentUpon>ShriramSample.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StarHealthSample1.resx">
       <DependentUpon>StarHealthSample1.cs</DependentUpon>

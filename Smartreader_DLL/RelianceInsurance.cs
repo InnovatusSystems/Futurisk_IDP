@@ -18,11 +18,19 @@ namespace Smartreader_DLL
             SQLProcs sql = new SQLProcs();
             Microsoft.Office.Interop.Excel.Worksheet wks = (Microsoft.Office.Interop.Excel.Worksheet)WB.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range lastCell = wks.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
-            int lastrow = lastCell.Row; 
+            int lastrow = lastCell.Row; int K = 0;
             for (int i = 2; i <= lastrow; i++)
             {
                 var Terrorism = ""; var Policy_Endorsement = ""; var InsuredType = ""; var Policy_Type = ""; var New_Renewal = ""; var Revenue_Amt = "";
                 string InsuredName = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 12]).Value;
+                if (InsuredName == null)
+                {
+                    K++;
+                    if (K > 10)
+                    {
+                        i = lastrow + 1;
+                    }
+                }
                 if (InsuredName != null && InsuredName != "" && InsuredName != " ")
                 {
                     InsuredName = InsuredName.Replace("\n", "").TrimStart();

@@ -28,7 +28,7 @@ namespace Futurisk
         {
             try
             {
-                btnCancel.Enabled = false;
+                btnCancel.Enabled = false; var file = "";
                 var confirmResult = MessageBox.Show("Have you got the right document?", "Confirm",
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
@@ -62,7 +62,6 @@ namespace Futurisk
                     // Minimize number of Worksheets
                     options.MinimizeTheNumberOfWorksheets = true;
 
-
                     SQLProcs sql = new SQLProcs();
                     DataSet ds1 = new DataSet(); 
                     ds1 = sql.SQLExecuteDataset("SP_Insert_Transactions",
@@ -86,93 +85,111 @@ namespace Futurisk
                         IWorkbook workbook = OpenWorkBook(name);
 
                         ISheet sheet1 = workbook.GetSheet("Sheet1");
-
-                        DeleteRows(sheet1);
-
-                        SaveWorkBook(workbook, name);
-
-                        string filewithourext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss");
-                        filewithourext = Dir + "\\" + filewithourext;
-
-                        DataSet ds = new DataSet();
-                        ds = sql.SQLExecuteDataset("SP_Insert_Transactions",
-                                     new SqlParameter { ParameterName = "@Imode", Value = 2 }
-                            );
-                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        
+                        var num = sheet1.LastRowNum;
+                        if (num > 1)
                         {
-                            TranID = ds.Tables[0].Rows[0]["TranID"].ToString();
+
+                            DeleteRows(sheet1);
+
+                            SaveWorkBook(workbook, name);
+
+                            string filewithourext = Filename + DateTime.Now.AddDays(0).ToString("ddMMyyyyhhmmss");
+                            filewithourext = Dir + "\\" + filewithourext;
+
+                            DataSet ds = new DataSet();
+                            ds = sql.SQLExecuteDataset("SP_Insert_Transactions",
+                                         new SqlParameter { ParameterName = "@Imode", Value = 2 }
+                                );
+                            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                TranID = ds.Tables[0].Rows[0]["TranID"].ToString();
+                            }
+                            else
+                            {
+                                TranID = "0";
+                            }
+
+                            //RDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+
+                            string Insurance = DDInsurance.Text.ToString();
+                            string Salesby = DDsales.Text.ToString();
+                            string Serviceby = DDService.Text.ToString();
+                            string location = DDLocation.Text.ToString();
+                            string Support = DDSupport.Text.ToString();
+                            string Rmonth = DDMonth.Text.ToString();
+
+                            RDate = DateTime.Now.AddDays(0).ToString("dd-MM-yyyy");
+                            Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
+                            Microsoft.Office.Interop.Excel.Workbook WB = oExcel.Workbooks.Open(name);
+
+                            Microsoft.Office.Interop.Excel.Worksheet sheet = WB.ActiveSheet;
+                            InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
+                            //SaveDB(sheet, WB, Filename);
+
+                            //Workbook book = new Workbook();
+                            //book.LoadFromFile(name);
+                            ////book.Replace(",","");
+                            //book.SaveToFile(filewithourext + ".xls", ExcelVersion.Version97to2003);
+
+                            //xlsFilename = filewithourext + ".xls";
+
+                            DateTime b = DateTime.Now;
+                            TimeSpan diff = b - a;
+                            var Sec = String.Format("{0}", diff.Seconds);
+                            lblmsg.Text = "";
+                            lblSuccMsg.Text = "          SmartRead Done in " + Sec + " Seconds.\n" +
+                                                 "       Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
+                            linkLabel2.Enabled = true;
+                            linkLabel2.Text = "Click here to Edit the records if needed.";
+                            oExcel.Workbooks.Close();
+                            DDInsurance.SelectionLength = 0;
+                            DDLocation.SelectionLength = 0;
+                            DDsales.SelectionLength = 0;
+                            DDService.SelectionLength = 0;
+                            DDSupport.SelectionLength = 0;
+                            DDMonth.SelectionLength = 0;
+                            var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
+                                            MessageBoxButtons.YesNo);
+                            if (confirmExportResult == DialogResult.Yes)
+                            {
+                                ExcelExport();
+                            }
+                            else
+                            {
+                                lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
+                                lblmsg1.Text = "You can check the data through another Menu Option.";
+                            }
+
+                            DDInsurance.SelectionLength = 0;
+                            DDLocation.SelectionLength = 0;
+                            DDsales.SelectionLength = 0;
+                            DDService.SelectionLength = 0;
+                            DDSupport.SelectionLength = 0;
+                            DDMonth.SelectionLength = 0;
+                            //txtfile.Text = "Select pdf file";
+                            //btnBrowse.Enabled = true;
+                            btnCancel.Enabled = true;
+                            //linkLabel2.Enabled = true;
+                            //DDInsurance.SelectedValue = 0;
+                            //DDLocation.SelectedValue = 0;
+                            //DDsales.SelectedValue = 0;
+                            //DDService.SelectedValue = 0;
+                            //DDSupport.SelectedValue = 0;
                         }
                         else
                         {
-                            TranID = "0";
+                            lblmsg.Text = "";
+                            lblmsg.Refresh();
+                            MessageBox.Show("Please check the PDF. The pdf may contain image mask.", "Warning!");
+                            btnCancel.Enabled = true; btnBrowse.Enabled = true;
+                            DDInsurance.SelectionLength = 0;
+                            DDLocation.SelectionLength = 0;
+                            DDsales.SelectionLength = 0;
+                            DDService.SelectionLength = 0;
+                            DDSupport.SelectionLength = 0;
+                            DDMonth.SelectionLength = 0;
                         }
-
-                        //RDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
-
-                        string Insurance = DDInsurance.Text.ToString();
-                        string Salesby = DDsales.Text.ToString();
-                        string Serviceby = DDService.Text.ToString();
-                        string location = DDLocation.Text.ToString();
-                        string Support = DDSupport.Text.ToString();
-                        string Rmonth = DDMonth.Text.ToString();
-
-                        RDate = DateTime.Now.AddDays(0).ToString("dd-MM-yyyy");
-                        Microsoft.Office.Interop.Excel.Application oExcel = new Microsoft.Office.Interop.Excel.Application();
-                        Microsoft.Office.Interop.Excel.Workbook WB = oExcel.Workbooks.Open(name);
-
-                        Microsoft.Office.Interop.Excel.Worksheet sheet = WB.ActiveSheet;
-                        InsertTransaction(WB, TranID, RDate, Insurance, Salesby, Serviceby, location, Support, Rmonth);
-                        //SaveDB(sheet, WB, Filename);
-
-                        //Workbook book = new Workbook();
-                        //book.LoadFromFile(name);
-                        ////book.Replace(",","");
-                        //book.SaveToFile(filewithourext + ".xls", ExcelVersion.Version97to2003);
-
-                        //xlsFilename = filewithourext + ".xls";
-
-                        DateTime b = DateTime.Now;
-                        TimeSpan diff = b - a;
-                        var Sec = String.Format("{0}", diff.Seconds);
-                        lblmsg.Text = "";
-                        lblSuccMsg.Text = "          SmartRead Done in " + Sec + " Seconds.\n" +
-                                             "       Batch ID: " + BatchID + " ,Number of records: " + NoRecord;
-                        linkLabel2.Enabled = true;
-                        linkLabel2.Text = "Click here to Edit the records if needed.";
-                        oExcel.Workbooks.Close();
-                        DDInsurance.SelectionLength = 0;
-                        DDLocation.SelectionLength = 0;
-                        DDsales.SelectionLength = 0;
-                        DDService.SelectionLength = 0;
-                        DDSupport.SelectionLength = 0;
-                        DDMonth.SelectionLength = 0;
-                        var confirmExportResult = MessageBox.Show("Data is now in database. Do you wish to get it in Excel format for your checking?", "Confirm",
-                                        MessageBoxButtons.YesNo);
-                        if (confirmExportResult == DialogResult.Yes)
-                        {
-                            ExcelExport();
-                        }
-                        else
-                        {
-                            lblmsg1.ForeColor = System.Drawing.Color.DarkGreen;
-                            lblmsg1.Text = "You can check the data through another Menu Option.";
-                        }
-
-                        DDInsurance.SelectionLength = 0;
-                        DDLocation.SelectionLength = 0;
-                        DDsales.SelectionLength = 0;
-                        DDService.SelectionLength = 0;
-                        DDSupport.SelectionLength = 0;
-                        DDMonth.SelectionLength = 0;
-                        //txtfile.Text = "Select pdf file";
-                        //btnBrowse.Enabled = true;
-                        btnCancel.Enabled = true;
-                        //linkLabel2.Enabled = true;
-                        //DDInsurance.SelectedValue = 0;
-                        //DDLocation.SelectedValue = 0;
-                        //DDsales.SelectedValue = 0;
-                        //DDService.SelectedValue = 0;
-                        //DDSupport.SelectedValue = 0;
                     }
                     else
                     {
@@ -726,7 +743,7 @@ namespace Futurisk
                         termsList1 = rowIndex;
                     }
                 }
-                termsList2 = num - 1;
+                termsList2 = sheet.LastRowNum - 1;
 
                 if (termsList1 != -1 && termsList2 != -1)
                 {
@@ -948,6 +965,15 @@ namespace Futurisk
                 if (Policy_Type == "Motor TP" || Policy_Type == "Motor" )
                 {
                     InsuredType = "Retail";
+                }
+                if (Endo_Effective_Date == null || Endo_Effective_Date == "" || Endo_Effective_Date == " ")
+                {
+                    var BillDate = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 6]).Value; 
+                    if (BillDate != "" && BillDate != " " && !BillDate.Contains("Bill Date"))
+                    {
+                        Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 6]).Value.Replace("\n", "").TrimStart();
+                        Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[5, 6]).Value.Replace("\n", "").TrimStart();
+                    }
                 }
                 if (Endo_Effective_Date.Contains("Bill Date"))
                 {

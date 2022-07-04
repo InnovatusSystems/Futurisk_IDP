@@ -52,6 +52,7 @@ namespace Futurisk
                 }
                 cmd.CommandText = spName;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
                 if (con.State.Equals(ConnectionState.Open))
                 {
                     con.Close();
@@ -94,6 +95,7 @@ namespace Futurisk
                 }
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = query;
+                cmd.CommandTimeout = 0;
                 return cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -122,6 +124,7 @@ namespace Futurisk
                 }
                 cmd.CommandText = spName;
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds);
                 return ds;

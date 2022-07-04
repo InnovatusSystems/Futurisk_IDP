@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Futurisk
 {
-    public partial class Form1 : Form
+    public partial class NewIndiaPDFSample3 : Form
     {
-        public Form1()
+        public NewIndiaPDFSample3()
         {
             InitializeComponent();
         }

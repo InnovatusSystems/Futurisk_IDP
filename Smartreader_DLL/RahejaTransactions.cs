@@ -67,30 +67,24 @@ namespace Smartreader_DLL
                                     EndosNo = "0" + Convert.ToString(Convert.ToDecimal(EndosNo) - 1);
                                 }
                                 PolicyNo = "0" + BRcode + PolicyNo + EndosNo;
+                                Policy_Endorsement = "Endorsement";
                             }
                             else
                             {
                                 PolicyNo = "0" + BRcode + PolicyNo + "00000";
+                                Policy_Endorsement = "Policy";
                             }
                         }
                         else
                         {
                             PolicyNo = "0" + BRcode + PolicyNo + EndosNo;
+                            Policy_Endorsement = "Policy";
                         }
                     }
 
                     var Client_N_E = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 3]).Value.Replace("\n", "").TrimStart();
                     //Policy_Endorsement = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 32]).Value.Replace("\n", "").TrimStart();
-                    if (Client_N_E == "New Business" || Client_N_E == "New")
-                    {
-                        Client_N_E = "New Client";
-                        New_Renewal = "New Policy";
-                    }
-                    else
-                    {
-                        Client_N_E = "Existing Client";
-                        New_Renewal = "Renewal Policy";
-                    }
+                   
                     var Endo_Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 27]).Value;
                     var Effective_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 13]).Value;
                     var END_Date = ((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 14]).Value;
@@ -143,13 +137,30 @@ namespace Smartreader_DLL
                     var Reward_Amt = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 51]).Value);
                     Policy_Type = Convert.ToString(((Microsoft.Office.Interop.Excel.Range)wks.Cells[i, 10]).Value);
 
-                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("INSURANCE"))
+                    if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("INSURANCE")
+                         || InsuredName.ToLower().Contains("solution") || InsuredName.ToLower().Contains("india") || InsuredName.ToLower().Contains("pvt"))
                     {
                         InsuredType = "Corporate";
                     }
                     else
                     {
                         InsuredType = "Retail";
+                    }
+                    if (Client_N_E == "New Business" || Client_N_E == "New")
+                    {
+                        Client_N_E = "New Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "New Policy";
+                        }
+                    }
+                    else
+                    {
+                        Client_N_E = "Existing Client";
+                        if (Policy_Endorsement != "Endorsement" && InsuredType != "Retail")
+                        {
+                            New_Renewal = "Renewal Policy";
+                        }
                     }
                     if (PA == "" || PA == " " || PA == null)
                     {

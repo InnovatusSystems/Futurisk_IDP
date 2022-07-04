@@ -56,7 +56,6 @@ namespace Futurisk
             DBType.ValueMember = "ReportCode";
             DBType.DisplayMember = "Type";
             DBType.DataSource = dt;
-
             //strconn.Close();
         }
 
@@ -213,6 +212,61 @@ namespace Futurisk
                 if (Type == "UIIX") // United India Insurance Co Ltd (Excel).
                 {
                     UnitedExcelSample obj = new UnitedExcelSample();
+                    obj.Show();
+                }
+                if (Type == "MCGX") //Manipal Cigna General Insurance Co.Ltd.
+                {
+                    Manipal_Sample obj = new Manipal_Sample();
+                    obj.Show();
+                }
+                if (Type == "ECGX") //Export Credit Guarantee Corporation of India Ltd.
+                {
+                    ExportCreditsample obj = new ExportCreditsample();
+                    obj.Show();
+                }
+                if (Type == "MHGX") //Magma HDI General Insurance Co. Ltd.
+                {
+                    Magma_Sample obj = new Magma_Sample();
+                    obj.Show();
+                }
+                if (Type == "MHG1") //Magma HDI General Reward Insurance Co. Ltd.
+                {
+                    Magma_Reward_Sample obj = new Magma_Reward_Sample();
+                    obj.Show();
+                }
+                if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
+                {
+                    New_India_Sample1 obj = new New_India_Sample1();
+                    obj.Show();
+                }
+                if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
+                {
+                    New_India_Sample2 obj = new New_India_Sample2();
+                    obj.Show();
+                }
+                if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
+                {
+                    New_India_Sample3 obj = new New_India_Sample3();
+                    obj.Show();
+                }
+                if (Type == "SGIX") //Shriram General Insurance Co. Ltd.
+                {
+                    ShriramSample obj = new ShriramSample();
+                    obj.Show();
+                }
+                if (Type == "NIP1") //New India Assurance Company Ltd.
+                {
+                    NewIndiaTemplate obj = new NewIndiaTemplate();
+                    obj.Show();
+                }
+                if (Type == "NIP2") //New India Assurance Company Ltd.
+                {
+                    NewIndiaPDFSample2 obj = new NewIndiaPDFSample2();
+                    obj.Show();
+                }
+                if (Type == "NIP3") //New India Assurance Company Ltd.
+                {
+                    NewIndiaPDFSample3 obj = new NewIndiaPDFSample3();
                     obj.Show();
                 }
             }
@@ -441,30 +495,30 @@ namespace Futurisk
                 obj.Show();
                 this.Close();
             }
-            //if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
-            //{
-            //    Fileinfo.InsurerCode = "NIAC";
-            //    Fileinfo.ReportId = Type;
-            //    AckoInsurence obj = new AckoInsurence();
-            //    obj.Show();
-            //    this.Close();
-            //}
-            //if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
-            //{
-            //    Fileinfo.InsurerCode = "NIAC";
-            //    Fileinfo.ReportId = Type;
-            //    AckoInsurence obj = new AckoInsurence();
-            //    obj.Show();
-            //    this.Close();
-            //}
-            //if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
-            //{
-            //    Fileinfo.InsurerCode = "NIAC";
-            //    Fileinfo.ReportId = Type;
-            //    AckoInsurence obj = new AckoInsurence();
-            //    obj.Show();
-            //    this.Close();
-            //}
+            if (Type == "NIX1") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIX2") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIX3") // New India Assurance Company Ltd.(Excel).
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
             if (Type == "FGIX") //Future General India Insurance Co. Ltd..
             {
                 Fileinfo.InsurerCode = "FGII";
@@ -494,6 +548,70 @@ namespace Futurisk
                 Fileinfo.InsurerCode = "NBHI";
                 Fileinfo.ReportId = Type;
                 AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "MCGX") //Manipal Cigna General Insurance Co.Ltd.
+            {
+                Fileinfo.InsurerCode = "MCGI";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "ECGX") //Export Credit Guarantee Corporation of India Ltd.
+            {
+                Fileinfo.InsurerCode = "ECGC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "MHGX") //Magma HDI General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "MHGI";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "MHG1") //Magma HDI General Reward Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "MHGI";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "SGIX") //Shriram General Insurance Co. Ltd.
+            {
+                Fileinfo.InsurerCode = "SGIC";
+                Fileinfo.ReportId = Type;
+                AckoInsurence obj = new AckoInsurence();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIP1") //New India Assurance Company Ltd.
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                NewIndiaPDFInsurance obj = new NewIndiaPDFInsurance();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIP2") //New India Assurance Company Ltd.
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                NewIndiaPDFInsurance obj = new NewIndiaPDFInsurance();
+                obj.Show();
+                this.Close();
+            }
+            if (Type == "NIP3") //New India Assurance Company Ltd.
+            {
+                Fileinfo.InsurerCode = "NIAC";
+                Fileinfo.ReportId = Type;
+                NewIndiaPDFInsurance obj = new NewIndiaPDFInsurance();
                 obj.Show();
                 this.Close();
             }
