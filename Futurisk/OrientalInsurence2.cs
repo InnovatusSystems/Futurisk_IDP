@@ -1387,6 +1387,10 @@ namespace Futurisk
                     {
                         Revenue_Pcnt = "0";
                     }
+                    if (TPrevenue == "" || TPrevenue == " ")
+                    {
+                        TPrevenue = "0";
+                    }
                     Revenue_Amt = Convert.ToString(Convert.ToDecimal(ODRevenue) + Convert.ToDecimal(TPrevenue));
 
                     if (InsuredName.ToUpper().Contains("LIMITED") || InsuredName.ToUpper().Contains("LTD") || InsuredName.ToUpper().Contains("LLP")
